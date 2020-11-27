@@ -1,4 +1,12 @@
 # ActionMenuApi <br>
+- Made by gompo#6956 you are free to use this provided credit is given<br>
+  your mod is licensed under the same license as the one in this repository <br>
+  for more complicated situations please dm me on discord<br>
+  Credits:  <br>
+  -Function XRefCheck here adapted to use string lists rather than just strings from Ben's <br>
+  (Ben 🐾#3621) Dynamic Bone Safety Mod, link: https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs<br>
+
+
 - There are only 4 Functions you need to be aware of
 <ol>
   <li>
