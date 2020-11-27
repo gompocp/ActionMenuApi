@@ -1,8 +1,10 @@
 # ActionMenuApi <br>
+- Some Stuff don't work at all such as nameplates menu because it hasnt updated to that version yet
+- I haven't tested everything because effort lol. If something broken open up an issue plz
 - Made by gompo#6956 you are free to use this provided credit is given<br>
   your mod is licensed under the same license as the one in this repository <br>
   for more complicated situations please dm me on discord<br>
-  Credits:  <br>
+-Credits:  <br>
   -Function XRefCheck here adapted to use string lists rather than just strings from Ben's <br>
   (Ben 🐾#3621) Dynamic Bone Safety Mod, link: https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs<br>
 
