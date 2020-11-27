@@ -1,4 +1,4 @@
-# ActionMenuApi
+# ActionMenuApi <br>
 - There are only 4 Functions you need to be aware of
 <ol>
 <li><h2>ActionMenuApi()<h2>
