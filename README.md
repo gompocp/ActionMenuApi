@@ -1,7 +1,6 @@
 # ActionMenuApi <br>
 - There are only 4 Functions you need to be aware of
-<ol>
-<li><h2>ActionMenuApi()<h2>
+<h2>ActionMenuApi()<h2>
   <p>
     Constructor. Used to create new ActionMenuApi Instance and applies all neccessary patches 
   </p>
@@ -42,5 +41,4 @@
   actionMenuApi.AddPedalToCustomMenu(new Action(delegate {
     //Invoke Method or whatever here
   }), "DoSomething", coolIcon);
-  </code></pre></li>
-</ol>
+  </code></pre>
