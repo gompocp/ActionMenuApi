@@ -1,6 +1,8 @@
 # ActionMenuApi <br>
 - There are only 4 Functions you need to be aware of
-<h2>ActionMenuApi()<h2>
+<ol>
+  <li>
+<h2>ActionMenuApi()</h2>
   <p>
     Constructor. Used to create new ActionMenuApi Instance and applies all neccessary patches 
   </p>
@@ -8,7 +10,7 @@
   ActionMenuApi actionMenuApi = new ActionMenuApi();
   </code></pre>
   </li>
-<li><h2>AddPedalToExistingMenu()<h2>
+<li><h2>AddPedalToExistingMenu()</h2>
   <p>
     Adds a custom Pedal to an already existing menu in vrchat. Options are in enum ActionMenuPageType
   </p>
@@ -22,7 +24,7 @@
   }), "Example Button", icon, ActionMenuApi.Insertion.Post);
   </code></pre>
   </li>
-<li><h2>CreateSubMenu<h2><p>
+<li><h2>CreateSubMenu</h2><p>
     call this in a triggerevent for an already existing pedal to open a new submenu
   </p>
   <p>
@@ -34,11 +36,12 @@
   }));
   </code></pre>
   </li>
-<li><h2>AddPedalToCustomMenu<h2><p>
+<li><h2>AddPedalToCustomMenu</h2><p>
     If you create a custom Submenu you can use this to add your pedals to it
   </p>
   <pre><code class='language-cs'>
   actionMenuApi.AddPedalToCustomMenu(new Action(delegate {
     //Invoke Method or whatever here
   }), "DoSomething", coolIcon);
-  </code></pre>
+  </code></pre></li>
+  </ol>
