@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,7 @@ using UnhollowerRuntimeLib;
 //-Function XRefCheck here adapted to use string lists rather than just strings from Ben's 
 //  (Ben 🐾#3621) Dynamic Bone Safety Mod, link: https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs
 
-namespace YourNameSpace
+namespace ActionMenuRespawn
 {
     public class ActionMenuApi
     {
@@ -64,8 +64,7 @@ namespace YourNameSpace
         private static List<string> openNameplatesSizePageKeyWords = new List<string>(new string[] { "Large", "Medium", "Normal", "Small", "Tiny" });
         
 
-        private static List<string> openMenuSizePageKeywords = new List<string>(new string[] { "XXXXXXXXXXXXXXXXX" }); // No strings found :( Unusable for now
-
+        private static List<string> openMenuSizePageKeyWords = new List<string>(new string[] { "XXXXXXXXX" }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
 
 
         /// <summary>
@@ -141,6 +140,7 @@ namespace YourNameSpace
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenSDK2ExpressionPre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenSDK2ExpressionPost))));
                 break;
             }
+           
         }
 
 
@@ -207,13 +207,15 @@ namespace YourNameSpace
 
         /// <summary>
         /// call this in a triggerevent for an already existing pedal to open a new submenu
-        /// Add pedals to this in the openFunc param using AddPedalToCustomMenu()
+        /// Add pedals to this in the onStart param using AddPedalToCustomMenu()
         /// </summary>
-        /// <param name="openFunc">Called on submenu open </param>
+        /// <param name="openFunc">Called on submenu open whats the difference... I dunno it exists tho</param>
         /// <param name="closeFunc">Called on submenu close</param>
         /// <param name="icon">Pedal Icon</param>
         /// <param name="text">title</param>
-        public ActionMenuPage CreateSubMenu(System.Action openFunc, System.Action closeFunc = null, Texture2D icon = null, string text = null) {
+        public ActionMenuPage CreateSubMenu(System.Action openFunc, System.Action closeFunc = null, Texture2D icon = null, string text = null)
+        {
+            if (GetActionMenuOpener() == null) return null;
             return GetActionMenuOpener().actionMenu.PushPage(openFunc, closeFunc, icon, text);
         }
 
@@ -226,6 +228,7 @@ namespace YourNameSpace
         public PedalOption AddPedalToCustomMenu(System.Action triggerEvent, string text = "Button Text", Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.actionMenu.AddOption();
             pedalOption.setText(text); //    VVV
             pedalOption.setIcon(icon); //Pretty self explanatory
@@ -235,117 +238,127 @@ namespace YourNameSpace
 
         private static ActionMenuOpener GetActionMenuOpener()
         {
-            ActionMenuOpener actionMenuOpener = null;
-            if (ActionMenuDriver._instance.openerR.isOpen()) actionMenuOpener = ActionMenuDriver._instance.openerR;
-            else if (ActionMenuDriver._instance.openerL.isOpen()) actionMenuOpener = ActionMenuDriver._instance.openerL;    // If both are active... well shit I guess
-            if (actionMenuOpener == null) return null; // Shouldnt run unless vrchat has something interesting going on under the hood
-            return actionMenuOpener;
+            if (!ActionMenuDriver._instance.openerL.isOpen() && ActionMenuDriver._instance.openerR.isOpen())
+            {
+                return ActionMenuDriver._instance.openerR;
+            }
+            else if (ActionMenuDriver._instance.openerL.isOpen() && !ActionMenuDriver._instance.openerR.isOpen())
+            {
+                return ActionMenuDriver._instance.openerL;
+            }
+            else return null;
+            /*
+            else if (ActionMenuDriver._instance.openerL.isOpen() && ActionMenuDriver._instance.openerR.isOpen())
+            {
+                return null; //Which one to return ¯\_(ツ)_/¯ Mystery till I figure something smart out
+            }
+            */
+
+
         }
 
-        public static void OpenConfigPagePre()
+        public static void OpenConfigPagePre(ActionMenu __instance)
         {
-            AddPedalsInList(configPagePre);
+            AddPedalsInList(configPagePre, __instance);
         }
-        public static void OpenConfigPagePost()
+        public static void OpenConfigPagePost(ActionMenu __instance)
         {
-            AddPedalsInList(configPagePost);
+            AddPedalsInList(configPagePost, __instance);
         }
-        public static void OpenMainPagePre()
+        public static void OpenMainPagePre(ActionMenu __instance)
         {
-            AddPedalsInList(mainPagePre);
+            AddPedalsInList(mainPagePre, __instance);
         }
-        public static void OpenMainPagePost()
+        public static void OpenMainPagePost(ActionMenu __instance)
         {
-            AddPedalsInList(mainPagePost);
+            AddPedalsInList(mainPagePost, __instance);
         }
-        public static void OpenMenuOpacityPagePre()
+        public static void OpenMenuOpacityPagePre(ActionMenu __instance)
         {
-            AddPedalsInList(menuOpacityPagePre);
+            AddPedalsInList(menuOpacityPagePre, __instance);
         }
-        public static void OpenMenuOpacityPagePost()
+        public static void OpenMenuOpacityPagePost(ActionMenu __instance)
         {
-            AddPedalsInList(menuOpacityPagePost);
+            AddPedalsInList(menuOpacityPagePost, __instance);
         }
-        public static void OpenEmojisPagePre()
+        public static void OpenEmojisPagePre(ActionMenu __instance)
         {
-            AddPedalsInList(emojisPagePre);
+            AddPedalsInList(emojisPagePre, __instance);
         }
-        public static void OpenEmojisPagePost()
+        public static void OpenEmojisPagePost(ActionMenu __instance)
         {
-            AddPedalsInList(emojisPagePost);
+            AddPedalsInList(emojisPagePost, __instance);
         }
-        public static void OpenExpressionMenuPre()
+        public static void OpenExpressionMenuPre(ActionMenu __instance)
         {
-            AddPedalsInList(expressionPagePre);
+            AddPedalsInList(expressionPagePre, __instance);
         }
-        public static void OpenExpressionMenuPost()
+        public static void OpenExpressionMenuPost(ActionMenu __instance)
         {
-            AddPedalsInList(expressionPagePost);
+            AddPedalsInList(expressionPagePost, __instance);
         }
-        public static void OpenNameplatesOpacityPre()
+        public static void OpenNameplatesOpacityPre(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesOpacityPagePre);
+            AddPedalsInList(nameplatesOpacityPagePre, __instance);
         }
-        public static void OpenNameplatesOpacityPost()
+        public static void OpenNameplatesOpacityPost(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesOpacityPagePost);
+            AddPedalsInList(nameplatesOpacityPagePost, __instance);
         }
-        public static void OpenNameplatesPagePre()
+        public static void OpenNameplatesPagePre(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesPagePre);
+            AddPedalsInList(nameplatesPagePre, __instance);
         }
-        public static void OpenNameplatesPagePost()
+        public static void OpenNameplatesPagePost(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesPagePost);
+            AddPedalsInList(nameplatesPagePost, __instance);
         }
-        public static void OpenNameplatesVisibilityPre()
+        public static void OpenNameplatesVisibilityPre(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesVisibilityPagePre);
+            AddPedalsInList(nameplatesVisibilityPagePre, __instance);
         }
-        public static void OpenNameplatesVisibilityPost()
+        public static void OpenNameplatesVisibilityPost(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesVisibilityPagePost);
+            AddPedalsInList(nameplatesVisibilityPagePost, __instance);
         }
-        public static void OpenNameplatesSizePre()
+        public static void OpenNameplatesSizePre(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesSizePagePre);
+            AddPedalsInList(nameplatesSizePagePre, __instance);
         }
-        public static void OpenNameplatesSizePost()
+        public static void OpenNameplatesSizePost(ActionMenu __instance)
         {
-            AddPedalsInList(nameplatesSizePagePost);
+            AddPedalsInList(nameplatesSizePagePost, __instance);
         }
-        public static void OpenOptionsPre()
+        public static void OpenOptionsPre(ActionMenu __instance)
         {
-            AddPedalsInList(optionsPagePre);
+            AddPedalsInList(optionsPagePre, __instance);
         }
-        public static void OpenOptionsPost()
+        public static void OpenOptionsPost(ActionMenu __instance)
         {
-            AddPedalsInList(optionsPagePost);
+            AddPedalsInList(optionsPagePost, __instance);
         }
-        public static void OpenSDK2ExpressionPre()
+        public static void OpenSDK2ExpressionPre(ActionMenu __instance)
         {
-            AddPedalsInList(sdk2ExpressionPagePre);
+            AddPedalsInList(sdk2ExpressionPagePre, __instance);
         }
-        public static void OpenSDK2ExpressionPost()
+        public static void OpenSDK2ExpressionPost(ActionMenu __instance)
         {
-            AddPedalsInList(sdk2ExpressionPagePost);
+            AddPedalsInList(sdk2ExpressionPagePost, __instance);
         }
-        public static void OpenMenuSizePre()
+        public static void OpenMenuSizePre(ActionMenu __instance)
         {
-            AddPedalsInList(menuSizePagePre);
+            AddPedalsInList(menuSizePagePre, __instance);
         }
-        public static void OpenMenuSizePost()
+        public static void OpenMenuSizePost(ActionMenu __instance)
         {
-            AddPedalsInList(menuSizePagePost);
+            AddPedalsInList(menuSizePagePost, __instance);
         }
 
-        private static void AddPedalsInList(List<PedalStruct> pedalStructs)
+        private static void AddPedalsInList(List<PedalStruct> pedalStructs, ActionMenu instance)
         {
-            ActionMenuOpener actionMenuOpener = GetActionMenuOpener();
-
             foreach (PedalStruct pedalStruct in pedalStructs)
             {
-                PedalOption pedalOption = actionMenuOpener.actionMenu.AddOption();
+                PedalOption pedalOption = instance.AddOption();
                 pedalOption.setText(pedalStruct.text); //    VVV
                 pedalOption.setIcon(pedalStruct.icon); //Pretty self explanatory
                 pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
@@ -391,6 +404,14 @@ namespace YourNameSpace
             Pre,
             Post
         }
+        /*
+        private enum ActionMenuHand
+        {
+            None,
+            Left, 
+            Right
+        }
+        */
 
         // Note: anything to do with nameplates and menu size wont work till the new update
         public enum ActionMenuPageType
@@ -412,6 +433,7 @@ namespace YourNameSpace
     }
     public static class ExtensionMethods
     {
+        
         public static PedalOption AddOption(this ActionMenu menu)
         {
             return menu.Method_Private_PedalOption_0(); //This should be safe for a while unless they add another similar method
@@ -430,6 +452,7 @@ namespace YourNameSpace
         }
         public static Texture2D setIcon(this PedalOption pedal, Texture2D icon)
         {
+            //PropertyInfo texture = typeof(PedalOption).GetProperties().Where(p => p.PropertyType == typeof(Texture2D)).First(); meh
             return pedal.prop_Texture2D_0 = icon;
         }
         public static Texture2D getIcon(this PedalOption pedal)
