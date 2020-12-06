@@ -73,31 +73,31 @@ namespace ActionMenuRespawn
         public ActionMenuApi()
         {
             harmonyInstance = HarmonyInstance.Create(typeof(ActionMenuApi).Namespace.ToString() + ".ActionMenuApi");
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Private_Void_") && checkXref(m, openMainPageKeyWords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openMainPageKeyWords)))
             {
                 //MelonLogger.Log("Found Main Page: " + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenMainPagePre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenMainPagePost))));
                 break;
             }
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Private_Void_") && checkXref(m, openConfigPageKeywords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openConfigPageKeywords)))
             {
                 //MelonLogger.Log("Found Config Page:" + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenConfigPagePre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenConfigPagePost))));
                 break;
             }
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Private_Void_") && checkXref(m, openMenuOpacityPageKeyWords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openMenuOpacityPageKeyWords)))
             {
                 //MelonLogger.Log("Found Menu Opacity Page:" + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenMenuOpacityPagePre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenMenuOpacityPagePost))));
                 break;
             }
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Private_Void_") && checkXref(m, openEmojisPageKeyWords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openEmojisPageKeyWords)))
             {
                 //MelonLogger.Log("Found Emojis Page:" + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenEmojisPagePre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenEmojisPagePost))));
                 break;
             }
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Public_Void_") && checkXref(m, openExpressionMenuKeyWords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openExpressionMenuKeyWords)))
             {
                 //MelonLogger.Log("Found Expression Menu Page:" + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenExpressionMenuPre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenExpressionMenuPost))));
@@ -127,14 +127,14 @@ namespace ActionMenuRespawn
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenNameplatesSizePre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenNameplatesSizePost))));
                 break;
             }           
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Private_Void_") && checkXref(m, openOptionsPageKeyWords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openOptionsPageKeyWords)))
             {
 
                 //MelonLogger.Log("Found Options Page:" + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenOptionsPre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenOptionsPost))));
                 break;
             }
-            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_Public_Void_") && checkXref(m, openSDK2ExpressionPageKeyWords)))
+            foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && checkXref(m, openSDK2ExpressionPageKeyWords)))
             {
                 //MelonLogger.Log("Found SDK2 Expression Page:" + methodBase.Name);
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenSDK2ExpressionPre))), new HarmonyMethod(typeof(ActionMenuApi).GetMethod(nameof(OpenSDK2ExpressionPost))));
