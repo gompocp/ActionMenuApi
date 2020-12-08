@@ -1,5 +1,5 @@
 # ActionMenuApi <br>
-- I haven't tested everything because effort lol. If something is broken open up an issue or fix it yourself ¯\_(ツ)_/¯ 
+- I haven't tested everything because effort lol. If something is broken open up an issue or fix it yourself ¯\\_(ツ)_/¯ 
 - Made by gompo#6956 you are free to use this provided credit is given<br>
   your mod is licensed under the same license as the one in this repository <br>
   for more complicated situations please dm me on discord<br>
