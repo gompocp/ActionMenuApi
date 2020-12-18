@@ -56,10 +56,8 @@ namespace ActionMenuApi
 
         public static void AddPedalsInList(List<PedalStruct> list, ActionMenu instance)
         {
-            Logger.Log("Adding pedals in list");
             foreach (var pedalStruct in list)
             {
-                Logger.Log(pedalStruct.Type.ToString());
                 PedalOption pedalOption = instance.AddOption();
                 switch (pedalStruct.Type)
                 {
@@ -83,6 +81,19 @@ namespace ActionMenuApi
                         pedalRadial.pedal = pedalOption;
                         pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
+                    case PedalType.Toggle:
+                        PedalToggle pedalToggle = (PedalToggle) pedalStruct;
+                        pedalOption.setText(pedalStruct.text);
+                        if (pedalToggle.toggled)
+                            pedalOption.button.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOn;
+                        else
+                            pedalOption.button.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOff;
+
+                        pedalOption.setIcon(pedalToggle.icon);
+                        pedalToggle.pedal = pedalOption;
+                        pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        break;
+                        
                 }
 
                 

@@ -11,6 +11,7 @@
         <AssemblyName>ActionMenuTestMod</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
+        <LangVersion>latestmajor</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -387,6 +388,16 @@
     <ItemGroup>
         <Compile Include="ActionMenuTestMod.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\app-update.png" />
+      <EmbeddedResource Include="Resources\cloud-data-download.png" />
+      <EmbeddedResource Include="Resources\file-transfer.png" />
+      <EmbeddedResource Include="Resources\free-trial.png" />
+      <EmbeddedResource Include="Resources\sound-full.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="customicons" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

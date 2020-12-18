@@ -48,6 +48,20 @@ namespace ActionMenuApi.API
             );
         }
 
+        public static void AddTogglePedalToMenu(ActionMenuPageType pageType,bool startingState, System.Action<bool> onToggle, string text, Texture2D icon = null, Insertion insertion = Insertion.Post)
+        {
+            AddPedalToList(
+                pageType, 
+                new PedalToggle(
+                    text, 
+                    onToggle, 
+                    startingState,
+                    icon
+                ),
+                insertion
+            );
+        }
+
 
         private static void AddPedalToList(ActionMenuPageType pageType, PedalStruct customPedal,
             Insertion insertion)

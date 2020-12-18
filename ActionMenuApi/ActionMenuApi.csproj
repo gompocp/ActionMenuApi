@@ -382,7 +382,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="ActionMenuApi.cs" />
+        <Compile Include="ActionMenuAPI.cs" />
         <Compile Include="Logger.cs" />
         <Compile Include="Managers\RadialPuppetManager.cs" />
         <Compile Include="Pedals\PedalToggle.cs" />
