@@ -1,8 +1,20 @@
 # ActionMenuApi <br>
+![alt text](https://cdn.discordapp.com/attachments/761897291388157955/789496482092679168/unknown.png)
 - Currently in the process of rewriting all of this <br>
 if you are looking for the old .cs file you can find it in releases
-- Now supports the radial puppet (kinda)
+Now supports the 
+- Radial puppet (bit buggy)
+- Button
+- Toggle 
+- SubMenu  
 
+Working on
+- FourAxisPuppet
+- Correct placement of the radial puppet
+
+# Credits
+- Assetbundle loading mechanism from Knah
+- Icons from https://uxwing.com/
 
 
 
