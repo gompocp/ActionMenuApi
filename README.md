@@ -1,8 +1,8 @@
 # ActionMenuApi <br>
 ![alt text](https://cdn.discordapp.com/attachments/761897291388157955/789496482092679168/unknown.png)
 - Currently in the process of rewriting all of this <br>
-if you are looking for the old .cs file you can find it in releases
-Now supports the 
+if you are looking for the old .cs file you can find it in releases <br>
+Now supports the <br>
 - Radial puppet (bit buggy)
 - Button
 - Toggle 
