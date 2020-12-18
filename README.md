@@ -3,7 +3,7 @@
 - Currently in the process of rewriting all of this <br>
 if you are looking for the old .cs file you can find it in releases <br>
 Now supports the <br>
-- Radial puppet (bit buggy)
+- Radial puppet (bit buggy in vr)
 - Button
 - Toggle 
 - SubMenu  
