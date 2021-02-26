@@ -1,6 +1,4 @@
 ﻿using System;
-using Il2CppSystem.Linq;
-using Transmtn;
 using UnityEngine;
 
 namespace ActionMenuApi.Pedals
@@ -11,8 +9,8 @@ namespace ActionMenuApi.Pedals
         public Action openFunc { get; set; }
         public Action closeFunc { get; set; }
         
-        public PedalSubMenu(System.Action openFunc, string text = null,
-            Texture2D icon = null, System.Action closeFunc = null)
+        public PedalSubMenu(Action openFunc, string text = null,
+            Texture2D icon = null, Action closeFunc = null)
         {
             this.text = text;
             this.icon = icon;
@@ -21,7 +19,7 @@ namespace ActionMenuApi.Pedals
             this.triggerEvent =  delegate
             {
                 if (Utilities.GetActionMenuOpener() == null) return;
-                Utilities.GetActionMenuOpener().actionMenu.PushPage(openFunc, closeFunc, icon, text);
+                Utilities.GetActionMenuOpener().field_Public_ActionMenu_0.PushPage(openFunc, closeFunc, icon, text);
             };
             this.Type = PedalType.SubMenu;
         }

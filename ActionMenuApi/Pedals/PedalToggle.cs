@@ -16,9 +16,9 @@ namespace ActionMenuApi.Pedals
             {
                 this.toggled = !this.toggled;
                 if (this.toggled)
-                    pedal.button.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
+                    pedal.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
                 else 
-                    pedal.button.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
+                    pedal.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
             };
             this.Type = PedalType.Toggle;
         }

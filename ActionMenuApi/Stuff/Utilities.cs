@@ -63,35 +63,35 @@ namespace ActionMenuApi
                 {
                     case PedalType.Button:
                         pedalOption.setText(pedalStruct.text);
-                        pedalOption.setIcon(pedalStruct.icon); 
-                        pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        pedalOption.setIcon(pedalStruct.icon);
+                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                     case PedalType.SubMenu:
                         pedalOption.setText(pedalStruct.text);
                         pedalOption.setIcon(pedalStruct.icon);
-                        pedalOption.button.prop_Texture2D_2 = GetExpressionsIcons().typeFolder;
-                        pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeFolder;
+                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                     case PedalType.RadialPuppet:
                         PedalRadial pedalRadial = (PedalRadial) pedalStruct;
                         pedalOption.setText(pedalStruct.text);
                         pedalOption.setIcon(pedalStruct.icon);
-                        pedalOption.button.prop_Texture2D_2 = GetExpressionsIcons().typeRadial;
-                        pedalOption.button.prop_String_1 = $"{Math.Round(pedalRadial.currentValue)}%";
+                        pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeRadial;
+                        pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(pedalRadial.currentValue)}%";
                         pedalRadial.pedal = pedalOption;
-                        pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                     case PedalType.Toggle:
                         PedalToggle pedalToggle = (PedalToggle) pedalStruct;
                         pedalOption.setText(pedalStruct.text);
                         if (pedalToggle.toggled)
-                            pedalOption.button.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOn;
+                            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOn;
                         else
-                            pedalOption.button.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOff;
+                            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOff;
 
                         pedalOption.setIcon(pedalToggle.icon);
                         pedalToggle.pedal = pedalOption;
-                        pedalOption.triggerEvent = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                         
                 }
@@ -114,14 +114,14 @@ namespace ActionMenuApi
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.LeftHorizontal), Input.GetAxis(InputAxes.LeftVertical)) * 16;
             else
-                return ActionMenuDriver.prop_ActionMenuDriver_0.openerL.actionMenu.field_Private_Vector2_0;
+                return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().field_Private_Vector2_0;
         }
         public static Vector2 GetCursorPosRight()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.RightHorizontal), Input.GetAxis(InputAxes.RightVertical)) * 16;
             else
-                return ActionMenuDriver.prop_ActionMenuDriver_0.openerR.actionMenu.field_Private_Vector2_0;
+                return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().field_Private_Vector2_0;
         }
         
         public static GameObject CloneGameObject(string pathToGameObject, string pathToParent)
@@ -131,32 +131,32 @@ namespace ActionMenuApi
 
         public static ActionMenuDriver.ExpressionIcons GetExpressionsIcons()
         {
-            return ActionMenuDriver.prop_ActionMenuDriver_0.expressionIcons;
+            return ActionMenuDriver.prop_ActionMenuDriver_0.field_Public_ExpressionIcons_0;
         }
 
         // Didnt know what to name this function
         public static ActionMenuHand GetActionMenuHand()
         {
-            if (!ActionMenuDriver._instance.openerL.isOpen() && ActionMenuDriver._instance.openerR.isOpen())
+            if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuHand.Right;
             }
-            else if (ActionMenuDriver._instance.openerL.isOpen() && !ActionMenuDriver._instance.openerR.isOpen())
+            if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuHand.Left;
             }
-            else return ActionMenuHand.Invalid;
+            return ActionMenuHand.Invalid;
         }
         
         public static ActionMenuOpener GetActionMenuOpener()
         {
-            if (!ActionMenuDriver._instance.openerL.isOpen() && ActionMenuDriver._instance.openerR.isOpen())
+            if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
-                return ActionMenuDriver._instance.openerR;
+                return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
             }
-            else if (ActionMenuDriver._instance.openerL.isOpen() && !ActionMenuDriver._instance.openerR.isOpen())
+            else if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
-                return ActionMenuDriver._instance.openerL;
+                return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
             }
             else return null;
             /*

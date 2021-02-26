@@ -37,10 +37,14 @@ namespace ActionMenuApi
         {
             return actionMenuOpener.field_Private_Boolean_0;
         }
+
+        public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_0;
+        public static ActionMenuOpener GetRightOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_1;
+        public static ActionMenu GetActionMenu(this ActionMenuOpener actionMenuOpener) => actionMenuOpener.field_Public_ActionMenu_0;
         
         public static void SetAngle(this RadialPuppetMenu radialPuppet, float angle)
         {
-            radialPuppet.fill.angleMax = angle;
+            radialPuppet.field_Public_PedalGraphic_0.angleMax = angle;
             radialPuppet.UpdateDisplay();
         }
 
