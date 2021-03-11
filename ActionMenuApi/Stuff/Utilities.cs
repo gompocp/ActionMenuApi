@@ -101,24 +101,22 @@ namespace ActionMenuApi
         public static double ConvertFromDegToEuler(double angle)
         {
             if (angle >= 0 && angle <= 90) return 90 - angle;
-            else if (angle > 90 && angle <= 180) return angle = 360 - (angle - 90);
-            else if (angle <= -90 && angle >= -180) return angle = 270 - (angle + 180);
-            else if (angle <= 0 && angle >= -90) return angle = 180 - (angle + 180) + 90;
+            if (angle > 90 && angle <= 180) return 360 - (angle - 90);
+            if (angle <= -90 && angle >= -180) return 270 - (angle + 180);
+            if (angle <= 0 && angle >= -90) return 180 - (angle + 180) + 90;
             return 0;
         }
         public static Vector2 GetCursorPosLeft()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.LeftHorizontal), Input.GetAxis(InputAxes.LeftVertical)) * 16;
-            else
-                return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().field_Private_Vector2_0;
+            return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().field_Private_Vector2_0;
         }
         public static Vector2 GetCursorPosRight()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.RightHorizontal), Input.GetAxis(InputAxes.RightVertical)) * 16;
-            else
-                return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().field_Private_Vector2_0;
+            return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().field_Private_Vector2_0;
         }
         
         public static GameObject CloneGameObject(string pathToGameObject, string pathToParent)
@@ -126,10 +124,7 @@ namespace ActionMenuApi
             return GameObject.Instantiate(GameObject.Find(pathToGameObject).transform, GameObject.Find(pathToParent).transform).gameObject;
         }
 
-        public static ActionMenuDriver.ExpressionIcons GetExpressionsIcons()
-        {
-            return ActionMenuDriver.prop_ActionMenuDriver_0.field_Public_ExpressionIcons_0;
-        }
+        public static ActionMenuDriver.ExpressionIcons GetExpressionsIcons() => ActionMenuDriver.prop_ActionMenuDriver_0.field_Public_ExpressionIcons_0;
 
         // Didnt know what to name this function
         public static ActionMenuHand GetActionMenuHand()
@@ -151,11 +146,11 @@ namespace ActionMenuApi
             {
                 return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
             }
-            else if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
+            if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
             }
-            else return null;
+            return null;
             /*
             else if (ActionMenuDriver._instance.openerL.isOpen() && ActionMenuDriver._instance.openerR.isOpen())
             {
