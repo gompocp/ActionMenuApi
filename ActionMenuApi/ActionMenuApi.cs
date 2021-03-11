@@ -17,11 +17,13 @@ namespace ActionMenuApi
         {
             Patches.PatchAll();
             RadialPuppetManager.Setup();
+            FourAxisPuppetManager.Setup();
         }
 
         public override void OnUpdate()
         {
             RadialPuppetManager.OnUpdate();
+            FourAxisPuppetManager.OnUpdate();
         }
     }
 }

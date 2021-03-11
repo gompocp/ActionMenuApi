@@ -70,7 +70,9 @@
     <ItemGroup>
         <Compile Include="ActionMenuAPI.cs" />
         <Compile Include="Logger.cs" />
+        <Compile Include="Managers\FourAxisPuppetManager.cs" />
         <Compile Include="Managers\RadialPuppetManager.cs" />
+        <Compile Include="Pedals\PedalFourAxis.cs" />
         <Compile Include="Pedals\PedalToggle.cs" />
         <Compile Include="Tools.cs" />
         <Compile Include="Patches.cs" />

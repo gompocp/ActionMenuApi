@@ -8,7 +8,7 @@ Now supports the <br>
 - Button
 - Toggle 
 - SubMenu  
-You can currently add toggles and buttons custom sub menus
+You can currently add toggles and buttons to custom sub menus
 
 Working on
 - FourAxisPuppet
