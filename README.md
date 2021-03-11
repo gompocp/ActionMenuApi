@@ -1,5 +1,5 @@
 # ActionMenuApi <br>
-> Currently in the process of rewriting the old system of this <br>Old version info available further down and source code in the releases section <br>
+> Currently in the process of rewriting the old system of this <br>Old version info available further down and source code in the releases section [here](https://github.com/gompocp/ActionMenuApi/releases/tag/v1.0.0) <br>
 
 ![alt text](https://cdn.discordapp.com/attachments/761897291388157955/789496482092679168/unknown.png)
 
@@ -22,6 +22,7 @@ The test mod I've included should be more than enough but I'll add these here an
 ```cs
 //Add a reference to the api dll and add this to the top of your file
 using ActionMenuApi;
+/*
 
 //To add a button to the main page of the action menu
 AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon);
