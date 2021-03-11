@@ -7,19 +7,19 @@ namespace ActionMenuApi
         public static void Log(string message)
         {
 #if DEBUG
-            MelonLogger.Log(message);
+            MelonLogger.Msg(message);
 #endif            
         }
         public static void LogWarning(string message)
         {
 #if DEBUG
-            MelonLogger.LogWarning(message);
+            MelonLogger.Warning(message);
 #endif            
         }
         public static void LogError(string message)
         {
 #if DEBUG
-            MelonLogger.LogError(message);
+            MelonLogger.Error(message);
 #endif            
         }
 

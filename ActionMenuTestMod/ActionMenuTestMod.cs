@@ -20,14 +20,12 @@ namespace ActionMenuTestMod
     {
         private float testFloatValue = 50;
         private bool testBool = false;
-        
         private static AssetBundle iconsAssetBundle = null;
         private static Texture2D toggleIcon;
         private static Texture2D radialIcon;
         private static Texture2D subMenuIcon;
         private static Texture2D buttonIcon;
-
-
+        
         public override void OnApplicationStart()
         {
             using (var stream = Assembly.GetExecutingAssembly()
@@ -40,6 +38,11 @@ namespace ActionMenuTestMod
                 iconsAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             }
 
+            Transform transform = new Transform();
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                GameObject child = transform.GetChild(i).gameObject;
+            }
             radialIcon = iconsAssetBundle
                 .LoadAsset_Internal("Assets/Resources/Icons/sound-full.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
@@ -56,20 +59,18 @@ namespace ActionMenuTestMod
                 .LoadAsset_Internal("Assets/Resources/Icons/cloud-data-download.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
             buttonIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-
-            Tools.AddButtonPedalToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Log("Pressed Button"); },
+            
+            Tools.AddButtonPedalToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Pressed Button"); },
                 "Button", buttonIcon);
 
-            Tools.AddSubMenuToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Log("Opened Menu"); },
+            Tools.AddSubMenuToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Opened Menu"); },
                 "Sub Menu", subMenuIcon);
 
             Tools.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue,
                 radialIcon);
 
             Tools.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
-
-
+            
             }
     }
 }

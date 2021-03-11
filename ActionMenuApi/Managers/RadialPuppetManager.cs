@@ -1,7 +1,6 @@
 ﻿using System;
 using MelonLoader;
 using UnityEngine;
-using VRC.UI;
 
 namespace ActionMenuApi
 {
@@ -63,11 +62,9 @@ namespace ActionMenuApi
                 else
                 {
                     UpdateMathStuff();
-                    radialPuppetValue = (current.fill.angleMax / 360) * 100;
+                    radialPuppetValue = (current.GetFill().field_Public_Single_0 / 360) * 100;
                     if(onUpdate != null) onUpdate.Invoke(radialPuppetValue);
-                    
                 }
-                
             }
         }
 
@@ -92,10 +89,11 @@ namespace ActionMenuApi
             Input.ResetInputAxes();
             onClose = close;
             current.gameObject.SetActive(true);
-            current.fill.angleMax = 360*(startingValue / 100);
-            current.title.text = title;
-            current.centerText.text = (Math.Round(radialPuppetMenuRight.fill.angleMax / 360 * 100)) + "%";
-            current.fill.UpdateGeometry();
+            current.GetFill().field_Public_Single_0 = 360 * (startingValue / 100);
+            
+            current.GetTitle().text = title;
+            current.GetCenterText().text = (Math.Round(radialPuppetMenuRight.GetFill().field_Public_Single_0 / 360 * 100)) + "%";
+            current.GetFill().UpdateGeometry();
             current.transform.localPosition = new Vector3(-256f, 0, 0);
         }
 
@@ -112,7 +110,7 @@ namespace ActionMenuApi
         {
             
             Vector2 mousePos = (hand == ActionMenuHand.Left) ? Utilities.GetCursorPosLeft() : Utilities.GetCursorPosRight();
-            radialPuppetMenuRight.cursor.transform.localPosition = mousePos * 4;
+            radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
             
 
             if (Vector2.Distance(mousePos, Vector2.zero) > 12)

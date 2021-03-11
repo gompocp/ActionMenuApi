@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 using UnityEngine;
@@ -41,29 +42,33 @@ namespace ActionMenuApi
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_0;
         public static ActionMenuOpener GetRightOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_1;
         public static ActionMenu GetActionMenu(this ActionMenuOpener actionMenuOpener) => actionMenuOpener.field_Public_ActionMenu_0;
-        
+        public static GameObject GetCursor(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_GameObject_0;
+        public static GameObject GetArrow(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_GameObject_1;
+        public static PedalGraphic GetFill(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_PedalGraphic_0;
+        public static TextMeshProUGUI GetTitle(this RadialPuppetMenu radialPuppetMenu) => ((PuppetMenu)radialPuppetMenu).field_Public_TextMeshProUGUI_0;
+        public static TextMeshProUGUI GetCenterText(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_TextMeshProUGUI_0;
         public static void SetAngle(this RadialPuppetMenu radialPuppet, float angle)
         {
-            radialPuppet.field_Public_PedalGraphic_0.angleMax = angle;
+            radialPuppet.GetFill().field_Public_Single_3 = angle;
             radialPuppet.UpdateDisplay();
         }
 
         public static void SetValue(this RadialPuppetMenu radialPuppet, float value)
         {
-            radialPuppet.fill.angleMax = (value / 100) * 360;
+            radialPuppet.GetFill().field_Public_Single_3  = (value / 100) * 360;
             radialPuppet.UpdateDisplay();
         }
 
         public static void UpdateDisplay(this RadialPuppetMenu radialPuppet)
         {
-            radialPuppet.centerText.text = (Math.Round(radialPuppet.fill.angleMax / 360 * 100)) + "%";
-            radialPuppet.fill.UpdateGeometry();
+            radialPuppet.GetCenterText().text = (Math.Round(radialPuppet.GetFill().field_Public_Single_3  / 360 * 100)) + "%";
+            radialPuppet.GetFill().UpdateGeometry();
         }
 
         public static void UpdateArrow(this RadialPuppetMenu radialPuppet, double angleOriginal, double eulerAngle)
         {
-            radialPuppet.arrow.transform.localPosition = new Vector3((float)(120 * Math.Cos(angleOriginal / Constants.radToDeg)), (float)(120 * Math.Sin(angleOriginal / Constants.radToDeg)), radialPuppet.arrow.transform.localPosition.z);
-            radialPuppet.arrow.transform.localEulerAngles = new Vector3(radialPuppet.arrow.transform.localEulerAngles.x, radialPuppet.arrow.transform.localEulerAngles.y, (float)(180 - eulerAngle));
+            radialPuppet.GetArrow().transform.localPosition = new Vector3((float)(120 * Math.Cos(angleOriginal / Constants.radToDeg)), (float)(120 * Math.Sin(angleOriginal / Constants.radToDeg)), radialPuppet.GetArrow().transform.localPosition.z);
+            radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (float)(180 - eulerAngle));
         }
     }
 }

@@ -15,7 +15,5 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: AssemblyVersion(ModInfo.Version)]
 [assembly: AssemblyFileVersion(ModInfo.Version)]
-[assembly:
-    MelonInfo(typeof(ActionMenuTestMod.ActionMenuTestMod), ModInfo.Name, ModInfo.Version, ModInfo.Author,
-        ModInfo.DownloadLink)]
+[assembly: MelonInfo(typeof(ActionMenuTestMod.ActionMenuTestMod), ModInfo.Name, ModInfo.Version, ModInfo.Author, ModInfo.DownloadLink)]
 [assembly: MelonGame("VRChat", "VRChat")]

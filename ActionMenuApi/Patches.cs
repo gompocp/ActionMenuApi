@@ -40,14 +40,12 @@ namespace ActionMenuApi
         private static List<string> openExpressionMenuKeyWords = new List<string>(new string[] { "Reset Avatar" });
         private static List<string> openOptionsPageKeyWords = new List<string>(new string[] { "Config" }); //"Nameplates" and "Close Menu" are ones as well but that update hasnt dropped yet
         private static List<string> openSDK2ExpressionPageKeyWords = new List<string>(new string[] { "EMOTE{0}" });
-
-     
+        
         private static List<string> openNameplatesOpacityPageKeyWords = new List<string>(new string[] { "100%", "80%", "60%", "40%", "20%", "0%" });
         private static List<string> openNameplatesPageKeyWords = new List<string>(new string[] { "Visibility", "Size", "Opacity" });
         private static List<string> openNameplatesVisibilityPageKeyWords = new List<string>(new string[] { "Nameplates Shown", "Icons Only", "Nameplates Hidden" });
         private static List<string> openNameplatesSizePageKeyWords = new List<string>(new string[] { "Large", "Medium", "Normal", "Small", "Tiny" });
-
-
+        
         private static List<string> openMenuSizePageKeyWords = new List<string>(new string[] { "XXXXXXXXX" }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
 
         private static HarmonyInstance harmonyInstance { get; set; } = HarmonyInstance.Create("gompo.actionmenuapi");

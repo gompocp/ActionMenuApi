@@ -18,7 +18,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>E:\Windows\Programs\Software\SteamLibrary\steamapps\common\VRChat\Mods</OutputPath>
+        <OutputPath>bin</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugType>none</DebugType>
         <Optimize>true</Optimize>
-        <OutputPath>E:\Windows\Programs\Software\SteamLibrary\steamapps\common\VRChat\Mods</OutputPath>
+        <OutputPath>bin</OutputPath>
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -38,12 +38,6 @@
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Include="customicons" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\ActionMenuApi\ActionMenuApi.csproj">
-        <Project>{8f74b60c-3e7f-409b-8245-61e16a4c34e7}</Project>
-        <Name>ActionMenuApi</Name>
-      </ProjectReference>
     </ItemGroup>
     <ItemGroup>
       <Reference Include="Il2Cppmscorlib, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
@@ -65,13 +59,14 @@
         <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
       </Reference>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ActionMenuApi\ActionMenuApi.csproj">
+        <Project>{8f74b60c-3e7f-409b-8245-61e16a4c34e7}</Project>
+        <Name>ActionMenuApi</Name>
+      </ProjectReference>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
-
+    <PropertyGroup>
+        <PostBuildEvent>COPY "$(MSBuildProjectDirectory)\bin\ActionMenuTestMod.dll" "E:\Windows\Programs\Software\SteamLibrary\steamapps\common\VRChat\Mods"</PostBuildEvent>
+    </PropertyGroup>
 </Project>

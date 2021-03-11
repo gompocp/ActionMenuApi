@@ -93,10 +93,7 @@ namespace ActionMenuApi
                         pedalToggle.pedal = pedalOption;
                         pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
-                        
                 }
-
-                
             }
         }
         

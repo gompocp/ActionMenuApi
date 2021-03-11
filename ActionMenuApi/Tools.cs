@@ -20,7 +20,6 @@ namespace ActionMenuApi.API
         
         public static void AddRadialPedalToMenu(ActionMenuPageType pageType, System.Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
-
             AddPedalToList(
                 pageType, 
                 new PedalRadial(
@@ -63,8 +62,7 @@ namespace ActionMenuApi.API
         }
 
 
-        private static void AddPedalToList(ActionMenuPageType pageType, PedalStruct customPedal,
-            Insertion insertion)
+        private static void AddPedalToList(ActionMenuPageType pageType, PedalStruct customPedal, Insertion insertion)
         {
             switch (pageType)
             {
