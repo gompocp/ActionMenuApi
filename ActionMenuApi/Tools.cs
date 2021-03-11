@@ -77,18 +77,17 @@ namespace ActionMenuApi
         }
         
         /*
-        public static PedalOption AddTogglePedalToSubMenu(System.Action<bool> onToggle, string text, Texture2D icon = null)
+        public static PedalOption AddTogglePedalToSubMenu(System.Action<bool> onToggle, bool startingState, string text, Texture2D icon = null)
         {
-            AddPedalToList(
-                pageType, 
-                new PedalToggle(
-                    text, 
-                    onToggle, 
-                    startingState,
-                    icon
-                ),
-                insertion
-            );
+            
+            ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
+            PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
+            pedalOption.setText(text); 
+            pedalOption.setIcon(icon);
+            bool toggle = startingState;
+            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent);
+            return pedalOption;
         }*/
         
         
