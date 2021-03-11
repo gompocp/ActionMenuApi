@@ -18,10 +18,11 @@ Working on
 
 The test mod I've included should be more than enough but I'll add these here anyway
 
-> Add a reference to the api dll and include `using ActionMenuApi;` at the top of your file
-
 
 ```cs
+//Add a reference to the api dll and add this to the top of your file
+using ActionMenuApi;
+
 //To add a button to the main page of the action menu
 AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon);
 
