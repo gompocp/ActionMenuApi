@@ -37,11 +37,6 @@ namespace ActionMenuTestMod
                 iconsAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             }
 
-            Transform transform = new Transform();
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                GameObject child = transform.GetChild(i).gameObject;
-            }
             radialIcon = iconsAssetBundle
                 .LoadAsset_Internal("Assets/Resources/Icons/sound-full.png", Il2CppType.Of<Texture2D>())
                 .Cast<Texture2D>();
