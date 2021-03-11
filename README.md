@@ -24,6 +24,10 @@ The test mod I've included should be more than enough but I'll add these here an
 using ActionMenuApi;
 /*
 
+Code
+
+*/
+
 //To add a button to the main page of the action menu
 AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon);
 
