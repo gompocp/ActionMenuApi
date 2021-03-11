@@ -49,6 +49,18 @@ namespace ActionMenuApi
         public static TextMeshProUGUI GetTitle(this RadialPuppetMenu radialPuppetMenu) => ((PuppetMenu)radialPuppetMenu).field_Public_TextMeshProUGUI_0;
         public static TextMeshProUGUI GetTitle(this AxisPuppetMenu axisPuppetMenu) => ((PuppetMenu)axisPuppetMenu).field_Public_TextMeshProUGUI_0;
         public static TextMeshProUGUI GetCenterText(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_TextMeshProUGUI_0;
+        public static PedalGraphic GetFillUp(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_0;
+        public static PedalGraphic GetFillRight(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_1;
+        public static PedalGraphic GetFillDown(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_2;
+        public static PedalGraphic GetFillLeft(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_3;
+
+        public static void SetAlpha(this PedalGraphic pedalGraphic, float amount)
+        {
+            Color temp = pedalGraphic.color;
+            temp.a = amount;
+            pedalGraphic.color = temp;
+        }
+        
         public static void SetAngle(this RadialPuppetMenu radialPuppet, float angle)
         {
             radialPuppet.GetFill().field_Public_Single_3 = angle;

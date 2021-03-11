@@ -20,7 +20,7 @@ namespace ActionMenuApi.Pedals
             this.onClose = delegate(Vector2 v)
             {
                 currentValue = v;
-                MelonLogger.Msg(v.ToString());
+                //MelonLogger.Msg(v.ToString());
             };
             this.triggerEvent = delegate {
                 FourAxisPuppetManager.OpenFourAxisMenu(startingValue, onClose, text, onUpdate);

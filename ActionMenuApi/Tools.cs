@@ -47,6 +47,20 @@ namespace ActionMenuApi
                 insertion
             );
         }
+        
+        public static void AddFourAxisPedalToMenu(ActionMenuPageType pageType, string text, Vector2 startingValue, Action<Vector2> onUpdate,Texture2D icon = null, Insertion insertion = Insertion.Post)
+        {
+            AddPedalToList(
+                pageType, 
+                new PedalFourAxis(
+                    text, 
+                    startingValue, 
+                    icon,
+                    onUpdate
+                ),
+                insertion
+            );
+        }
 
         public static void AddSubMenuToMenu(ActionMenuPageType pageType, Action openFunc, string text = null,
             Texture2D icon = null, Action closeFunc = null, Insertion insertion = Insertion.Post)

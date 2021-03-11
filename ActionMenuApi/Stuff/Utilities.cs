@@ -88,15 +88,19 @@ namespace ActionMenuApi
                             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOn;
                         else
                             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOff;
-
                         pedalOption.setIcon(pedalToggle.icon);
                         pedalToggle.pedal = pedalOption;
+                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        break;
+                    case PedalType.FourAxisPuppet:
+                        pedalOption.setText(pedalStruct.text);
+                        pedalOption.setIcon(pedalStruct.icon);
+                        pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeAxis;
                         pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                 }
             }
         }
-        
         
         public static double ConvertFromDegToEuler(double angle)
         {
@@ -158,7 +162,5 @@ namespace ActionMenuApi
             }
             */
         }
-
-
     }
 }

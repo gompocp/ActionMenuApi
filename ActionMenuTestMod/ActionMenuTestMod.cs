@@ -20,6 +20,7 @@ namespace ActionMenuTestMod
         private float testFloatValue = 50;
         private bool testBool = false;
         private bool testBool2 = false;
+        private Vector2 testVector2 = new Vector2();
         private static AssetBundle iconsAssetBundle = null;
         private static Texture2D toggleIcon;
         private static Texture2D radialIcon;
@@ -55,9 +56,8 @@ namespace ActionMenuTestMod
                 "Sub Menu", 
                 subMenuIcon
             );
-
             AMAPI.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue, radialIcon);
-
+            AMAPI.AddFourAxisPedalToMenu(ActionMenuPageType.Main, "Four Axis", testVector2, vector2 => testVector2 = vector2, toggleIcon);
             AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
         }
     }
