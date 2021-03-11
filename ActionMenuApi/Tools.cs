@@ -1,4 +1,5 @@
-﻿using ActionMenuApi.Pedals;
+﻿using System;
+using ActionMenuApi.Pedals;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
@@ -9,7 +10,7 @@ namespace ActionMenuApi
     public static class AMAPI
     {
         
-        public static void AddButtonPedalToMenu(ActionMenuPageType pageType, System.Action triggerEvent, string text = "Button Text", Texture2D icon = null, Insertion insertion = Insertion.Post)
+        public static void AddButtonPedalToMenu(ActionMenuPageType pageType, Action triggerEvent, string text = "Button Text", Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
                 pageType, 
@@ -22,7 +23,7 @@ namespace ActionMenuApi
             );
         }
 
-        public static PedalOption AddButtonPedalToSubMenu(System.Action triggerEvent, string text = "Button Text", Texture2D icon = null)
+        public static PedalOption AddButtonPedalToSubMenu(Action triggerEvent, string text = "Button Text", Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -33,7 +34,7 @@ namespace ActionMenuApi
             return pedalOption;
         }
         
-        public static void AddRadialPedalToMenu(ActionMenuPageType pageType, System.Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null, Insertion insertion = Insertion.Post)
+        public static void AddRadialPedalToMenu(ActionMenuPageType pageType, Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
                 pageType, 
@@ -47,8 +48,8 @@ namespace ActionMenuApi
             );
         }
 
-        public static void AddSubMenuToMenu(ActionMenuPageType pageType, System.Action openFunc, string text = null,
-            Texture2D icon = null, System.Action closeFunc = null, Insertion insertion = Insertion.Post)
+        public static void AddSubMenuToMenu(ActionMenuPageType pageType, Action openFunc, string text = null,
+            Texture2D icon = null, Action closeFunc = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
                 pageType, 
@@ -76,8 +77,8 @@ namespace ActionMenuApi
             );
         }
         
-        /*
-        public static PedalOption AddTogglePedalToSubMenu(System.Action<bool> onToggle, bool startingState, string text, Texture2D icon = null)
+        
+        public static PedalOption AddTogglePedalToSubMenu(Action<bool> onToggle, bool startingState, string text, Texture2D icon = null)
         {
             
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -85,10 +86,19 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
-            bool toggle = startingState;
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent);
+            if (startingState) pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
+            else pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
+            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            {
+                startingState = !startingState;
+                if (startingState)
+                    pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
+                else 
+                    pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
+                onToggle.Invoke(startingState);
+            }));
             return pedalOption;
-        }*/
+        }
         
         
 

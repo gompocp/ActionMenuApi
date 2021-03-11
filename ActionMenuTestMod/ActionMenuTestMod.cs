@@ -19,6 +19,7 @@ namespace ActionMenuTestMod
     {
         private float testFloatValue = 50;
         private bool testBool = false;
+        private bool testBool2 = false;
         private static AssetBundle iconsAssetBundle = null;
         private static Texture2D toggleIcon;
         private static Texture2D radialIcon;
@@ -49,6 +50,7 @@ namespace ActionMenuTestMod
                 delegate {
                     MelonLogger.Msg("Sub Menu Opened");
                     AMAPI.AddButtonPedalToSubMenu(() => MelonLogger.Msg("Pressed Button In Sub Menu"), "Sub Menu Button", buttonIcon);
+                    AMAPI.AddTogglePedalToSubMenu(b => testBool2 = b, testBool2, "Sub Menu Toggle", toggleIcon);
                 },
                 "Sub Menu", 
                 subMenuIcon
