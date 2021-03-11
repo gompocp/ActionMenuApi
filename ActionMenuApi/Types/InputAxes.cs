@@ -1,6 +1,6 @@
 ﻿namespace ActionMenuApi
 {
-    public static class InputAxes
+    internal static class InputAxes
     {
 
         public const string LeftHorizontal = "Horizontal";

@@ -2,7 +2,6 @@
 using System.Reflection;
 using ActionMenuApi;
 using MelonLoader;
-using ActionMenuApi.API;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
@@ -60,16 +59,16 @@ namespace ActionMenuTestMod
                 .Cast<Texture2D>();
             buttonIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             
-            Tools.AddButtonPedalToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Pressed Button"); },
+            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Pressed Button"); },
                 "Button", buttonIcon);
 
-            Tools.AddSubMenuToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Opened Menu"); },
+            AMAPI.AddSubMenuToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Opened Menu"); },
                 "Sub Menu", subMenuIcon);
 
-            Tools.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue,
+            AMAPI.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue,
                 radialIcon);
 
-            Tools.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
+            AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
             
             }
     }

@@ -1,9 +1,9 @@
 ﻿using ActionMenuApi.Pedals;
 using UnityEngine;
 
-namespace ActionMenuApi.API
+namespace ActionMenuApi
 {
-    public static class Tools
+    public static class AMAPI
     {
         public static void AddButtonPedalToMenu(ActionMenuPageType pageType, System.Action triggerEvent, string text = "Button Text", Texture2D icon = null, Insertion insertion = Insertion.Post)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ActionMenuApi
 {
-    public static class RadialPuppetManager
+    internal static class RadialPuppetManager
     {
 
         public static void Setup()

@@ -1,6 +1,6 @@
 ﻿namespace ActionMenuApi
 {
-    public enum ActionMenuHand
+    internal enum ActionMenuHand
     {
         Invalid,
         Left,

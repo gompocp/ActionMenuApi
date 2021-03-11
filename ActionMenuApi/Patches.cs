@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace ActionMenuApi
 {
-    public static class Patches
+    internal static class Patches
     {
         public static List<PedalStruct> configPagePre = new List<PedalStruct>();
         public static List<PedalStruct> configPagePost = new List<PedalStruct>();

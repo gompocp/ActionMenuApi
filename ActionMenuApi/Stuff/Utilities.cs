@@ -12,7 +12,7 @@ using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this ch
 
 namespace ActionMenuApi
 {
-    public static class Utilities
+    internal static class Utilities
     {
         public static bool checkXref(MethodBase m, params  string[] keywords)
         {

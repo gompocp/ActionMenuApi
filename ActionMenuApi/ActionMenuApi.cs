@@ -3,7 +3,7 @@
 
 namespace ActionMenuApi
 {
-    public static class ModInfo
+    internal static class ModInfo
     {
         public const string Name = "ActionMenuApi";
         public const string Author = "gompo#6956";

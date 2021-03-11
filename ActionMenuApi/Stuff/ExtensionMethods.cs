@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ActionMenuApi
 {
-    public static class ExtensionMethods
+    internal static class ExtensionMethods
     {
         
         public static PedalOption AddOption(this ActionMenu menu)
