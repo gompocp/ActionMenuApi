@@ -1,10 +1,14 @@
 ﻿using ActionMenuApi.Pedals;
+using UnhollowerRuntimeLib;
 using UnityEngine;
+using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
+using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 
 namespace ActionMenuApi
 {
     public static class AMAPI
     {
+        
         public static void AddButtonPedalToMenu(ActionMenuPageType pageType, System.Action triggerEvent, string text = "Button Text", Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -16,6 +20,17 @@ namespace ActionMenuApi
                 ),
                 insertion
             );
+        }
+
+        public static PedalOption AddButtonPedalToSubMenu(System.Action triggerEvent, string text = "Button Text", Texture2D icon = null)
+        {
+            ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
+            PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
+            pedalOption.setText(text); 
+            pedalOption.setIcon(icon); 
+            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent);
+            return pedalOption;
         }
         
         public static void AddRadialPedalToMenu(ActionMenuPageType pageType, System.Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null, Insertion insertion = Insertion.Post)
@@ -60,6 +75,23 @@ namespace ActionMenuApi
                 insertion
             );
         }
+        
+        /*
+        public static PedalOption AddTogglePedalToSubMenu(System.Action<bool> onToggle, string text, Texture2D icon = null)
+        {
+            AddPedalToList(
+                pageType, 
+                new PedalToggle(
+                    text, 
+                    onToggle, 
+                    startingState,
+                    icon
+                ),
+                insertion
+            );
+        }*/
+        
+        
 
 
         private static void AddPedalToList(ActionMenuPageType pageType, PedalStruct customPedal, Insertion insertion)

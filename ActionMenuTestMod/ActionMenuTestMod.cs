@@ -54,17 +54,20 @@ namespace ActionMenuTestMod
                 .Cast<Texture2D>();
             buttonIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             
-            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Pressed Button"); },
-                "Button", buttonIcon);
+            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon);
 
-            AMAPI.AddSubMenuToMenu(ActionMenuPageType.Main, delegate { MelonLogger.Msg("Opened Menu"); },
-                "Sub Menu", subMenuIcon);
+            AMAPI.AddSubMenuToMenu(ActionMenuPageType.Main, 
+                delegate {
+                    MelonLogger.Msg("Sub Menu Opened");
+                    AMAPI.AddButtonPedalToSubMenu(() => MelonLogger.Msg("Pressed Button In Sub Menu"), "Sub Menu Button", buttonIcon);
+                },
+                "Sub Menu", 
+                subMenuIcon
+            );
 
-            AMAPI.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue,
-                radialIcon);
+            AMAPI.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue, radialIcon);
 
             AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
-            
-            }
+        }
     }
 }
