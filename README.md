@@ -1,17 +1,49 @@
 # ActionMenuApi <br>
+> Currently in the process of rewriting the old system of this <br>Old version info available further down and source code in the releases section <br>
+
 ![alt text](https://cdn.discordapp.com/attachments/761897291388157955/789496482092679168/unknown.png)
-- Currently in the process of rewriting all of this <br>
-if you are looking for the old .cs file you can find it in releases <br>
+
 Now supports the <br>
-- Radial puppet (bit buggy in vr)
+- Radial puppet (broken in vr oops :) )
 - Button
 - Toggle 
 - SubMenu  
-Can't currently add to custom sub menus
+You can currently add toggles and buttons custom sub menus
 
 Working on
 - FourAxisPuppet
 - Correct placement of the radial puppet
+
+# Usage
+
+The test mod I've included should be more than enough but I'll add these here anyway
+
+> Add a reference to the api dll and include `using ActionMenuApi;` at the top of your file
+
+
+```cs
+//To add a button to the main page of the action menu
+AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon);
+
+//To add a toggle to the main page of the action menu
+AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
+
+//To add a radial pedal to the main page of the action menu
+AMAPI.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue, radialIcon);
+
+//To add a submenu to the main page of the action menu and add a toggle and button to it
+AMAPI.AddSubMenuToMenu(ActionMenuPageType.Main, 
+    delegate {
+        MelonLogger.Msg("Sub Menu Opened");
+        AMAPI.AddButtonPedalToSubMenu(() => MelonLogger.Msg("Pressed Button In Sub Menu"), "Sub Menu Button", buttonIcon);
+        AMAPI.AddTogglePedalToSubMenu(b => testBool2 = b, testBool2, "Sub Menu Toggle", toggleIcon);
+    },
+    "Sub Menu", 
+    subMenuIcon
+);
+```
+
+
 
 # Credits
 - Assetbundle loading mechanism from Knah
