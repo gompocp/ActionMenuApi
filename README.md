@@ -1,7 +1,7 @@
 # ActionMenuApi <br>
 > Currently in the process of rewriting the old system of this <br>Old version info available further down and source code in the releases section [here](https://github.com/gompocp/ActionMenuApi/releases/tag/v1.0.0) <br>
 
-![alt text](https://cdn.discordapp.com/attachments/761897291388157955/789496482092679168/unknown.png)
+![alt text](https://raw.githubusercontent.com/gompocp/ActionMenuApi/main/Assets/preview.gif)
 
 Now supports the <br>
 - Radial puppet (broken in vr oops :) )
