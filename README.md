@@ -5,14 +5,14 @@
 
 Now supports the <br>
 - Radial puppet (broken in vr oops :) )
+- Four Axis puppet (broken in vr  double oops :) )
 - Button
 - Toggle 
 - SubMenu  
-You can currently add toggles and buttons to custom sub menus
+Currently you can only add toggles and buttons to custom sub menus
 
 Working on
-- FourAxisPuppet
-- Correct placement of the radial puppet
+- Correct placement of the radial/four axis puppet
 
 # Usage
 

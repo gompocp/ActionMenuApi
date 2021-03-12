@@ -6,7 +6,7 @@ namespace ActionMenuApi.Pedals
 {
     public class PedalFourAxis : PedalStruct
     {
-        public System.Action<Vector2> onClose;
+        public Action<Vector2> onClose;
         public Vector2 currentValue;
         public Action<Vector2> onUpdate;
         public PedalOption pedal { get; set; }
