@@ -50,15 +50,20 @@ namespace ActionMenuApi
         
         public static PedalOption AddRadialPedalToSubMenu(Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null)
         {
-            
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
+            pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
+            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeRadial;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
             {
-                //TODO: Finish Radial Pedal To Sub Menu Method
+                RadialPuppetManager.OpenRadialMenu(startingValue, delegate(float f)
+                {
+                    startingValue = f;
+                    pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
+                }, text);
             }));
             return pedalOption;
         }
@@ -80,6 +85,26 @@ namespace ActionMenuApi
                 ),
                 insertion
             );
+        }
+        
+        public static PedalOption AddFourAxisPedalToSubMenu(string text, Vector2 startingValue, Action<Vector2> onUpdate,Texture2D icon = null, string topButtonText = "Up", 
+            string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
+        {
+            ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
+            PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
+            pedalOption.setText(text); 
+            pedalOption.setIcon(icon);
+            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeAxis;
+            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            {
+                FourAxisPuppetManager.OpenFourAxisMenu(startingValue, v => startingValue = v, text, onUpdate);
+                    FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
+                    FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
+                    FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
+                    FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
+                }));
+            return pedalOption;
         }
 
         public static void AddSubMenuToMenu(ActionMenuPageType pageType, Action openFunc, string text = null,

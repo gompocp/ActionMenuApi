@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Harmony;
 using MelonLoader;
 
 
@@ -14,8 +15,11 @@ namespace ActionMenuApi
 
     public class ActionMenuApi : MelonMod
     {
+        private static MelonMod Instance;
+        public static HarmonyInstance HarmonyInstance => Instance.Harmony;
         public override void OnApplicationStart()
         {
+            Instance = this;
             Patches.PatchAll();
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();

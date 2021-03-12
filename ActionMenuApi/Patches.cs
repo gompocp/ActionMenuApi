@@ -48,7 +48,7 @@ namespace ActionMenuApi
         
         private static List<string> openMenuSizePageKeyWords = new List<string>(new string[] { "XXXXXXXXX" }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
 
-        private static HarmonyInstance harmonyInstance { get; set; } = HarmonyInstance.Create("gompo.actionmenuapi");
+        private static HarmonyInstance harmonyInstance { get; set; } = ActionMenuApi.HarmonyInstance;
 
         public static void PatchAll()
         {
@@ -58,6 +58,7 @@ namespace ActionMenuApi
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMainPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMainPagePost))));
                 break;
             }
+            
             foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && Utilities.checkXref(m, openConfigPageKeywords)))
             {
                 Logger.Log("Found Config Page:" + methodBase.Name);
@@ -106,6 +107,7 @@ namespace ActionMenuApi
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesSizePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesSizePost))));
                 break;
             }
+            
             foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && Utilities.checkXref(m, openOptionsPageKeyWords)))
             {
 
@@ -113,6 +115,7 @@ namespace ActionMenuApi
                 harmonyInstance.Patch(methodBase, new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenOptionsPre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenOptionsPost))));
                 break;
             }
+            
             foreach (MethodBase methodBase in typeof(ActionMenu).GetMethods().Where(m => m.Name.StartsWith("Method_") && Utilities.checkXref(m, openSDK2ExpressionPageKeyWords)))
             {
                 Logger.Log("Found SDK2 Expression Page:" + methodBase.Name);

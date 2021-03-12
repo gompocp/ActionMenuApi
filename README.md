@@ -9,7 +9,7 @@ Now supports the <br>
 - Button
 - Toggle 
 - SubMenu  
-Currently you can only add toggles and buttons to custom sub menus
+Currently you can't (currently) nest a submenu within a custom submenu
 
 Working on
 - Correct placement of the radial/four axis puppet

@@ -18,8 +18,10 @@ namespace ActionMenuTestMod
     public class ActionMenuTestMod : MelonMod
     {
         private float testFloatValue = 50;
+        private float testFloatValue2 = 50;
         private bool testBool = false;
         private bool testBool2 = false;
+        private Vector2 testVector = new Vector2();
         private Vector2 testVector2 = new Vector2();
         private static AssetBundle iconsAssetBundle = null;
         private static Texture2D toggleIcon;
@@ -52,6 +54,8 @@ namespace ActionMenuTestMod
                     MelonLogger.Msg("Sub Menu Opened");
                     AMAPI.AddButtonPedalToSubMenu(() => MelonLogger.Msg("Pressed Button In Sub Menu"), "Sub Menu Button", buttonIcon);
                     AMAPI.AddTogglePedalToSubMenu(b => testBool2 = b, testBool2, "Sub Menu Toggle", toggleIcon);
+                    AMAPI.AddRadialPedalToSubMenu(f => testFloatValue2 = f, "Sub Menu Radial", testFloatValue2, radialIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Sub Menu Four Axis", testVector, v => testVector = v, toggleIcon);
                 },
                 "Sub Menu", 
                 subMenuIcon
