@@ -53,7 +53,12 @@ namespace ActionMenuApi
         public static PedalGraphic GetFillRight(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_1;
         public static PedalGraphic GetFillDown(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_2;
         public static PedalGraphic GetFillLeft(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_PedalGraphic_3;
-
+        public static void SetButtonText(this ActionButton actionButton, string text) => actionButton.prop_String_0 = text;
+        public static ActionButton GetButtonUp(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_ActionButton_0;
+        public static ActionButton GetButtonRight(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_ActionButton_1;
+        public static ActionButton GetButtonDown(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_ActionButton_2;
+        public static ActionButton GetButtonLeft(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_ActionButton_3;
+        
         public static void SetAlpha(this PedalGraphic pedalGraphic, float amount)
         {
             Color temp = pedalGraphic.color;

@@ -8,7 +8,7 @@ namespace ActionMenuApi
     {
         private static AxisPuppetMenu fourAxisPuppetMenuRight;
         private static AxisPuppetMenu fourAxisPuppetMenuLeft;
-        private static AxisPuppetMenu current;
+        public static AxisPuppetMenu current { get; private set; }
         private static ActionMenuHand hand;
 
         public static Vector2 fourAxisPuppetValue { get; set; }
@@ -29,7 +29,6 @@ namespace ActionMenuApi
             while (GameObject.Find("UserInterface/ActionMenu/MenuR/ActionMenu/AxisPuppetMenu") == null) yield return null;
             fourAxisPuppetMenuLeft = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/AxisPuppetMenu", "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<AxisPuppetMenu>();
             fourAxisPuppetMenuRight = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/AxisPuppetMenu", "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<AxisPuppetMenu>();
-            yield break;
         }
         
         public static void OnUpdate()
@@ -113,7 +112,6 @@ namespace ActionMenuApi
             {
                 current.Method_Private_Void_Vector2_Boolean_1(startingValue, false);
             }catch {}
-
             current.transform.localPosition = new Vector3(-256f, 0, 0);
         }
 

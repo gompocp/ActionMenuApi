@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using System.Diagnostics;
+using MelonLoader;
 
 
 namespace ActionMenuApi

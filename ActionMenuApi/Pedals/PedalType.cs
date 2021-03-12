@@ -3,9 +3,9 @@
     public enum PedalType
     {
         Button,
-        Toggle, //Not Implemented Yet
+        Toggle,
         SubMenu, 
-        FourAxisPuppet, //Not Implemented Yet
+        FourAxisPuppet, 
         RadialPuppet
     }
 }

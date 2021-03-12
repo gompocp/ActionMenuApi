@@ -48,7 +48,23 @@ namespace ActionMenuApi
             );
         }
         
-        public static void AddFourAxisPedalToMenu(ActionMenuPageType pageType, string text, Vector2 startingValue, Action<Vector2> onUpdate,Texture2D icon = null, Insertion insertion = Insertion.Post)
+        public static PedalOption AddRadialPedalToSubMenu(Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null)
+        {
+            
+            ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
+            PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
+            pedalOption.setText(text); 
+            pedalOption.setIcon(icon);
+            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            {
+                //TODO: Finish Radial Pedal To Sub Menu Method
+            }));
+            return pedalOption;
+        }
+        
+        public static void AddFourAxisPedalToMenu(ActionMenuPageType pageType, string text, Vector2 startingValue, Action<Vector2> onUpdate,Texture2D icon = null, Insertion insertion = Insertion.Post, string topButtonText = "Up", 
+            string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
         {
             AddPedalToList(
                 pageType, 
@@ -56,7 +72,11 @@ namespace ActionMenuApi
                     text, 
                     startingValue, 
                     icon,
-                    onUpdate
+                    onUpdate,
+                    topButtonText,
+                    rightButtonText,
+                    downButtonText,
+                    leftButtonText
                 ),
                 insertion
             );
