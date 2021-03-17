@@ -89,12 +89,15 @@ namespace ActionMenuApi
             Input.ResetInputAxes();
             onClose = close;
             current.gameObject.SetActive(true);
-            current.GetFill().field_Public_Single_3 = 360 * (startingValue / 100);
-            
+            current.GetFill().field_Public_Single_3 = startingValue;
+            onUpdate = onClose;
             current.GetTitle().text = title;
             current.GetCenterText().text = (Math.Round(radialPuppetMenuRight.GetFill().field_Public_Single_3 / 360 * 100)) + "%";
             current.GetFill().UpdateGeometry();
             current.transform.localPosition = new Vector3(-256f, 0, 0);
+            double angleOriginal = (startingValue/100)*360;
+            double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
+            current.UpdateArrow(angleOriginal, eulerAngle);
         }
 
         public static void CloseRadialMenu()
@@ -108,7 +111,6 @@ namespace ActionMenuApi
 
         private static void UpdateMathStuff()
         {
-            
             Vector2 mousePos = (hand == ActionMenuHand.Left) ? Utilities.GetCursorPosLeft() : Utilities.GetCursorPosRight();
             radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
 

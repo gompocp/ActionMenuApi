@@ -59,11 +59,13 @@ namespace ActionMenuApi
             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeRadial;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
             {
-                RadialPuppetManager.OpenRadialMenu(startingValue, delegate(float f)
+                Action<float> combinedAction = (System.Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
                 {
                     startingValue = f;
+                    
                     pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
-                }, text);
+                }), onUpdate);
+                RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text);
             }));
             return pedalOption;
         }
