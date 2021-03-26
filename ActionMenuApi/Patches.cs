@@ -39,23 +39,8 @@ namespace ActionMenuApi
         private static readonly List<string> openNameplatesVisibilityPageKeyWords = new (new [] { "Nameplates Shown", "Icons Only", "Nameplates Hidden" });
         private static readonly List<string> openNameplatesSizePageKeyWords = new (new [] { "Large", "Medium", "Normal", "Small", "Tiny" });
         private static readonly List<string> openMenuSizePageKeyWords = new (new [] { "XXXXXXXXX" }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
-        unsafe static private void ApplyPatches()
-        {
-            var CollideTarget = *(IntPtr*)(IntPtr)typeof(DynamicBoneCollider).GetField("NativeMethodInfoPtr_Method_Public_Void_byref_Vector3_Single_0", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null);
-            MelonUtils.NativeHookAttach((IntPtr)(&CollideTarget), Marshal.GetFunctionPointerForDelegate(new Action<IntPtr, IntPtr, IntPtr>(OnCollide)));
-            collideDelegate = Marshal.GetDelegateForFunctionPointer<CollideDelegate>(CollideTarget);
-        }
-
-        public delegate void CollideDelegate(IntPtr instance, IntPtr particlePosition, IntPtr particleRadius);
-        public static CollideDelegate collideDelegate;
-
-        unsafe static private void OnCollide(IntPtr instance, IntPtr particlePosition, IntPtr particleRadius)
-        {
-            collideDelegate(instance, particlePosition, particleRadius); // Error happens here
-        }
         public static void PatchAll()
         {
-            ApplyPatches();
             try {
                 unsafe
                 {
