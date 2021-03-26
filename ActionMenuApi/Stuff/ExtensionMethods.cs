@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Reflection;
+using MelonLoader;
 using TMPro;
+using UnhollowerBaseLib;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 using UnityEngine;
@@ -88,6 +91,22 @@ namespace ActionMenuApi
         {
             radialPuppet.GetArrow().transform.localPosition = new Vector3((float)(120 * Math.Cos(angleOriginal / Constants.radToDeg)), (float)(120 * Math.Sin(angleOriginal / Constants.radToDeg)), radialPuppet.GetArrow().transform.localPosition.z);
             radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (float)(180 - eulerAngle));
+        }
+
+        public static IntPtr Il2CppPtr(this MethodInfo methodInfo)
+        {
+            unsafe
+            {
+                return *(IntPtr*) (IntPtr) UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(methodInfo).GetValue(null);
+            }
+        }
+
+        public static void Hook(this IntPtr targetPtr, MethodInfo patch)
+        {
+            unsafe
+            {
+                MelonUtils.NativeHookAttach(targetPtr, patch!.MethodHandle.GetFunctionPointer());
+            }
         }
     }
 }
