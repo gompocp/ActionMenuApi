@@ -13,9 +13,7 @@
   <p align="center">
     Currently in the process the old script used in my other mod "ActionMenuUtils"
     <br />
-    <a href="https://github.com/gompocp/ActionMenuUtils">View Features</a>
-    ·
-    <a href="https://github.com/gompocp/ActionMenuUtils/issues">Request Feature</a>
+    <a href="https://github.com/gompocp/ActionMenuApi/issues">Request Feature</a>
   </p>
 </p>
 
@@ -44,7 +42,7 @@
 
 
 ## Info
-<a href="https://github.com/gompocp/ActionMenuUtils">
+<a href="https://github.com/gompocp/ActionMenuApi">
     <img src="Assets/preview.gif" alt="Preview" width="700" height="400">
 </a> 
 
@@ -69,7 +67,7 @@ To use simply add ActionMenuApi to your mods folder and reference it in your pro
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/gompocp/ActionMenuUtils.git
+   git clone https://github.com/gompocp/ActionMenuApi.git
    ```
 2. Fix references (all available in VRChat\MelonLoader\Managed
 3. Configure the solution build configuration and click build
