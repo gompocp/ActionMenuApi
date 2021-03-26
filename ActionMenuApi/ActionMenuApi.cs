@@ -25,10 +25,6 @@ namespace ActionMenuApi
         {
             RadialPuppetManager.OnUpdate();
             FourAxisPuppetManager.OnUpdate();
-            if (Input.GetKey(KeyCode.P))
-            {
-                MelonLogger.Msg(Utilities.GetCursorPosRight().ToString());
-            }   
         }
     }
 }
