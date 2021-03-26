@@ -2,7 +2,7 @@
 using MelonLoader;
 using UnityEngine;
 
-namespace ActionMenuApi
+namespace ActionMenuApi.Managers
 {
     internal static class RadialPuppetManager
     {
@@ -42,29 +42,30 @@ namespace ActionMenuApi
                 {
                     if (hand == ActionMenuHand.Right)
                     {
-                        if (Input.GetKeyUp(InputAxes.RightTrigger))
+                        if (Input.GetAxis(InputAxes.RightTrigger) >= 0.4)
                         {
                            CloseRadialMenu(); 
+                           return;
                         }
                     }
                     else if (hand == ActionMenuHand.Left)
                     {
-                        if (Input.GetKeyUp(InputAxes.LeftTrigger))
+                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4)
                         {
                             CloseRadialMenu();
+                            return;
                         }
                     }
                 }
                 else if (Input.GetMouseButton(0))
                 {
                     CloseRadialMenu();
+                    return;
                 }
-                else
-                {
-                    UpdateMathStuff();
-                    radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360) * 100;
-                    if(onUpdate != null) onUpdate.Invoke(radialPuppetValue);
-                }
+
+                UpdateMathStuff();
+                radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360) * 100;
+                if(onUpdate != null) onUpdate.Invoke(radialPuppetValue);
             }
         }
 

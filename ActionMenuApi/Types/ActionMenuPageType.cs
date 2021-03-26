@@ -8,7 +8,7 @@
         SDK2Expression,
         Main,
         MenuOpacity,
-        MenuSize,
+        MenuSize, //Not Implemented
         Nameplates,
         NameplatesOpacity,
         NameplatesVisibilty,

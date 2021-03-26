@@ -77,7 +77,7 @@
         <Compile Include="Managers\RadialPuppetManager.cs" />
         <Compile Include="Pedals\PedalFourAxis.cs" />
         <Compile Include="Pedals\PedalToggle.cs" />
-        <Compile Include="Tools.cs" />
+        <Compile Include="AMAPI.cs" />
         <Compile Include="Patches.cs" />
         <Compile Include="Pedals\PedalButton.cs" />
         <Compile Include="Pedals\PedalRadial.cs" />

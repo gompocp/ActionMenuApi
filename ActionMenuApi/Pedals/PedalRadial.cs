@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
+using ActionMenuApi.Managers;
 
 namespace ActionMenuApi.Pedals
 {

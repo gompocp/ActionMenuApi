@@ -1,5 +1,5 @@
 ﻿using System;
-using MelonLoader;
+using ActionMenuApi.Managers;
 using UnityEngine;
 
 namespace ActionMenuApi.Pedals

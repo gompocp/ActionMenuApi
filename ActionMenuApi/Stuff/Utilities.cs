@@ -103,6 +103,7 @@ namespace ActionMenuApi
         
         public static double ConvertFromDegToEuler(double angle)
         {
+            //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
             if (angle >= 0 && angle <= 90) return 90 - angle;
             if (angle > 90 && angle <= 180) return 360 - (angle - 90);
             if (angle <= -90 && angle >= -180) return 270 - (angle + 180);

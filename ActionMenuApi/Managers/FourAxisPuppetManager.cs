@@ -2,7 +2,7 @@
 using MelonLoader;
 using UnityEngine;
 
-namespace ActionMenuApi
+namespace ActionMenuApi.Managers
 {
     public static class FourAxisPuppetManager
     {
@@ -40,49 +40,50 @@ namespace ActionMenuApi
                 {
                     if (hand == ActionMenuHand.Right)
                     {
-                        if (Input.GetKeyUp(InputAxes.RightTrigger))
+                        if (Input.GetAxis(InputAxes.RightTrigger) >= 0.4)
                         {
                             CloseFourAxisMenu(); 
+                            return;
                         }
                     }
                     else if (hand == ActionMenuHand.Left)
                     {
-                        if (Input.GetKeyUp(InputAxes.LeftTrigger))
+                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4)
                         {
                             CloseFourAxisMenu();
+                            return;
                         }
                     }
                 }
                 else if (Input.GetMouseButton(0))
                 {
                     CloseFourAxisMenu();
+                    return;
                 }
-                else
+
+                try
                 {
-                    try
-                    {
-                        current.Method_Private_Void_Vector2_Boolean_1(fourAxisPuppetValue, false);
-                    }catch {}
-                    fourAxisPuppetValue =  ((hand == ActionMenuHand.Left) ? Utilities.GetCursorPosLeft() : Utilities.GetCursorPosRight())/ 16;
-                    float x = fourAxisPuppetValue.x;
-                    float y = fourAxisPuppetValue.y;
-                    if (x >= 0) {
-                        current.GetFillLeft().SetAlpha(0);
-                        current.GetFillRight().SetAlpha(x);
-                    }else {
-                        current.GetFillLeft().SetAlpha(Math.Abs(x));
-                        current.GetFillRight().SetAlpha(0);
-                    }
-                    if (y >= 0) {
-                        current.GetFillDown().SetAlpha(0);
-                        current.GetFillUp().SetAlpha(y);
-                    }else {
-                        current.GetFillDown().SetAlpha(Math.Abs(y));
-                        current.GetFillUp().SetAlpha(0);
-                    }
-                    UpdateMathStuff();
-                    onUpdate.Invoke(fourAxisPuppetValue);
+                    current.Method_Private_Void_Vector2_Boolean_1(fourAxisPuppetValue, false);
+                }catch {}
+                fourAxisPuppetValue =  ((hand == ActionMenuHand.Left) ? Utilities.GetCursorPosLeft() : Utilities.GetCursorPosRight())/ 16;
+                float x = fourAxisPuppetValue.x;
+                float y = fourAxisPuppetValue.y;
+                if (x >= 0) {
+                    current.GetFillLeft().SetAlpha(0);
+                    current.GetFillRight().SetAlpha(x);
+                }else {
+                    current.GetFillLeft().SetAlpha(Math.Abs(x));
+                    current.GetFillRight().SetAlpha(0);
                 }
+                if (y >= 0) {
+                    current.GetFillDown().SetAlpha(0);
+                    current.GetFillUp().SetAlpha(y);
+                }else {
+                    current.GetFillDown().SetAlpha(Math.Abs(y));
+                    current.GetFillUp().SetAlpha(0);
+                }
+                UpdateMathStuff();
+                onUpdate.Invoke(fourAxisPuppetValue);
             }
         }
         public static void OpenFourAxisMenu(Vector2 startingValue, Action<Vector2> close, string title, Action<Vector2> update)
