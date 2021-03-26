@@ -61,6 +61,9 @@
       <Reference Include="UnityEngine.CoreModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
         <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
       </Reference>
+      <Reference Include="UnityEngine.PhysicsModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      </Reference>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\ActionMenuApi\ActionMenuApi.csproj">
