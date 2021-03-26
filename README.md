@@ -1,26 +1,83 @@
-# ActionMenuApi <br>
-> Currently in the process of rewriting the old system of this <br>Old version info available further down and source code in the releases section [here](https://github.com/gompocp/ActionMenuApi/releases/tag/v1.0.0) <br>
 
-![alt text](https://raw.githubusercontent.com/gompocp/ActionMenuApi/main/Assets/preview.gif)
 
-Now supports the <br>
+[![MIT License][license-shield]][license-url]
+<!--
+![Downloads][downloads-shield] -->
+
+
+<br />
+<p align="center">
+
+  <h3 align="center">ActionMenuApi</h3>
+
+  <p align="center">
+    Currently in the process the old script used in my other mod "ActionMenuUtils"
+    <br />
+    <a href="https://github.com/gompocp/ActionMenuUtils">View Features</a>
+    ·
+    <a href="https://github.com/gompocp/ActionMenuUtils/issues">Request Feature</a>
+  </p>
+</p>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#info">Info</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#building">Building</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
+
+
+
+
+## Info
+<a href="https://github.com/gompocp/ActionMenuUtils">
+    <img src="Assets/preview.gif" alt="Preview" width="700" height="400">
+</a> 
+
+Now supports the
 - Radial puppet
 - Four Axis puppet 
 - Button
 - Toggle 
 - SubMenu  
+
 Currently you can't (yet) nest a submenu within a custom submenu
 
 Working on
 - Correct placement of the radial/four axis puppet
 
-# Usage
 
-The test mod I've included should be more than enough but I'll add these here anyway
+## Getting Started
 
+To use simply add ActionMenuApi to your mods folder and reference it in your project same way as with UIX
+
+### Building 
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/gompocp/ActionMenuUtils.git
+   ```
+2. Fix references (all available in VRChat\MelonLoader\Managed
+3. Configure the solution build configuration and click build
+
+
+## Usage
 
 ```cs
-//Add a reference to the api dll and add this to the top of your file
 using ActionMenuApi;
 /*
 
@@ -49,67 +106,25 @@ AMAPI.AddSubMenuToMenu(ActionMenuPageType.Main,
 );
 ```
 
-
-
-# Credits
-- Assetbundle loading mechanism from Knah
-- Icons from https://uxwing.com/
+_For a mod example check out the test mod [here](https://github.com/gompocp/ActionMenuApi/tree/main/ActionMenuTestMod)_
 
 
 
-# Old Version Info
-- I haven't tested everything because effort lol. If something is broken open up an issue or fix it yourself ¯\\_(ツ)_/¯ 
-- Made by gompo#6956 you are free to use this provided credit is given<br>
-  your mod is licensed under the same license as the one in this repository <br>
-  for more complicated situations please dm me on discord<br>
--Credits:  <br>
-  -Function XRefCheck here adapted to use string lists rather than just strings from Ben's <br>
-  (Ben 🐾#3621) Dynamic Bone Safety Mod, link: https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs<br>
+## License
+
+Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 
-- There are only 4 Functions you need to be aware of
-<ol>
-  <li>
-<h2>ActionMenuApi()</h2>
-  <p>
-    Constructor. Used to create new ActionMenuApi Instance and applies all neccessary patches 
-  </p>
-  <pre><code class='language-cs'>
-  ActionMenuApi actionMenuApi = new ActionMenuApi();
-  </code></pre>
-  </li>
-<li><h2>AddPedalToExistingMenu()</h2>
-  <p>
-    Adds a custom Pedal to an already existing menu in vrchat. Options are in enum ActionMenuPageType
-  </p>
-  <p>
-    Params are ActionMenuPageType, Action(onClick), string(Pedal Text), Texture2D(Pedal Texture), Insertion(Insert before or after VRChat)
-  </p>
-  <pre><code class='language-cs'>
-  actionMenuApi.AddPedalToExistingMenu(ActionMenuApi.ActionMenuPageType.Options, new Action(delegate
-  {
-    MelonLogger.Log("Pedal Pressed");                  
-  }), "Example Button", icon, ActionMenuApi.Insertion.Post);
-  </code></pre>
-  </li>
-<li><h2>CreateSubMenu</h2><p>
-    call this in a triggerevent for an already existing pedal to open a new submenu
-  </p>
-  <p>
-    Add pedals to this in the openFunc param using AddPedalToCustomMenu()
-  </p>
-  <pre><code class='language-cs'>
-  actionMenuApi.CreateSubMenu(new Action(delegate {
-    //actionMenuApi.AddPedalToCustomMenu() etc..
-  }));
-  </code></pre>
-  </li>
-<li><h2>AddPedalToCustomMenu</h2><p>
-    If you create a custom Submenu you can use this to add your pedals to it
-  </p>
-  <pre><code class='language-cs'>
-  actionMenuApi.AddPedalToCustomMenu(new Action(delegate {
-    //Invoke Method or whatever here
-  }), "DoSomething", coolIcon);
-  </code></pre></li>
-  </ol>
+
+Project Link: [https://github.com/gompocp/ActionMenuApi](https://github.com/gompocp/ActionMenuApi)
+
+
+## Acknowledgements
+
+* XRef method from [BenjaminZehowlt](https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs)
+* [Knah](https://github.com/knah/VRCMods/blob/master/AdvancedSafety/PortalHiding.cs) for his native hooking example and assetbundle loading example
+
+
+[license-shield]: https://img.shields.io/github/license/gompocp/ActionMenuApi.svg?style=for-the-badge
+[license-url]: https://github.com/gompocp/ActionMenuApi/blob/main/LICENSE
+[downloads-shield]: https://img.shields.io/github/downloads/gompocp/ActionMenuApi/total?style=for-the-badge
