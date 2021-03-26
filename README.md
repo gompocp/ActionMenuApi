@@ -4,8 +4,8 @@
 ![alt text](https://raw.githubusercontent.com/gompocp/ActionMenuApi/main/Assets/preview.gif)
 
 Now supports the <br>
-- Radial puppet (broken in vr oops :) )
-- Four Axis puppet (broken in vr  double oops :) )
+- Radial puppet
+- Four Axis puppet 
 - Button
 - Toggle 
 - SubMenu  
