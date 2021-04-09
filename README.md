@@ -11,7 +11,7 @@
   <h3 align="center">ActionMenuApi</h3>
 
   <p align="center">
-    Currently in the process the old script used in my other mod "ActionMenuUtils"
+    Currently in the process the rewriting old script used in my other mod "ActionMenuUtils"
     <br />
     <a href="https://github.com/gompocp/ActionMenuApi/issues">Request Feature</a>
   </p>
