@@ -5,7 +5,9 @@ using System.Linq;
 using ActionMenuApi.Pedals;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Harmony;
 using MelonLoader;
+using VRC.UI;
 
 namespace ActionMenuApi
 {
@@ -39,178 +41,64 @@ namespace ActionMenuApi
         private static readonly List<string> openNameplatesVisibilityPageKeyWords = new (new [] { "Nameplates Shown", "Icons Only", "Nameplates Hidden" });
         private static readonly List<string> openNameplatesSizePageKeyWords = new (new [] { "Large", "Medium", "Normal", "Small", "Tiny" });
         private static readonly List<string> openMenuSizePageKeyWords = new (new [] { "XXXXXXXXX" }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
-        public static void PatchAll()
+        private static HarmonyInstance Harmony;
+        public static void PatchAll(HarmonyInstance harmonyInstance)
         {
-            try {
-                unsafe
-                {
-                    BindingFlags flags = BindingFlags.Static | BindingFlags.NonPublic;
-                    
-                    //Hooking mechanism adapted from Knah's Advanced Safety Mod 
-                    var originalConfigMethod = FindAMMethod(openConfigPageKeywords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr) (&originalConfigMethod),typeof(Patches).GetMethod(nameof(OpenConfigPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openConfigPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenConfigPageDelegate>(originalConfigMethod);
-
-                    var originalOptionsMethod = FindAMMethod(openOptionsPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr) (&originalOptionsMethod),typeof(Patches).GetMethod(nameof(OpenOptionsPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openOptionsPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenOptionsPageDelegate>(originalOptionsMethod);
-
-                    var originalMainMethod = FindAMMethod(openMainPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr) (&originalMainMethod), typeof(Patches).GetMethod(nameof(OpenMainPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openMainPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenMainPageDelegate>(originalMainMethod);
-                    
-                    var originalMenuOpacityMethod = FindAMMethod(openMenuOpacityPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalMenuOpacityMethod), typeof(Patches).GetMethod(nameof(OpenMenuOpacityPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openMenuOpacityPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenMenuOpacityPageDelegate>(originalMenuOpacityMethod);
-    
-                    var originalEmojisMethod = FindAMMethod(openEmojisPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalEmojisMethod), typeof(Patches).GetMethod(nameof(OpenEmojisPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openEmojisPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenEmojisPageDelegate>(originalEmojisMethod);
-    
-                    var originalExpressionMethod = FindAMMethod(openExpressionMenuKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalExpressionMethod),typeof(Patches).GetMethod(nameof(OpenExpressionMenuPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openExpressionMenuPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenExpressionMenuPageDelegate>(originalExpressionMethod);
-    
-                    var originalNameplatesOpacityMethod = FindAMMethod(openNameplatesOpacityPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalNameplatesOpacityMethod),typeof(Patches).GetMethod(nameof(OpenNameplatesOpacityPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openNameplatesOpacityPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenNameplatesOpacityPageDelegate>(originalNameplatesOpacityMethod);
-    
-                    var originalNameplatesMethod = FindAMMethod(openNameplatesPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalNameplatesMethod),typeof(Patches).GetMethod(nameof(OpenNameplatesPagePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openNameplatesPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenNameplatesPageDelegate>(originalNameplatesMethod);
-    
-                    var originalNameplatesVisibilityMethod = FindAMMethod(openNameplatesVisibilityPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalNameplatesVisibilityMethod),typeof(Patches).GetMethod(nameof(OpenNameplatesVisibilityPatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openNameplatesVisibilityPageDelegate = Marshal.GetDelegateForFunctionPointer<OpenNameplatesVisibilityPageDelegate>(originalNameplatesVisibilityMethod);
-    
-                    var originalNameplatesSizeMethod = FindAMMethod(openNameplatesSizePageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalNameplatesSizeMethod),typeof(Patches).GetMethod(nameof(OpenNameplatesSizePatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openNameplatesSizePageDelegate =Marshal.GetDelegateForFunctionPointer<OpenNameplatesSizePageDelegate>(originalNameplatesVisibilityMethod);
-    
-                    var originalSDK2ExpressionMethod = FindAMMethod(openSDK2ExpressionPageKeyWords).Il2CppPtr();
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalSDK2ExpressionMethod),typeof(Patches).GetMethod(nameof(OpenSDK2ExpressionPatch), flags)!.MethodHandle.GetFunctionPointer());
-                    openSDK2ExpressionPageDelegate =Marshal.GetDelegateForFunctionPointer<OpenSDK2ExpressionPageDelegate>(originalSDK2ExpressionMethod);
-                }
-            }catch (Exception e) {MelonLogger.Error($"Hooking failed with exception: {e}");}
+            Harmony = harmonyInstance;
+            PatchMethod(openMainPageKeyWords, nameof(OpenMainPagePre), nameof(OpenMainPagePost));
+            PatchMethod(openConfigPageKeywords, nameof(OpenConfigPagePre), nameof(OpenConfigPagePost));
+            PatchMethod(openMenuOpacityPageKeyWords, nameof(OpenMenuOpacityPagePre), nameof(OpenMenuOpacityPagePost));
+            PatchMethod(openEmojisPageKeyWords, nameof(OpenEmojisPagePre), nameof(OpenEmojisPagePost));
+            PatchMethod(openExpressionMenuKeyWords, nameof(OpenExpressionMenuPre), nameof(OpenExpressionMenuPost));
+            PatchMethod(openNameplatesOpacityPageKeyWords, nameof(OpenNameplatesOpacityPre), nameof(OpenNameplatesOpacityPost));
+            PatchMethod(openNameplatesPageKeyWords, nameof(OpenNameplatesPagePre), nameof(OpenNameplatesPagePost));
+            PatchMethod(openNameplatesVisibilityPageKeyWords, nameof(OpenNameplatesVisibilityPre), nameof(OpenNameplatesVisibilityPost));
+            PatchMethod(openNameplatesSizePageKeyWords, nameof(OpenNameplatesSizePre), nameof(OpenNameplatesSizePost));
+            PatchMethod(openOptionsPageKeyWords, nameof(OpenOptionsPre), nameof(OpenOptionsPost));
+            PatchMethod(openSDK2ExpressionPageKeyWords, nameof(OpenSDK2ExpressionPre), nameof(OpenSDK2ExpressionPost));
         }
 
-        private static void OpenConfigPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(configPagePre, actionMenu);
-            openConfigPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(configPagePost, actionMenu);
-        }
-        private static void OpenOptionsPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(optionsPagePre, actionMenu);
-            openOptionsPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(optionsPagePost, actionMenu);
-        }
-        private static void OpenMainPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(mainPagePre, actionMenu);
-            openMainPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(mainPagePost, actionMenu);
-        }
-        private static void OpenMenuOpacityPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(menuOpacityPagePre, actionMenu);
-            openMenuOpacityPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(menuOpacityPagePost, actionMenu);
-        }
-        private static void OpenEmojisPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(emojisPagePre, actionMenu);
-            openEmojisPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(emojisPagePost, actionMenu);
-        }
-        private static void OpenExpressionMenuPagePatch(IntPtr thisPtr, IntPtr expressionsMenuPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(expressionPagePre, actionMenu);
-            openExpressionMenuPageDelegate(thisPtr, expressionsMenuPtr);
-            Utilities.AddPedalsInList(expressionPagePost, actionMenu);
-        }
-        private static void OpenNameplatesOpacityPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(nameplatesOpacityPagePre, actionMenu);
-            openNameplatesOpacityPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(nameplatesOpacityPagePost, actionMenu);
-        }
-        private static void OpenNameplatesPagePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(nameplatesPagePre, actionMenu);
-            openNameplatesPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(nameplatesPagePost, actionMenu);
-        }
-        private static void OpenNameplatesVisibilityPatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(nameplatesVisibilityPagePre, actionMenu);
-            openNameplatesVisibilityPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(nameplatesVisibilityPagePost, actionMenu);
-        }
-        private static void OpenNameplatesSizePatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(nameplatesSizePagePre, actionMenu);
-            openNameplatesSizePageDelegate(thisPtr);
-            Utilities.AddPedalsInList(nameplatesSizePagePost, actionMenu);
-        }
-
-        private static void OpenSDK2ExpressionPatch(IntPtr thisPtr)
-        {
-            ActionMenu actionMenu = new ActionMenu(thisPtr);
-            Utilities.AddPedalsInList(sdk2ExpressionPagePre, actionMenu);
-            openSDK2ExpressionPageDelegate(thisPtr);
-            Utilities.AddPedalsInList(sdk2ExpressionPagePost, actionMenu);
-        }
-
+        public static void OpenConfigPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(configPagePre, __instance);
+        public static void OpenConfigPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(configPagePost, __instance);
+        public static void OpenMainPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(mainPagePre, __instance);
+        public static void OpenMainPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(mainPagePost, __instance);
+        public static void OpenMenuOpacityPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(menuOpacityPagePre, __instance);
+        public static void OpenMenuOpacityPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(menuOpacityPagePost, __instance);
+        public static void OpenEmojisPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(emojisPagePre, __instance);
+        public static void OpenEmojisPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(emojisPagePost, __instance);
+        public static void OpenExpressionMenuPre(ActionMenu __instance) => Utilities.AddPedalsInList(expressionPagePre, __instance);
+        public static void OpenExpressionMenuPost(ActionMenu __instance) => Utilities.AddPedalsInList(expressionPagePost, __instance);
+        public static void OpenNameplatesOpacityPre(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesOpacityPagePre, __instance);
+        public static void OpenNameplatesOpacityPost(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesOpacityPagePost, __instance);
+        public static void OpenNameplatesPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesPagePre, __instance);
+        public static void OpenNameplatesPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesPagePost, __instance);
+        public static void OpenNameplatesVisibilityPre(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesVisibilityPagePre, __instance);
+        public static void OpenNameplatesVisibilityPost(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesVisibilityPagePost, __instance);
+        public static void OpenNameplatesSizePre(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesSizePagePre, __instance);
+        public static void OpenNameplatesSizePost(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesSizePagePost, __instance);
+        public static void OpenOptionsPre(ActionMenu __instance) => Utilities.AddPedalsInList(optionsPagePre, __instance);
+        public static void OpenOptionsPost(ActionMenu __instance) => Utilities.AddPedalsInList(optionsPagePost, __instance);
+        public static void OpenSDK2ExpressionPre(ActionMenu __instance) => Utilities.AddPedalsInList(sdk2ExpressionPagePre, __instance);
+        public static void OpenSDK2ExpressionPost(ActionMenu __instance) => Utilities.AddPedalsInList(sdk2ExpressionPagePost, __instance);
         public static void OpenMenuSizePre(ActionMenu __instance) => Utilities.AddPedalsInList(menuSizePagePre, __instance);
-        
         public static void OpenMenuSizePost(ActionMenu __instance) => Utilities.AddPedalsInList(menuSizePagePost, __instance);
-
-        private static MethodInfo FindAMMethod(List<String> keywords) => typeof(ActionMenu).GetMethods().First(m => m.Name.StartsWith("Method") && Utilities.checkXref(m, keywords));
         
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenMainPageDelegate(IntPtr thisPtr);
-        private static OpenMainPageDelegate openMainPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenConfigPageDelegate(IntPtr thisPtr);
-        private static OpenConfigPageDelegate openConfigPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenMenuOpacityPageDelegate(IntPtr thisPtr);
-        private static OpenMenuOpacityPageDelegate openMenuOpacityPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenEmojisPageDelegate(IntPtr thisPtr);
-        private static OpenEmojisPageDelegate openEmojisPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenExpressionMenuPageDelegate(IntPtr thisPtr, IntPtr vrcExpressionsMenu);
-        private static OpenExpressionMenuPageDelegate openExpressionMenuPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenNameplatesOpacityPageDelegate(IntPtr thisPtr);
-        private static OpenNameplatesOpacityPageDelegate openNameplatesOpacityPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenNameplatesPageDelegate(IntPtr thisPtr);
-        private static OpenNameplatesPageDelegate openNameplatesPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenNameplatesVisibilityPageDelegate(IntPtr thisPtr);
-        private static OpenNameplatesVisibilityPageDelegate openNameplatesVisibilityPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenNameplatesSizePageDelegate(IntPtr thisPtr);
-        private static OpenNameplatesSizePageDelegate openNameplatesSizePageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenOptionsPageDelegate(IntPtr thisPtr);
-        private static OpenOptionsPageDelegate openOptionsPageDelegate;
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void OpenSDK2ExpressionPageDelegate(IntPtr thisPtr);
-        private static OpenSDK2ExpressionPageDelegate openSDK2ExpressionPageDelegate;
+        private static MethodInfo FindAMMethod(List<String> keywords) => typeof(ActionMenu).GetMethods().First(m => m.Name.StartsWith("Method") && Utilities.checkXref(m, keywords));
+
+        private static void PatchMethod(List<String> keywords, String preName, String postName)
+        {
+            try
+            {
+                Harmony.Patch(
+                    FindAMMethod(keywords),
+                    new HarmonyMethod(typeof(Patches).GetMethod(preName)),
+                    new HarmonyMethod(typeof(Patches).GetMethod(postName))
+                );
+            }
+            catch(Exception e)
+            {
+                MelonLogger.Warning($"Failed to Patch Method: {e}");
+            }
+        }
     }
 }

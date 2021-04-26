@@ -100,13 +100,6 @@ namespace ActionMenuApi
                 return *(IntPtr*) (IntPtr) UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(methodInfo).GetValue(null);
             }
         }
-
-        public static void Hook(this IntPtr targetPtr, MethodInfo patch)
-        {
-            unsafe
-            {
-                MelonUtils.NativeHookAttach(targetPtr, patch!.MethodHandle.GetFunctionPointer());
-            }
-        }
+        
     }
 }

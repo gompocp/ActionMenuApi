@@ -75,6 +75,8 @@
         <Compile Include="Logger.cs" />
         <Compile Include="Managers\FourAxisPuppetManager.cs" />
         <Compile Include="Managers\RadialPuppetManager.cs" />
+        <Compile Include="ModMenu\ModCategory.cs" />
+        <Compile Include="ModMenu\Page.cs" />
         <Compile Include="Pedals\PedalFourAxis.cs" />
         <Compile Include="Pedals\PedalToggle.cs" />
         <Compile Include="AMAPI.cs" />

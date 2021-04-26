@@ -1,5 +1,6 @@
 ﻿using MelonLoader;
 using ActionMenuApi.Managers;
+using Harmony;
 using UnityEngine;
 
 namespace ActionMenuApi
@@ -16,11 +17,11 @@ namespace ActionMenuApi
     {
         public override void OnApplicationStart()
         {
-            Patches.PatchAll();
+            Patches.PatchAll(Harmony);
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
         }
-
+        
         public override void OnUpdate()
         {
             RadialPuppetManager.OnUpdate();

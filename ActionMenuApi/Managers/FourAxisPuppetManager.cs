@@ -34,7 +34,7 @@ namespace ActionMenuApi.Managers
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
-            if (current != null)
+            if (current != null && current.gameObject.active)
             {
                 if (UnityEngine.XR.XRDevice.isPresent)
                 {
