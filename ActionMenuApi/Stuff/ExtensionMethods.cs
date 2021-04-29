@@ -83,7 +83,8 @@ namespace ActionMenuApi
 
         public static void UpdateDisplay(this RadialPuppetMenu radialPuppet)
         {
-            radialPuppet.GetCenterText().text = (Math.Round(radialPuppet.GetFill().field_Public_Single_3  / 360 * 100)) + "%";
+            //MelonLogger.Msg($"Original: {radialPuppet.GetFill().field_Public_Single_3}, Math:{(radialPuppet.GetFill().field_Public_Single_3  / 360f)*100f}");
+            radialPuppet.GetCenterText().text = Math.Round((radialPuppet.GetFill().field_Public_Single_3  / 360f)*100f) + "%";
             radialPuppet.GetFill().UpdateGeometry();
         }
 

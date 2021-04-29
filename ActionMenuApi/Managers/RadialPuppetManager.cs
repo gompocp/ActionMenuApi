@@ -64,12 +64,12 @@ namespace ActionMenuApi.Managers
                 }
 
                 UpdateMathStuff();
-                radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360) * 100; //IK this is bad I'll refactor it later 
-                if(onUpdate != null) onUpdate.Invoke(radialPuppetValue/100);
+                radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360); //IK this is bad I'll refactor it later 
+                if(onUpdate != null) onUpdate.Invoke(radialPuppetValue);
             }
         }
 
-        public static void OpenRadialMenu(float startingValue, Action<float> close, string title)
+        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title)
         {
             if(open) return;
             switch (Utilities.GetActionMenuHand())
@@ -88,17 +88,16 @@ namespace ActionMenuApi.Managers
                     break;
             }
             Input.ResetInputAxes();
-            onClose = close;
             current.gameObject.SetActive(true);
-            current.GetFill().field_Public_Single_3 = startingValue*100; //Please dont break
-            onUpdate = onClose;
+            current.GetFill().field_Public_Single_3 = startingValue*360; //Please dont break
+            RadialPuppetManager.onUpdate = onUpdate;
             current.GetTitle().text = title;
-            current.GetCenterText().text = (Math.Round(radialPuppetMenuRight.GetFill().field_Public_Single_3 / 360 * 100)) + "%";
+            current.GetCenterText().text = (Math.Round(startingValue)*100) + "%";
             current.GetFill().UpdateGeometry();
             current.transform.localPosition = new Vector3(-256f, 0, 0); //TODO: Place it correctly
-            double angleOriginal = (startingValue/100)*360;
+            double angleOriginal = (startingValue)*360;
             double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
-            current.UpdateArrow(angleOriginal, eulerAngle);
+            current.UpdateArrow(angleOriginal, eulerAngle);  //TODO: Redo the entire fucking math because this is soooo scuffed rn
         }
 
         public static void CloseRadialMenu()

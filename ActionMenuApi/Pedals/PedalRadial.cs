@@ -20,7 +20,7 @@ namespace ActionMenuApi.Pedals
             this.onClose = delegate(float f)
             {
                 currentValue = f;
-                pedal.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(currentValue)}%";
+                pedal.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(currentValue*100f)}%";
             };
             this.triggerEvent = delegate {
                 RadialPuppetManager.OpenRadialMenu(currentValue, onClose, text);

@@ -96,8 +96,7 @@ namespace ActionMenuApi
                 Action<float> combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
                 {
                     startingValue = f;
-                    
-                    pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
+                    pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue*100)}%";
                 }), onUpdate);
                 RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text);
             }));
