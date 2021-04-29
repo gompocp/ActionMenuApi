@@ -19,11 +19,7 @@ namespace ActionMenuApi.Managers
         
         public static float radialPuppetValue { get; set; }
         private static bool open = false;
-        
         public static Action<float> onUpdate { get; set; }
-        
-        public static Action<float> onClose { get; set; }
-        
         
         private static System.Collections.IEnumerator WaitForRadialMenu()
         {
@@ -69,7 +65,7 @@ namespace ActionMenuApi.Managers
             }
         }
 
-        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title)
+        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title, PedalOption pedalOption)
         {
             if(open) return;
             switch (Utilities.GetActionMenuHand())
@@ -93,9 +89,12 @@ namespace ActionMenuApi.Managers
             RadialPuppetManager.onUpdate = onUpdate;
             current.GetTitle().text = title;
             current.GetCenterText().text = (Math.Round(startingValue)*100) + "%";
-            current.GetFill().UpdateGeometry();
-            current.transform.localPosition = new Vector3(-256f, 0, 0); //TODO: Place it correctly
-            double angleOriginal = (startingValue)*360;
+            current.GetFill().UpdateGeometry(); ;
+            //MelonLogger.Msg($"Button Pos: {pedalOption.field_Public_ActionButton_0.transform.position.ToString()}");
+            //MelonLogger.Msg($"Local Button Pos: {pedalOption.field_Public_ActionButton_0.transform.localPosition.ToString()}");
+            current.transform.localPosition = pedalOption.field_Public_ActionButton_0.transform.localPosition;
+            //new Vector3(-256f, 0, 0); 
+            double angleOriginal =  Utilities.ConvertFromEuler(startingValue*360); 
             double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
             current.UpdateArrow(angleOriginal, eulerAngle);  //TODO: Redo the entire fucking math because this is soooo scuffed rn
         }
@@ -106,7 +105,7 @@ namespace ActionMenuApi.Managers
             current = null;
             open = false;
             hand = ActionMenuHand.Invalid;
-            onClose.Invoke(radialPuppetValue);
+            onUpdate.Invoke(radialPuppetValue);
         }
 
         private static void UpdateMathStuff()

@@ -84,7 +84,7 @@ namespace ActionMenuApi.Managers
                 onUpdate.Invoke(fourAxisPuppetValue);
             }
         }
-        public static void OpenFourAxisMenu(string title, Action<Vector2> update)
+        public static void OpenFourAxisMenu(string title, Action<Vector2> update, PedalOption pedalOption)
         {
             if(open) return;
             switch (Utilities.GetActionMenuHand())
@@ -110,7 +110,7 @@ namespace ActionMenuApi.Managers
             {
                 current.Method_Private_Void_Vector2_Boolean_1(Vector2.zero, false);
             }catch {}
-            current.transform.localPosition = new Vector3(-256f, 0, 0); //TODO: Place it correctly
+            current.transform.localPosition = pedalOption.field_Public_ActionButton_0.transform.localPosition;
         }
 
         public static void CloseFourAxisMenu()

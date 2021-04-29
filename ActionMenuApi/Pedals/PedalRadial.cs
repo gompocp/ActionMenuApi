@@ -23,7 +23,7 @@ namespace ActionMenuApi.Pedals
                 pedal.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(currentValue*100f)}%";
             };
             this.triggerEvent = delegate {
-                RadialPuppetManager.OpenRadialMenu(currentValue, onClose, text);
+                RadialPuppetManager.OpenRadialMenu(currentValue, onClose, text, pedal);
             };
             this.Type = PedalType.RadialPuppet;
         }

@@ -110,6 +110,14 @@ namespace ActionMenuApi
             if (angle <= 0 && angle >= -90) return 180 - (angle + 180) + 90;
             return 0;
         }
+        public static double ConvertFromEuler(double angle)
+        {
+            //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
+            if (angle <= 90 && angle <= 270) return (angle - 90) * -1;
+            if (angle <= 360 && angle > 270) return 180 - (angle - 270);
+            if (angle < 90 && angle >= 0) return (90 - angle);
+            return 0;
+        }
         public static Vector2 GetCursorPosLeft()
         {
             if (UnityEngine.XR.XRDevice.isPresent)

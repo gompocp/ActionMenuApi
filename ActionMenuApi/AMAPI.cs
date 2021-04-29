@@ -98,7 +98,7 @@ namespace ActionMenuApi
                     startingValue = f;
                     pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue*100)}%";
                 }), onUpdate);
-                RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text);
+                RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
             }));
             return pedalOption;
         }
@@ -156,7 +156,7 @@ namespace ActionMenuApi
             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeAxis;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
             {
-                FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate);
+                FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
                     FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
                     FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
                     FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
@@ -386,7 +386,7 @@ namespace ActionMenuApi
                     
                     pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
                 }), onUpdate);
-                RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text);
+                RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
             }));
             return pedalOption;
         }
@@ -423,7 +423,7 @@ namespace ActionMenuApi
             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeAxis;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
             {
-                FourAxisPuppetManager.OpenFourAxisMenu(text, v => startingValue = v);
+                FourAxisPuppetManager.OpenFourAxisMenu(text, v => startingValue = v, pedalOption);
                     FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
                     FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
                     FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
