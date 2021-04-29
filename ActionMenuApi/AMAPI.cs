@@ -322,6 +322,7 @@ namespace ActionMenuApi
                     return;
             }
         }
+        [ObsoleteAttribute("This method is obsolete. Use the override AddButtonPedalToMenu(pageType, text, triggerEvent, icon, insertion)", true)]
         public static void AddButtonPedalToMenu(ActionMenuPageType pageType, Action triggerEvent, string text = "Button Text", Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -335,6 +336,7 @@ namespace ActionMenuApi
             );
         }
 
+        [ObsoleteAttribute("This method is obsolete. Use the override AddButtonPedalToSubMenu(text, triggerEvent, icon)", true)]
         public static PedalOption AddButtonPedalToSubMenu(Action triggerEvent, string text = "Button Text", Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -346,6 +348,7 @@ namespace ActionMenuApi
             return pedalOption;
         }
         
+        [ObsoleteAttribute("This method is obsolete. Use the override AddRadialPedalToMenu(pageType, text, onUpdate, startingValue, icon, insertion)", true)]
         public static void AddRadialPedalToMenu(ActionMenuPageType pageType, Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -360,6 +363,7 @@ namespace ActionMenuApi
             );
         }
         
+        [ObsoleteAttribute("This method is obsolete. Use the override AddRadialPedalToSubMenu(text, onUpdate, startingValue, icon)", true)]
         public static PedalOption AddRadialPedalToSubMenu(Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -423,6 +427,7 @@ namespace ActionMenuApi
             return pedalOption;
         }
 
+        [ObsoleteAttribute("This method is obsolete. Use the override AddSubMenuToMenu(pageType, text, openFunc, icon, closeFunc, insertion)", true)]
         public static void AddSubMenuToMenu(ActionMenuPageType pageType, Action openFunc, string text = null,
             Texture2D icon = null, Action closeFunc = null, Insertion insertion = Insertion.Post)
         {
@@ -437,7 +442,8 @@ namespace ActionMenuApi
                 insertion
             );
         }
-
+        
+        [ObsoleteAttribute("This method is obsolete. Use the override AddTogglePedalToMenu(pageType, text, startingState, onToggle, icon, insertion)", true)]
         public static void AddTogglePedalToMenu(ActionMenuPageType pageType,bool startingState, System.Action<bool> onToggle, string text, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -452,7 +458,7 @@ namespace ActionMenuApi
             );
         }
         
-        
+        [ObsoleteAttribute("This method is obsolete. Use the override AddTogglePedalToSubMenu(text, startingState, onToggle, icon)", true)]
         public static PedalOption AddTogglePedalToSubMenu(Action<bool> onToggle, bool startingState, string text, Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
