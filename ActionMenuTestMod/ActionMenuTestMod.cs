@@ -38,8 +38,7 @@ namespace ActionMenuTestMod
 #pragma warning restore 414
         public override void OnApplicationStart()
         {
-            using (var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("ActionMenuTestMod.customicons"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuTestMod.customicons"))
             using (var tempStream = new MemoryStream((int) stream.Length))
             {
                 stream.CopyTo(tempStream);
@@ -47,24 +46,18 @@ namespace ActionMenuTestMod
                 iconsAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             }
 
-            radialIcon = iconsAssetBundle
-                .LoadAsset_Internal("Assets/Resources/Icons/sound-full.png", Il2CppType.Of<Texture2D>())
-                .Cast<Texture2D>();
+            radialIcon = iconsAssetBundle.LoadAsset_Internal("Assets/Resources/Icons/sound-full.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             radialIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            toggleIcon = iconsAssetBundle
-                .LoadAsset_Internal("Assets/Resources/Icons/zero.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
+            toggleIcon = iconsAssetBundle.LoadAsset_Internal("Assets/Resources/Icons/zero.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             toggleIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            subMenuIcon = iconsAssetBundle
-                .LoadAsset_Internal("Assets/Resources/Icons/file-transfer.png", Il2CppType.Of<Texture2D>())
-                .Cast<Texture2D>();
+            subMenuIcon = iconsAssetBundle.LoadAsset_Internal("Assets/Resources/Icons/file-transfer.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             subMenuIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            buttonIcon = iconsAssetBundle
-                .LoadAsset_Internal("Assets/Resources/Icons/cloud-data-download.png", Il2CppType.Of<Texture2D>())
-                .Cast<Texture2D>();
+            buttonIcon = iconsAssetBundle.LoadAsset_Internal("Assets/Resources/Icons/cloud-data-download.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             buttonIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
 
-            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon);
+            //AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon);
 
+            AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Config, "Toggle", testBool, b => testBool = b);
             AMAPI.AddSubMenuToMenu(ActionMenuPageType.Options,
                 "Sub Menu",
                 delegate
