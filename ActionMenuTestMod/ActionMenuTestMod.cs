@@ -63,22 +63,22 @@ namespace ActionMenuTestMod
                 .Cast<Texture2D>();
             buttonIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
 
-            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button"), "Button", buttonIcon);
+            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon);
 
             AMAPI.AddSubMenuToMenu(ActionMenuPageType.Options,
+                "Sub Menu",
                 delegate
                 {
                     MelonLogger.Msg("Sub Menu Opened");
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", testVector, (v) => RePositionCubeXY(v), toggleIcon);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", testVector, (v) => RePositionCubeZY(v), toggleIcon);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", testVector, (v) => RePositionCubeXZ(v), toggleIcon);
-                    AMAPI.AddRadialPedalToSubMenu(f => RotateCubeX(f), "X", x,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu(f => RotateCubeY(f), "Y", y,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu(f => RotateCubeZ(f), "Z", z,radialIcon);
-                    AMAPI.AddButtonPedalToSubMenu(CreateCube, "Spawn Cube", buttonIcon);
-                    AMAPI.AddButtonPedalToSubMenu(() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, "Tp Cube To Player", buttonIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", (v) => RePositionCubeZY(v), toggleIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", (v) => RePositionCubeXZ(v), toggleIcon);
+                    AMAPI.AddRadialPedalToSubMenu("X",f => RotateCubeX(f), x,radialIcon);
+                    AMAPI.AddRadialPedalToSubMenu("Y",f => RotateCubeY(f), y,radialIcon);
+                    AMAPI.AddRadialPedalToSubMenu("Z",f => RotateCubeZ(f), z,radialIcon);
+                    AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
+                    AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
                 },
-                "Sub Menu",
                 subMenuIcon
             );
         }
