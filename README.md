@@ -46,17 +46,15 @@
     <img src="Assets/preview.gif" alt="Preview" width="700" height="400">
 </a> 
 
-Now supports the
+Supports the usage
 - Radial puppet
 - Four Axis puppet 
 - Button
 - Toggle 
 - SubMenu  
 
-Currently you can't (yet) nest a submenu within a custom submenu
-
 Working on
-- Correct placement of the radial/four axis puppet
+- Correct placement of the radial/four axis puppet above the pedal that called it
 
 
 ## Getting Started
