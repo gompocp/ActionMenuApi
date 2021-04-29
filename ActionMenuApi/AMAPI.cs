@@ -283,6 +283,8 @@ namespace ActionMenuApi
                     else if (insertion == Insertion.Post) Patches.emojisPagePost.Add(customPedal);
                     return;
                 case ActionMenuPageType.Expression:
+                    MelonLogger.Warning("Adding to the Expression page hasn't been implemented yet. Please use a different page");
+                    return;
                     if (insertion == Insertion.Pre) Patches.expressionPagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.expressionPagePost.Add(customPedal);
                     return;
@@ -291,6 +293,8 @@ namespace ActionMenuApi
                     else if (insertion == Insertion.Post) Patches.mainPagePost.Add(customPedal);
                     return;
                 case ActionMenuPageType.MenuOpacity:
+                    MelonLogger.Warning("Adding to the MenuOpacity page hasn't been implemented yet. Please use a different page");
+                    return;
                     if (insertion == Insertion.Pre) Patches.menuOpacityPagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.menuOpacityPagePost.Add(customPedal);
                     return;
@@ -309,6 +313,8 @@ namespace ActionMenuApi
                     else if (insertion == Insertion.Post) Patches.nameplatesOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPageType.NameplatesSize:
+                    MelonLogger.Warning("Adding to the NameplatesSize page hasn't been implemented yet. Please use a different page");
+                    return;
                     if (insertion == Insertion.Pre) Patches.nameplatesSizePagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.nameplatesSizePagePost.Add(customPedal);
                     return;

@@ -110,7 +110,7 @@ namespace ActionMenuApi.Managers
             {
                 current.Method_Private_Void_Vector2_Boolean_1(Vector2.zero, false);
             }catch {}
-            current.transform.localPosition = new Vector3(-256f, 0, 0);
+            current.transform.localPosition = new Vector3(-256f, 0, 0); //TODO: Place it correctly
         }
 
         public static void CloseFourAxisMenu()

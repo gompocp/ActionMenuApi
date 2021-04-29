@@ -64,8 +64,8 @@ namespace ActionMenuApi.Managers
                 }
 
                 UpdateMathStuff();
-                radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360) * 100;
-                if(onUpdate != null) onUpdate.Invoke(radialPuppetValue);
+                radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360) * 100; //IK this is bad I'll refactor it later 
+                if(onUpdate != null) onUpdate.Invoke(radialPuppetValue/100);
             }
         }
 
@@ -90,12 +90,12 @@ namespace ActionMenuApi.Managers
             Input.ResetInputAxes();
             onClose = close;
             current.gameObject.SetActive(true);
-            current.GetFill().field_Public_Single_3 = startingValue;
+            current.GetFill().field_Public_Single_3 = startingValue*100; //Please dont break
             onUpdate = onClose;
             current.GetTitle().text = title;
             current.GetCenterText().text = (Math.Round(radialPuppetMenuRight.GetFill().field_Public_Single_3 / 360 * 100)) + "%";
             current.GetFill().UpdateGeometry();
-            current.transform.localPosition = new Vector3(-256f, 0, 0);
+            current.transform.localPosition = new Vector3(-256f, 0, 0); //TODO: Place it correctly
             double angleOriginal = (startingValue/100)*360;
             double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
             current.UpdateArrow(angleOriginal, eulerAngle);

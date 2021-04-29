@@ -45,17 +45,19 @@ namespace ActionMenuApi
         public static void PatchAll(HarmonyInstance harmonyInstance)
         {
             Harmony = harmonyInstance;
-            PatchMethod(openMainPageKeyWords, nameof(OpenMainPagePre), nameof(OpenMainPagePost));
-            PatchMethod(openConfigPageKeywords, nameof(OpenConfigPagePre), nameof(OpenConfigPagePost));
-            PatchMethod(openMenuOpacityPageKeyWords, nameof(OpenMenuOpacityPagePre), nameof(OpenMenuOpacityPagePost));
-            PatchMethod(openEmojisPageKeyWords, nameof(OpenEmojisPagePre), nameof(OpenEmojisPagePost));
-            PatchMethod(openExpressionMenuKeyWords, nameof(OpenExpressionMenuPre), nameof(OpenExpressionMenuPost));
-            PatchMethod(openNameplatesOpacityPageKeyWords, nameof(OpenNameplatesOpacityPre), nameof(OpenNameplatesOpacityPost));
-            PatchMethod(openNameplatesPageKeyWords, nameof(OpenNameplatesPagePre), nameof(OpenNameplatesPagePost));
-            PatchMethod(openNameplatesVisibilityPageKeyWords, nameof(OpenNameplatesVisibilityPre), nameof(OpenNameplatesVisibilityPost));
-            PatchMethod(openNameplatesSizePageKeyWords, nameof(OpenNameplatesSizePre), nameof(OpenNameplatesSizePost));
-            PatchMethod(openOptionsPageKeyWords, nameof(OpenOptionsPre), nameof(OpenOptionsPost));
-            PatchMethod(openSDK2ExpressionPageKeyWords, nameof(OpenSDK2ExpressionPre), nameof(OpenSDK2ExpressionPost));
+            //Haha duplicate code go brrr
+            harmonyInstance.Patch(FindAMMethod(openMainPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMainPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMainPagePost))));
+            harmonyInstance.Patch(FindAMMethod(openConfigPageKeywords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenConfigPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenConfigPagePost))));
+            //harmonyInstance.Patch(FindAMMethod(openMenuOpacityPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMenuOpacityPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMenuOpacityPagePost))));
+            harmonyInstance.Patch(FindAMMethod(openEmojisPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenEmojisPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenEmojisPagePost))));
+            //harmonyInstance.Patch(FindAMMethod(openExpressionMenuKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenExpressionMenuPre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenExpressionMenuPost))));
+            harmonyInstance.Patch(FindAMMethod(openNameplatesOpacityPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesOpacityPre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesOpacityPost))));
+            harmonyInstance.Patch(FindAMMethod(openNameplatesPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesPagePost))));
+            harmonyInstance.Patch(FindAMMethod(openNameplatesVisibilityPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesVisibilityPre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesVisibilityPost))));
+            //harmonyInstance.Patch(FindAMMethod(openNameplatesSizePageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesSizePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenNameplatesSizePost))));
+            harmonyInstance.Patch(FindAMMethod(openSDK2ExpressionPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenSDK2ExpressionPre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenSDK2ExpressionPost))));
+            harmonyInstance.Patch(FindAMMethod(openOptionsPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenOptionsPre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenOptionsPost))));
+
         }
 
         public static void OpenConfigPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(configPagePre, __instance);
@@ -77,6 +79,7 @@ namespace ActionMenuApi
         public static void OpenNameplatesSizePre(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesSizePagePre, __instance);
         public static void OpenNameplatesSizePost(ActionMenu __instance) => Utilities.AddPedalsInList(nameplatesSizePagePost, __instance);
         public static void OpenOptionsPre(ActionMenu __instance) => Utilities.AddPedalsInList(optionsPagePre, __instance);
+
         public static void OpenOptionsPost(ActionMenu __instance) => Utilities.AddPedalsInList(optionsPagePost, __instance);
         public static void OpenSDK2ExpressionPre(ActionMenu __instance) => Utilities.AddPedalsInList(sdk2ExpressionPagePre, __instance);
         public static void OpenSDK2ExpressionPost(ActionMenu __instance) => Utilities.AddPedalsInList(sdk2ExpressionPagePost, __instance);
@@ -89,6 +92,9 @@ namespace ActionMenuApi
         {
             try
             {
+                MelonLogger.Msg(FindAMMethod(keywords).Name);
+                if(typeof(Patches).GetMethod(preName) == null) MelonLogger.Msg("Patch1 Null");
+                if(typeof(Patches).GetMethod(postName) == null) MelonLogger.Msg("Patch2 Null");
                 Harmony.Patch(
                     FindAMMethod(keywords),
                     new HarmonyMethod(typeof(Patches).GetMethod(preName)),

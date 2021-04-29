@@ -107,17 +107,20 @@ namespace ActionMenuTestMod
         {
 
             Vector3 old = controllingGameObject.transform.eulerAngles;
-            controllingGameObject.transform.eulerAngles = new Vector3((rotation / 100)*360, old.y, old.z);
+            controllingGameObject.transform.eulerAngles = new Vector3((rotation)*360, old.y, old.z);
+            x = rotation;
         }
         private static void RotateCubeY(float rotation)
         {
             Vector3 old = controllingGameObject.transform.eulerAngles;
-            controllingGameObject.transform.eulerAngles = new Vector3(old.x, (rotation / 100)*360, old.z);
+            controllingGameObject.transform.eulerAngles = new Vector3(old.x, (rotation)*360, old.z);
+            y = rotation;
         }
         private static void RotateCubeZ(float rotation)
         {
             Vector3 old = controllingGameObject.transform.eulerAngles;
-            controllingGameObject.transform.eulerAngles = new Vector3(old.x, old.y, (rotation / 100)*360);
+            controllingGameObject.transform.eulerAngles = new Vector3(old.x, old.y, (rotation)*360);
+            z = rotation;
         }
         private static GameObject controllingGameObject;
     }

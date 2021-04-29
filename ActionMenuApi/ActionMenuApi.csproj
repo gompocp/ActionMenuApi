@@ -75,7 +75,8 @@
         <Compile Include="Logger.cs" />
         <Compile Include="Managers\FourAxisPuppetManager.cs" />
         <Compile Include="Managers\RadialPuppetManager.cs" />
-        <Compile Include="ModMenu\ModCategory.cs" />
+        <Compile Include="ModMenu\ModFolder.cs" />
+        <Compile Include="ModMenu\ModsFolder.cs" />
         <Compile Include="ModMenu\Page.cs" />
         <Compile Include="Pedals\PedalFourAxis.cs" />
         <Compile Include="Pedals\PedalToggle.cs" />
@@ -85,7 +86,6 @@
         <Compile Include="Pedals\PedalRadial.cs" />
         <Compile Include="Pedals\PedalStruct.cs" />
         <Compile Include="Pedals\PedalSubMenu.cs" />
-        <Compile Include="Pedals\PedalType.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Stuff\Constants.cs" />
         <Compile Include="Stuff\ExtensionMethods.cs" />
@@ -94,6 +94,7 @@
         <Compile Include="Types\ActionMenuPageType.cs" />
         <Compile Include="Types\InputAxes.cs" />
         <Compile Include="Types\Insertion.cs" />
+        <Compile Include="Types\PedalType.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <PropertyGroup>
