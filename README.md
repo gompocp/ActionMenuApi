@@ -114,7 +114,7 @@ Project Link: [https://github.com/gompocp/ActionMenuApi](https://github.com/gomp
 ## Acknowledgements
 
 * XRef method from [BenjaminZehowlt](https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs)
-* [Knah](https://github.com/knah/VRCMods/blob/master/AdvancedSafety/PortalHiding.cs) for his native hooking example and assetbundle loading example
+* [Knah](https://github.com/knah/VRCMods/) assetbundle loading example
 
 
 [license-shield]: https://img.shields.io/github/license/gompocp/ActionMenuApi.svg?style=for-the-badge
