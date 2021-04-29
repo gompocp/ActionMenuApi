@@ -88,15 +88,14 @@ namespace ActionMenuApi.Managers
             current.GetFill().field_Public_Single_3 = startingValue*360; //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
             current.GetTitle().text = title;
-            current.GetCenterText().text = (Math.Round(startingValue)*100) + "%";
+            current.GetCenterText().text = (Math.Round(startingValue*100f)) + "%";
             current.GetFill().UpdateGeometry(); ;
             //MelonLogger.Msg($"Button Pos: {pedalOption.field_Public_ActionButton_0.transform.position.ToString()}");
             //MelonLogger.Msg($"Local Button Pos: {pedalOption.field_Public_ActionButton_0.transform.localPosition.ToString()}");
-            current.transform.localPosition = pedalOption.field_Public_ActionButton_0.transform.localPosition;
-            //new Vector3(-256f, 0, 0); 
-            double angleOriginal =  Utilities.ConvertFromEuler(startingValue*360); 
+            current.transform.localPosition = pedalOption.field_Public_ActionButton_0.transform.localPosition;  //new Vector3(-256f, 0, 0); 
+            double angleOriginal =  Utilities.ConvertFromEuler(startingValue*360);
             double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
-            current.UpdateArrow(angleOriginal, eulerAngle);  //TODO: Redo the entire fucking math because this is soooo scuffed rn
+            current.UpdateArrow(angleOriginal, eulerAngle); 
         }
 
         public static void CloseRadialMenu()

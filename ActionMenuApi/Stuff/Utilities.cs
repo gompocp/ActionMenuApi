@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ActionMenuApi.Pedals;
+using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
@@ -113,7 +114,7 @@ namespace ActionMenuApi
         public static double ConvertFromEuler(double angle)
         {
             //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
-            if (angle <= 90 && angle <= 270) return (angle - 90) * -1;
+            if (angle >= 90 && angle <= 270) return (angle - 90) * -1;
             if (angle <= 360 && angle > 270) return 180 - (angle - 270);
             if (angle < 90 && angle >= 0) return (90 - angle);
             return 0;
