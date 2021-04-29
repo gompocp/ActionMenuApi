@@ -24,7 +24,7 @@ namespace ActionMenuApi.Pedals
                 //MelonLogger.Msg(v.ToString());
             };
             this.triggerEvent = delegate {
-                FourAxisPuppetManager.OpenFourAxisMenu(startingValue, onClose, text, onUpdate);
+                FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate);
                 FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
                 FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
                 FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);

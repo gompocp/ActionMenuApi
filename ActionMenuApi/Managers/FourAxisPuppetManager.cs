@@ -16,8 +16,6 @@ namespace ActionMenuApi.Managers
         
         public static Action<Vector2> onUpdate { get; set; }
         
-        public static Action<Vector2> onClose { get; set; }
-        
         public static void Setup()
         {
             MelonCoroutines.Start(WaitForAxisMenu());
@@ -86,7 +84,7 @@ namespace ActionMenuApi.Managers
                 onUpdate.Invoke(fourAxisPuppetValue);
             }
         }
-        public static void OpenFourAxisMenu(Vector2 startingValue, Action<Vector2> close, string title, Action<Vector2> update)
+        public static void OpenFourAxisMenu(string title, Action<Vector2> update)
         {
             if(open) return;
             switch (Utilities.GetActionMenuHand())
@@ -105,13 +103,12 @@ namespace ActionMenuApi.Managers
                     break;
             }
             Input.ResetInputAxes();
-            onClose = close;
             onUpdate = update;
             current.gameObject.SetActive(true);
             current.GetTitle().text = title;
             try
             {
-                current.Method_Private_Void_Vector2_Boolean_1(startingValue, false);
+                current.Method_Private_Void_Vector2_Boolean_1(Vector2.zero, false);
             }catch {}
             current.transform.localPosition = new Vector3(-256f, 0, 0);
         }
@@ -122,7 +119,7 @@ namespace ActionMenuApi.Managers
             current = null;
             open = false;
             hand = ActionMenuHand.Invalid;
-            onClose.Invoke(fourAxisPuppetValue);
+            onUpdate.Invoke(fourAxisPuppetValue);
         }
 
         private static void UpdateMathStuff()
