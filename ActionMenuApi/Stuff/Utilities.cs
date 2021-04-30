@@ -59,44 +59,31 @@ namespace ActionMenuApi
             foreach (var pedalStruct in list)
             {
                 PedalOption pedalOption = instance.AddOption();
+                pedalOption.setText(pedalStruct.text);
+                pedalOption.setIcon(pedalStruct.icon);
+                pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
+                //Additional setup for pedals
                 switch (pedalStruct.Type)
                 {
-                    case PedalType.Button:
-                        pedalOption.setText(pedalStruct.text);
-                        pedalOption.setIcon(pedalStruct.icon);
-                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
-                        break;
                     case PedalType.SubMenu:
-                        pedalOption.setText(pedalStruct.text);
-                        pedalOption.setIcon(pedalStruct.icon);
-                        pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeFolder;
-                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeFolder);
                         break;
                     case PedalType.RadialPuppet:
                         PedalRadial pedalRadial = (PedalRadial) pedalStruct;
-                        pedalOption.setText(pedalStruct.text);
-                        pedalOption.setIcon(pedalStruct.icon);
-                        pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeRadial;
-                        pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(pedalRadial.currentValue)}%";
+                        pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeRadial);
+                        pedalOption.SetInfoText($"{Math.Round(pedalRadial.currentValue)}%");
                         pedalRadial.pedal = pedalOption;
-                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                     case PedalType.Toggle:
                         PedalToggle pedalToggle = (PedalToggle) pedalStruct;
-                        pedalOption.setText(pedalStruct.text);
                         if (pedalToggle.toggled)
-                            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOn;
+                            pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeToggleOn);
                         else
-                            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeToggleOff;
-                        pedalOption.setIcon(pedalToggle.icon);
+                            pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeToggleOff);
                         pedalToggle.pedal = pedalOption;
-                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
                         break;
                     case PedalType.FourAxisPuppet:
-                        pedalOption.setText(pedalStruct.text);
-                        pedalOption.setIcon(pedalStruct.icon);
-                        pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = GetExpressionsIcons().typeAxis;
-                        pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent);
+                        pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeAxis);
                         break;
                 }
             }
@@ -123,13 +110,13 @@ namespace ActionMenuApi
         {
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.LeftHorizontal), Input.GetAxis(InputAxes.LeftVertical)) * 16;
-            return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().field_Private_Vector2_0;
+            return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().GetCursorPos();
         }
         public static Vector2 GetCursorPosRight()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.RightHorizontal), Input.GetAxis(InputAxes.RightVertical)) * 16;
-            return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().field_Private_Vector2_0;
+            return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().GetCursorPos();
         }
         
         public static GameObject CloneGameObject(string pathToGameObject, string pathToParent)

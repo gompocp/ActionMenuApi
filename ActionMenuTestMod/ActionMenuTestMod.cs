@@ -13,7 +13,7 @@ namespace ActionMenuTestMod
     public static class ModInfo
     {
         public const string Name = "ActionMenuTestMod";
-        public const string Author = "gompo#6956";
+        public const string Author = "gompo";
         public const string Version = "1.0.0";
         public const string DownloadLink = null;
     }
@@ -65,11 +65,11 @@ namespace ActionMenuTestMod
                     MelonLogger.Msg("Sub Menu Opened");
                     AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
                     AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", (v) => RePositionCubeZY(v), toggleIcon);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", (v) => RePositionCubeXZ(v), toggleIcon);
-                    AMAPI.AddRadialPedalToSubMenu("X",f => RotateCubeX(f), x,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu("Y",f => RotateCubeY(f), y,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu("Z",f => RotateCubeZ(f), z,radialIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
+                    AMAPI.AddRadialPedalToSubMenu("X",RotateCubeX, x,radialIcon);
+                    AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
+                    AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
                     AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
                     AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
                 },

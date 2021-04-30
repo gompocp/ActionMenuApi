@@ -106,11 +106,7 @@ namespace ActionMenuApi.Managers
             onUpdate = update;
             current.gameObject.SetActive(true);
             current.GetTitle().text = title;
-            try
-            {
-                current.Method_Private_Void_Vector2_Boolean_1(Vector2.zero, false);
-            }catch {}
-            current.transform.localPosition = pedalOption.field_Public_ActionButton_0.transform.localPosition;
+            current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;
         }
 
         public static void CloseFourAxisMenu()

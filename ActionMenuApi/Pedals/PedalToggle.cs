@@ -18,9 +18,9 @@ namespace ActionMenuApi.Pedals
                 //MelonLogger.Msg($"Old state: {this.toggled}, New state: {!this.toggled}");
                 this.toggled = !this.toggled;
                 if (this.toggled)
-                    pedal.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
+                    pedal.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
                 else 
-                    pedal.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
+                    pedal.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
                 onToggle.Invoke(toggled);
             };
             this.Type = PedalType.Toggle;

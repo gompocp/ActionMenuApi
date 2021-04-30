@@ -28,7 +28,8 @@ namespace ActionMenuApi
         public static Texture2D getIcon(this PedalOption pedal) => pedal.prop_Texture2D_0;
         public static bool isOpen(this ActionMenuOpener actionMenuOpener) => actionMenuOpener.field_Private_Boolean_0;
         public static void SetPedalTypeIcon(this PedalOption pedalOption, Texture2D icon) => pedalOption.GetActionButton().prop_Texture2D_2 = icon;
-        public static void SetInfoText(this PedalOption pedalOption, string text) => pedalOption.GetActionButton().prop_String_1 = text; 
+        public static void SetInfoText(this PedalOption pedalOption, string text) => pedalOption.GetActionButton().prop_String_1 = text;
+        public static Vector2 GetCursorPos(this ActionMenu actionMenu) => actionMenu.field_Private_Vector2_0;
         public static ActionButton GetActionButton(this PedalOption pedalOption) => pedalOption.field_Public_ActionButton_0;
         public static void SetPedalTriggerEvent(this PedalOption pedalOption, PedalOptionTriggerEvent triggerEvent) => pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = triggerEvent;
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_0;
@@ -37,7 +38,7 @@ namespace ActionMenuApi
         public static GameObject GetCursor(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_GameObject_0;
         public static GameObject GetCursor(this AxisPuppetMenu axisPuppetMenu) => axisPuppetMenu.field_Public_GameObject_0;
         public static GameObject GetArrow(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_GameObject_1;
-        public static PedalGraphic GetFill(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_PedalGraphic_0;
+        public static PedalGraphic GetFill(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_PedalGraphic_0; //Only
         public static TextMeshProUGUI GetTitle(this RadialPuppetMenu radialPuppetMenu) => ((PuppetMenu)radialPuppetMenu).field_Public_TextMeshProUGUI_0;
         public static TextMeshProUGUI GetTitle(this AxisPuppetMenu axisPuppetMenu) => ((PuppetMenu)axisPuppetMenu).field_Public_TextMeshProUGUI_0;
         public static TextMeshProUGUI GetCenterText(this RadialPuppetMenu radialPuppetMenu) => radialPuppetMenu.field_Public_TextMeshProUGUI_0;

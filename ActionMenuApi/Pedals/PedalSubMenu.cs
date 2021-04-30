@@ -19,7 +19,7 @@ namespace ActionMenuApi.Pedals
             this.triggerEvent =  delegate
             {
                 if (Utilities.GetActionMenuOpener() == null) return;
-                Utilities.GetActionMenuOpener().field_Public_ActionMenu_0.PushPage(openFunc, closeFunc, icon, text);
+                Utilities.GetActionMenuOpener().GetActionMenu().PushPage(openFunc, closeFunc, icon, text);
             };
             this.Type = PedalType.SubMenu;
         }
