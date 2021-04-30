@@ -16,32 +16,21 @@ namespace ActionMenuApi
         {
             return menu.Method_Private_PedalOption_0(); //This should be safe for a while unless they add another similar method
         }
-        public static string setText(this PedalOption pedal, string text)
-        {
-            return pedal.prop_String_0 = text; //Likewise... should be safe
-        }
-        public static string getText(this PedalOption pedal)
-        {
-            return pedal.prop_String_0; //Likewise... should be safe
-        }
+        public static string setText(this PedalOption pedal, string text) => pedal.prop_String_0 = text;
+        public static string getText(this PedalOption pedal) => pedal.prop_String_0;
         public static ActionMenuPage PushPage(this ActionMenu menu, Il2CppSystem.Action openFunc, Il2CppSystem.Action closeFunc = null, Texture2D icon = null, string text = null)
         {
             return menu.Method_Public_ObjectNPublicAcTeAcStGaUnique_Action_Action_Texture2D_String_0(openFunc, closeFunc, icon, text); //Likewise... should be safe but reflection is pretty easy for it
         }
-        public static Texture2D setIcon(this PedalOption pedal, Texture2D icon)
-        {
-            //PropertyInfo texture = typeof(PedalOption).GetProperties().Where(p => p.PropertyType == typeof(Texture2D)).First(); meh
-            return pedal.prop_Texture2D_0 = icon;
-        }
-        public static Texture2D getIcon(this PedalOption pedal)
-        {
-            return pedal.prop_Texture2D_0;
-        }
-        public static bool isOpen(this ActionMenuOpener actionMenuOpener)
-        {
-            return actionMenuOpener.field_Private_Boolean_0;
-        }
-
+        public static Texture2D setIcon(this PedalOption pedal, Texture2D icon) => pedal.prop_Texture2D_0 = icon;
+        //PropertyInfo texture = typeof(PedalOption).GetProperties().Where(p => p.PropertyType == typeof(Texture2D)).First(); meh
+        
+        public static Texture2D getIcon(this PedalOption pedal) => pedal.prop_Texture2D_0;
+        public static bool isOpen(this ActionMenuOpener actionMenuOpener) => actionMenuOpener.field_Private_Boolean_0;
+        public static void SetPedalTypeIcon(this PedalOption pedalOption, Texture2D icon) => pedalOption.GetActionButton().prop_Texture2D_2 = icon;
+        public static void SetInfoText(this PedalOption pedalOption, string text) => pedalOption.GetActionButton().prop_String_1 = text; 
+        public static ActionButton GetActionButton(this PedalOption pedalOption) => pedalOption.field_Public_ActionButton_0;
+        public static void SetPedalTriggerEvent(this PedalOption pedalOption, PedalOptionTriggerEvent triggerEvent) => pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = triggerEvent;
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_0;
         public static ActionMenuOpener GetRightOpener(this ActionMenuDriver actionMenuDriver) => actionMenuDriver.field_Public_ActionMenuOpener_1;
         public static ActionMenu GetActionMenu(this ActionMenuOpener actionMenuOpener) => actionMenuOpener.field_Public_ActionMenu_0;

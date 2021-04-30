@@ -92,9 +92,6 @@ namespace ActionMenuApi
         {
             try
             {
-                MelonLogger.Msg(FindAMMethod(keywords).Name);
-                if(typeof(Patches).GetMethod(preName) == null) MelonLogger.Msg("Patch1 Null");
-                if(typeof(Patches).GetMethod(postName) == null) MelonLogger.Msg("Patch2 Null");
                 Harmony.Patch(
                     FindAMMethod(keywords),
                     new HarmonyMethod(typeof(Patches).GetMethod(preName)),

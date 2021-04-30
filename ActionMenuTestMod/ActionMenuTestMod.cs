@@ -63,6 +63,7 @@ namespace ActionMenuTestMod
                 delegate
                 {
                     MelonLogger.Msg("Sub Menu Opened");
+                    AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
                     AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
                     AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", (v) => RePositionCubeZY(v), toggleIcon);
                     AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", (v) => RePositionCubeXZ(v), toggleIcon);

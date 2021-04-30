@@ -7,6 +7,7 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
+// ReSharper disable HeuristicUnreachableCode
 
 namespace ActionMenuApi
 {
@@ -47,7 +48,7 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon); 
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent);
+            pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
             return pedalOption;
         }
         
@@ -89,17 +90,19 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
-            pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
-            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeRadial;
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
-            {
-                Action<float> combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
+            pedalOption.SetInfoText($"{Math.Round(startingValue*100)}%");
+            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
+            pedalOption.SetPedalTriggerEvent(
+                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
                 {
-                    startingValue = f;
-                    pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue*100)}%";
-                }), onUpdate);
-                RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
-            }));
+                    Action<float> combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
+                    {
+                        startingValue = f;
+                        pedalOption.SetInfoText($"{Math.Round(startingValue*100)}%");
+                    }), onUpdate);
+                    RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
+                }))
+            );
             return pedalOption;
         }
         
@@ -121,8 +124,7 @@ namespace ActionMenuApi
             AddPedalToList(
                 pageType, 
                 new PedalFourAxis(
-                    text, 
-                    Vector2.zero, 
+                    text,
                     icon,
                     onUpdate,
                     topButtonText,
@@ -153,15 +155,17 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
-            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeAxis;
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
-            {
-                FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
+            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeAxis);
+            pedalOption.SetPedalTriggerEvent(
+                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+                {
+                    FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
                     FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
                     FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
                     FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
                     FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
-                }));
+                }))
+            );
             return pedalOption;
         }
 
@@ -204,11 +208,13 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
-            pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeFolder;
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
-            {
-                actionMenuOpener.GetActionMenu().PushPage(openFunc, closeFunc, icon, text);
-            }));
+            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
+            pedalOption.SetPedalTriggerEvent(
+                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+                {
+                    actionMenuOpener.GetActionMenu().PushPage(openFunc, closeFunc, icon, text);
+                }))
+            );
             return pedalOption;
         }
 
@@ -251,17 +257,19 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
-            if (startingState) pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
-            else pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
-            {
-                startingState = !startingState;
-                if (startingState)
-                    pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
-                else 
-                    pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
-                onToggle.Invoke(startingState);
-            }));
+            if (startingState) pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
+            else pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
+            pedalOption.SetPedalTriggerEvent(
+                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+                {
+                    startingState = !startingState;
+                    if (startingState)
+                        pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
+                    else 
+                        pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
+                    onToggle.Invoke(startingState);
+                }))
+            );
             return pedalOption;
         }
         
@@ -398,8 +406,7 @@ namespace ActionMenuApi
             AddPedalToList(
                 pageType, 
                 new PedalFourAxis(
-                    text, 
-                    startingValue, 
+                    text,
                     icon,
                     onUpdate,
                     topButtonText,
