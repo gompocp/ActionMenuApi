@@ -5,6 +5,7 @@ using System.Linq;
 using ActionMenuApi.Pedals;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using ActionMenuApi.ModMenu;
 using Harmony;
 using MelonLoader;
 using VRC.UI;
@@ -41,10 +42,12 @@ namespace ActionMenuApi
         private static readonly List<string> openNameplatesVisibilityPageKeyWords = new (new [] { "Nameplates Shown", "Icons Only", "Nameplates Hidden" });
         private static readonly List<string> openNameplatesSizePageKeyWords = new (new [] { "Large", "Medium", "Normal", "Small", "Tiny" });
         private static readonly List<string> openMenuSizePageKeyWords = new (new [] { "XXXXXXXXX" }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
+        
         private static HarmonyInstance Harmony;
         public static void PatchAll(HarmonyInstance harmonyInstance)
         {
             Harmony = harmonyInstance;
+            
             //Haha duplicate code go brrr
             harmonyInstance.Patch(FindAMMethod(openMainPageKeyWords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMainPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenMainPagePost))));
             harmonyInstance.Patch(FindAMMethod(openConfigPageKeywords), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenConfigPagePre))), new HarmonyMethod(typeof(Patches).GetMethod(nameof(OpenConfigPagePost))));
@@ -63,7 +66,12 @@ namespace ActionMenuApi
         public static void OpenConfigPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(configPagePre, __instance);
         public static void OpenConfigPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(configPagePost, __instance);
         public static void OpenMainPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(mainPagePre, __instance);
-        public static void OpenMainPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(mainPagePost, __instance);
+        public static void OpenMainPagePost(ActionMenu __instance)
+        {
+            if (ModsFolder.instance.mods.Count > 0) ModsFolder.instance.AddMainPageButton();
+            Utilities.AddPedalsInList(mainPagePost, __instance);
+        }
+
         public static void OpenMenuOpacityPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(menuOpacityPagePre, __instance);
         public static void OpenMenuOpacityPagePost(ActionMenu __instance) => Utilities.AddPedalsInList(menuOpacityPagePost, __instance);
         public static void OpenEmojisPagePre(ActionMenu __instance) => Utilities.AddPedalsInList(emojisPagePre, __instance);

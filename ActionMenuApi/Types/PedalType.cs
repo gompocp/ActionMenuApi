@@ -8,5 +8,6 @@
         FourAxisPuppet, 
         RadialPuppet,
         ModFolder,
+        ModsFolder,
     }
 }

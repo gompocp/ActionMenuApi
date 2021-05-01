@@ -85,6 +85,9 @@ namespace ActionMenuApi
                     case PedalType.FourAxisPuppet:
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeAxis);
                         break;
+                    case PedalType.ModsFolder:
+                        pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeFolder);
+                        break;
                 }
             }
         }

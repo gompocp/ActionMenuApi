@@ -26,27 +26,26 @@ namespace ActionMenuApi.Managers
             while (GameObject.Find("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu") == null) yield return null;
             radialPuppetMenuLeft = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
             radialPuppetMenuRight = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
-            yield break;
         }
 
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
-            if (current != null && current.gameObject.active)
+            if (current != null && current.gameObject.gameObject.active)
             {
                 if (UnityEngine.XR.XRDevice.isPresent)
                 {
                     if (hand == ActionMenuHand.Right)
                     {
                         if (Input.GetAxis(InputAxes.RightTrigger) >= 0.4)
-                        {
-                           CloseRadialMenu(); 
-                           return;
+                        { 
+                            CloseRadialMenu();
+                            return;
                         }
                     }
                     else if (hand == ActionMenuHand.Left)
                     {
-                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4)
+                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4) 
                         {
                             CloseRadialMenu();
                             return;
@@ -58,10 +57,8 @@ namespace ActionMenuApi.Managers
                     CloseRadialMenu();
                     return;
                 }
-
                 UpdateMathStuff();
-                radialPuppetValue = (current.GetFill().field_Public_Single_3 / 360); //IK this is bad I'll refactor it later 
-                if(onUpdate != null) onUpdate.Invoke(radialPuppetValue);
+                CallUpdateAction();
             }
         }
 
@@ -95,16 +92,28 @@ namespace ActionMenuApi.Managers
             current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;  //new Vector3(-256f, 0, 0); 
             double angleOriginal =  Utilities.ConvertFromEuler(startingValue*360);
             double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
-            current.UpdateArrow(angleOriginal, eulerAngle); 
+            current.UpdateArrow(angleOriginal, eulerAngle);
         }
 
         public static void CloseRadialMenu()
         {
+            CallUpdateAction();
             current.gameObject.SetActive(false);
             current = null;
             open = false;
             hand = ActionMenuHand.Invalid;
-            onUpdate.Invoke(radialPuppetValue);
+        }
+
+        private static void CallUpdateAction()
+        {
+            try
+            {
+                onUpdate?.Invoke(current.GetFill().field_Public_Single_3 / 360f);
+            }
+            catch(Exception e)
+            {
+                MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet: {e}");
+            }
         }
 
         private static void UpdateMathStuff()

@@ -32,7 +32,7 @@ namespace ActionMenuApi.Managers
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
-            if (current != null && current.gameObject.active)
+            if (current != null && current.gameObject.gameObject.active)
             {
                 if (UnityEngine.XR.XRDevice.isPresent)
                 {
@@ -58,11 +58,6 @@ namespace ActionMenuApi.Managers
                     CloseFourAxisMenu();
                     return;
                 }
-
-                try
-                {
-                    current.Method_Private_Void_Vector2_Boolean_1(fourAxisPuppetValue, false);
-                }catch {}
                 fourAxisPuppetValue =  ((hand == ActionMenuHand.Left) ? Utilities.GetCursorPosLeft() : Utilities.GetCursorPosRight())/ 16;
                 float x = fourAxisPuppetValue.x;
                 float y = fourAxisPuppetValue.y;
@@ -81,7 +76,7 @@ namespace ActionMenuApi.Managers
                     current.GetFillUp().SetAlpha(0);
                 }
                 UpdateMathStuff();
-                onUpdate.Invoke(fourAxisPuppetValue);
+                CallUpdateAction();
             }
         }
         public static void OpenFourAxisMenu(string title, Action<Vector2> update, PedalOption pedalOption)
@@ -108,14 +103,26 @@ namespace ActionMenuApi.Managers
             current.GetTitle().text = title;
             current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;
         }
+        
+        private static void CallUpdateAction()
+        {
+            try
+            {
+                onUpdate?.Invoke(fourAxisPuppetValue);
+            }
+            catch(Exception e)
+            {
+                MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet: {e}");
+            }
+        }
 
         public static void CloseFourAxisMenu()
         {
+            CallUpdateAction();
             current.gameObject.SetActive(false);
             current = null;
             open = false;
             hand = ActionMenuHand.Invalid;
-            onUpdate.Invoke(fourAxisPuppetValue);
         }
 
         private static void UpdateMathStuff()

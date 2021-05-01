@@ -1,5 +1,6 @@
 ﻿using MelonLoader;
 using ActionMenuApi.Managers;
+using ActionMenuApi.ModMenu;
 using Harmony;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace ActionMenuApi
             Patches.PatchAll(Harmony);
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
+            new ModsFolder("Mods", () => { });
         }
         
         public override void OnUpdate()
