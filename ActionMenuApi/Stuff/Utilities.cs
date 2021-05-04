@@ -65,9 +65,9 @@ namespace ActionMenuApi
                 //Additional setup for pedals
                 switch (pedalStruct.Type)
                 {
-                    case PedalType.SubMenu:
+                    /*case PedalType.SubMenu:
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeFolder);
-                        break;
+                        break;*/
                     case PedalType.RadialPuppet:
                         PedalRadial pedalRadial = (PedalRadial) pedalStruct;
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeRadial);
@@ -84,9 +84,6 @@ namespace ActionMenuApi
                         break;
                     case PedalType.FourAxisPuppet:
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeAxis);
-                        break;
-                    case PedalType.ModsFolder:
-                        pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeFolder);
                         break;
                 }
             }

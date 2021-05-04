@@ -1,0 +1,8 @@
+
+*.dll
+.idea
+
+*.CopyComplete
+*.user
+*.cache
+*.pdb

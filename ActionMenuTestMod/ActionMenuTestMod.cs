@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using ActionMenuApi;
@@ -58,8 +57,8 @@ namespace ActionMenuTestMod
             //AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon);
 
             AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Config, "Toggle", testBool, b => testBool = b);
-            AMAPI.AddSubMenuToMenu(ActionMenuPageType.Options,
-                "Sub Menu",
+            AMAPI.AddModFolder(
+                "Cube Stuff",
                 delegate
                 {
                     MelonLogger.Msg("Sub Menu Opened");
@@ -81,10 +80,12 @@ namespace ActionMenuTestMod
         {
             controllingGameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             controllingGameObject.GetComponent<Collider>().enabled = false;
-            x = controllingGameObject.transform.eulerAngles.x*100;
-            y = controllingGameObject.transform.eulerAngles.y*100;
-            z = controllingGameObject.transform.eulerAngles.z*100;
+            x = controllingGameObject.transform.eulerAngles.x*360;
+            y = controllingGameObject.transform.eulerAngles.y*360;
+            z = controllingGameObject.transform.eulerAngles.z*360;
         }
+
+
         private static void RePositionCubeXY(Vector3 v)
         {
             controllingGameObject.transform.localPosition += v/25;
@@ -97,25 +98,30 @@ namespace ActionMenuTestMod
         {
             controllingGameObject.transform.localPosition += new Vector3(v.x/25, 0, v.y/25);
         }
+        
         private static void RotateCubeX(float rotation)
         {
-
             Vector3 old = controllingGameObject.transform.eulerAngles;
             controllingGameObject.transform.eulerAngles = new Vector3((rotation)*360, old.y, old.z);
             x = rotation;
         }
+        
         private static void RotateCubeY(float rotation)
         {
+            MelonLogger.Msg(rotation);
             Vector3 old = controllingGameObject.transform.eulerAngles;
+            //MelonLogger.Msg($"Old Angles: {old.ToString()}");
             controllingGameObject.transform.eulerAngles = new Vector3(old.x, (rotation)*360, old.z);
             y = rotation;
         }
         private static void RotateCubeZ(float rotation)
         {
             Vector3 old = controllingGameObject.transform.eulerAngles;
+            //MelonLogger.Msg($"Old Angles: {old.ToString()}");
             controllingGameObject.transform.eulerAngles = new Vector3(old.x, old.y, (rotation)*360);
             z = rotation;
         }
+        
         private static GameObject controllingGameObject;
     }
 }

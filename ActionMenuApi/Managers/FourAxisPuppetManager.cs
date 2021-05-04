@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using MelonLoader;
 using UnityEngine;
 
@@ -112,7 +113,7 @@ namespace ActionMenuApi.Managers
             }
             catch(Exception e)
             {
-                MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet: {e}");
+                MelonLogger.Error($"Exception caught in onUpdate action passed to Four Axis Puppet: {e}");
             }
         }
 

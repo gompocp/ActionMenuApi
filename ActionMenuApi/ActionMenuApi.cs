@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using System.Collections;
+using MelonLoader;
 using ActionMenuApi.Managers;
 using ActionMenuApi.ModMenu;
 using Harmony;
@@ -13,7 +14,7 @@ namespace ActionMenuApi
         public const string Version = "0.1.1";
         public const string DownloadLink = null;
     }
-
+    
     public class ActionMenuApi : MelonMod
     {
         public override void OnApplicationStart()
@@ -21,7 +22,7 @@ namespace ActionMenuApi
             Patches.PatchAll(Harmony);
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
-            new ModsFolder("Mods", () => { });
+            ModsFolder.CreateInstance();
         }
         
         public override void OnUpdate()
@@ -29,5 +30,6 @@ namespace ActionMenuApi
             RadialPuppetManager.OnUpdate();
             FourAxisPuppetManager.OnUpdate();
         }
+        
     }
 }

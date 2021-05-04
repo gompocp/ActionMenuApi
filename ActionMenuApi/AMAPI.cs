@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using ActionMenuApi.Pedals;
 using ActionMenuApi.Managers;
+using ActionMenuApi.ModMenu;
 using MelonLoader;
+using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
@@ -208,7 +210,7 @@ namespace ActionMenuApi
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.setText(text); 
             pedalOption.setIcon(icon);
-            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
+            //pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
             pedalOption.SetPedalTriggerEvent(
                 DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
                 {
@@ -271,6 +273,21 @@ namespace ActionMenuApi
                 }))
             );
             return pedalOption;
+        }
+
+        /// <summary>
+        /// Add a mod a dedicated section of the action menu with other mods
+        /// </summary>
+        /// <param name="text">Button text</param>
+        /// <param name="openFunc">Function called when your mod page is opened. Add your methods calls to other AMAPI methods such AddRadialPedalToSubMenu to add buttons to the submenu it creates when clicked</param>
+        /// <param name="icon">(optional) The Button Icon</param>
+        public static void AddModFolder(string text, Action openFunc, Texture2D icon = null)
+        {
+            if(ModsFolder.instance == null) ModsFolder.CreateInstance();
+            ModsFolder.instance.AddMod(() =>
+            {
+                AMAPI.AddSubMenuToSubMenu(text, openFunc, icon, null);
+            });
         }
         
         private static void AddPedalToList(ActionMenuPageType pageType, PedalStruct customPedal, Insertion insertion)
