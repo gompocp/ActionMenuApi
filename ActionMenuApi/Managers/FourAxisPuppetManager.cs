@@ -16,20 +16,13 @@ namespace ActionMenuApi.Managers
         private static bool open = false;
         
         public static Action<Vector2> onUpdate { get; set; }
-        
+
         public static void Setup()
         {
-            MelonCoroutines.Start(WaitForAxisMenu());
-        }
-        
-        
-        private static System.Collections.IEnumerator WaitForAxisMenu()
-        {
-            while (GameObject.Find("UserInterface/ActionMenu/MenuR/ActionMenu/AxisPuppetMenu") == null) yield return null;
             fourAxisPuppetMenuLeft = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/AxisPuppetMenu", "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<AxisPuppetMenu>();
             fourAxisPuppetMenuRight = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/AxisPuppetMenu", "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<AxisPuppetMenu>();
         }
-        
+
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this

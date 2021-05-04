@@ -40,7 +40,7 @@ namespace ActionMenuApi.ModMenu
 
         public static void CreateInstance()
         {
-            new ModsFolder("Mods", null);
+            if(instance == null) new ModsFolder("Mods", Texture2D.whiteTexture); //TEMP Texture //TODO: Swap to a different texture
         }
     }
 }

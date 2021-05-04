@@ -59,8 +59,8 @@ namespace ActionMenuApi
             foreach (var pedalStruct in list)
             {
                 PedalOption pedalOption = instance.AddOption();
-                pedalOption.setText(pedalStruct.text);
-                pedalOption.setIcon(pedalStruct.icon);
+                pedalOption.SetText(pedalStruct.text);
+                pedalOption.SetIcon(pedalStruct.icon);
                 pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
                 //Additional setup for pedals
                 switch (pedalStruct.Type)
@@ -71,7 +71,7 @@ namespace ActionMenuApi
                     case PedalType.RadialPuppet:
                         PedalRadial pedalRadial = (PedalRadial) pedalStruct;
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeRadial);
-                        pedalOption.SetInfoText($"{Math.Round(pedalRadial.currentValue)}%");
+                        pedalOption.SetButtonPercentText($"{Math.Round(pedalRadial.currentValue)}%");
                         pedalRadial.pedal = pedalOption;
                         break;
                     case PedalType.Toggle:

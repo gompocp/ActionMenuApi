@@ -10,7 +10,8 @@ namespace ActionMenuApi.Managers
 
         public static void Setup()
         {
-            MelonCoroutines.Start(WaitForRadialMenu());
+            radialPuppetMenuLeft = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
+            radialPuppetMenuRight = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
         }
         
         private static RadialPuppetMenu radialPuppetMenuRight;
@@ -22,13 +23,6 @@ namespace ActionMenuApi.Managers
         private static bool open = false;
         public static Action<float> onUpdate { get; set; }
         
-        private static System.Collections.IEnumerator WaitForRadialMenu()
-        {
-            while (GameObject.Find("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu") == null) yield return null;
-            radialPuppetMenuLeft = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
-            radialPuppetMenuRight = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
-        }
-
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
@@ -83,7 +77,7 @@ namespace ActionMenuApi.Managers
             }
             Input.ResetInputAxes();
             current.gameObject.SetActive(true);
-            current.GetFill().field_Public_Single_3 = startingValue*360; //Please dont break
+            current.GetFill().SetFillAngle(startingValue*360); //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
             current.GetTitle().text = title;
             current.GetCenterText().text = (Math.Round(startingValue*100f)) + "%";
@@ -109,7 +103,7 @@ namespace ActionMenuApi.Managers
         {
             try
             {
-                onUpdate?.Invoke(current.GetFill().field_Public_Single_3 / 360f);
+                onUpdate?.Invoke(current.GetFill().GetFillAngle() / 360f);
             }
             catch(Exception e)
             {

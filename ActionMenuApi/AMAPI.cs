@@ -48,8 +48,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon); 
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon); 
             pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
             return pedalOption;
         }
@@ -90,9 +90,9 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
-            pedalOption.SetInfoText($"{Math.Round(startingValue*100)}%");
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
+            pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
             pedalOption.SetPedalTriggerEvent(
                 DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
@@ -100,7 +100,7 @@ namespace ActionMenuApi
                     Action<float> combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
                     {
                         startingValue = f;
-                        pedalOption.SetInfoText($"{Math.Round(startingValue*100)}%");
+                        pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
                     }), onUpdate);
                     RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
                 }))
@@ -155,8 +155,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeAxis);
             pedalOption.SetPedalTriggerEvent(
                 DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
@@ -208,8 +208,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
             //pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
             pedalOption.SetPedalTriggerEvent(
                 DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
@@ -257,8 +257,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
             if (startingState) pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
             else pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
             pedalOption.SetPedalTriggerEvent(
@@ -372,8 +372,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon); 
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon); 
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent);
             return pedalOption;
         }
@@ -399,8 +399,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
             pedalOption.field_Public_ActionButton_0.prop_String_1 = $"{Math.Round(startingValue)}%";
             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeRadial;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
@@ -442,8 +442,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
             pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeAxis;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
             {
@@ -493,8 +493,8 @@ namespace ActionMenuApi
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.setText(text); 
-            pedalOption.setIcon(icon);
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
             if (startingState) pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOn;
             else pedalOption.field_Public_ActionButton_0.prop_Texture2D_2 = Utilities.GetExpressionsIcons().typeToggleOff;
             pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate

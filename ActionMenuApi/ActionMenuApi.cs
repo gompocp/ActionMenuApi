@@ -20,11 +20,16 @@ namespace ActionMenuApi
         public override void OnApplicationStart()
         {
             Patches.PatchAll(Harmony);
-            RadialPuppetManager.Setup();
-            FourAxisPuppetManager.Setup();
             ModsFolder.CreateInstance();
         }
-        
+
+        public override void VRChat_OnUiManagerInit()
+        {
+            RadialPuppetManager.Setup();
+            FourAxisPuppetManager.Setup();
+            //ExtensionMethods.PrefetchDelegatesAndProps(); //Prevent hitching on opening the action menu first time
+        }
+
         public override void OnUpdate()
         {
             RadialPuppetManager.OnUpdate();

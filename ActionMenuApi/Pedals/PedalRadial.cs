@@ -20,7 +20,7 @@ namespace ActionMenuApi.Pedals
                 Action<float> combinedAction = (Action<float>) Delegate.Combine(new Action<float>(delegate(float f)
                 {
                     startingValue = f;
-                    pedal.SetInfoText($"{Math.Round(startingValue * 100)}%");
+                    pedal.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
                 }), onUpdate);
                 RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedal);
             };
