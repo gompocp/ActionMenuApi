@@ -289,7 +289,7 @@ namespace ActionMenuApi
                 AMAPI.AddSubMenuToSubMenu(text, openFunc, icon, null);
             });
         }
-        
+
         private static void AddPedalToList(ActionMenuPageType pageType, PedalStruct customPedal, Insertion insertion)
         {
             switch (pageType)

@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using ActionMenuApi.Pedals;
 using MelonLoader;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 
 namespace ActionMenuApi.ModMenu
@@ -40,7 +43,19 @@ namespace ActionMenuApi.ModMenu
 
         public static void CreateInstance()
         {
-            if(instance == null) new ModsFolder("Mods", Texture2D.whiteTexture); //TEMP Texture //TODO: Swap to a different texture
+            if (instance != null) return;
+            AssetBundle iconsAssetBundle;
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi.actionmenuapi.icons"))
+            using (var tempStream = new MemoryStream((int)stream.Length))
+            {
+                stream.CopyTo(tempStream);
+                
+                iconsAssetBundle = AssetBundle.LoadFromMemory_Internal(tempStream.ToArray(), 0);
+                iconsAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            }
+            Texture2D modsSectionIcon = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/vrcmg.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
+            modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            new ModsFolder("Mods", modsSectionIcon); //TEMP Texture //TODO: Swap to a different texture
         }
     }
 }
