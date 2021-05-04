@@ -108,7 +108,6 @@ namespace ActionMenuTestMod
         
         private static void RotateCubeY(float rotation)
         {
-            MelonLogger.Msg(rotation);
             Vector3 old = controllingGameObject.transform.eulerAngles;
             //MelonLogger.Msg($"Old Angles: {old.ToString()}");
             controllingGameObject.transform.eulerAngles = new Vector3(old.x, (rotation)*360, old.z);
