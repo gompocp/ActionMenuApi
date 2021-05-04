@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using ActionMenuApi.Pedals;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using ActionMenuApi.ModMenu;
+using ActionMenuApi.Pedals;
+using ActionMenuApi.Types;
 using Harmony;
 using MelonLoader;
 using VRC.UI;

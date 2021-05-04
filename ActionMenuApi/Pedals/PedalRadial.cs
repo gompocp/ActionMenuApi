@@ -1,12 +1,13 @@
 ﻿using System;
-using UnityEngine;
 using ActionMenuApi.Managers;
+using ActionMenuApi.Types;
+using UnityEngine;
 using UnhollowerRuntimeLib;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
 
 namespace ActionMenuApi.Pedals
 {
-    public class PedalRadial : PedalStruct
+    internal sealed class PedalRadial : PedalStruct
     {
         public float currentValue;
         public PedalOption pedal { get; set; }

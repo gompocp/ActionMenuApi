@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using ActionMenuApi.Pedals;
+using ActionMenuApi.Types;
 using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;

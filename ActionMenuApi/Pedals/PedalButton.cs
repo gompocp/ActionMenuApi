@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using ActionMenuApi.Types;
+using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    public class PedalButton : PedalStruct
+    internal sealed class PedalButton : PedalStruct
     {
         public PedalButton(string text, Texture2D icon, System.Action triggerEvent)
         {

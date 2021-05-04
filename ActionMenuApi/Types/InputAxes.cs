@@ -1,4 +1,4 @@
-﻿namespace ActionMenuApi
+﻿namespace ActionMenuApi.Types
 {
     internal static class InputAxes
     {

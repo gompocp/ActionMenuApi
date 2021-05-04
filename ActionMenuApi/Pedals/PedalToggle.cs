@@ -1,9 +1,10 @@
-﻿using MelonLoader;
+﻿using ActionMenuApi.Types;
+using MelonLoader;
 using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    public class PedalToggle : PedalStruct
+    internal sealed class PedalToggle : PedalStruct
     {
         public bool toggled { get; set; }
         

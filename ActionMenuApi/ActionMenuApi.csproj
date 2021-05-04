@@ -78,7 +78,6 @@
         <Compile Include="Logger.cs" />
         <Compile Include="Managers\FourAxisPuppetManager.cs" />
         <Compile Include="Managers\RadialPuppetManager.cs" />
-        <Compile Include="ModMenu\ModFolder.cs" />
         <Compile Include="ModMenu\ModsFolder.cs" />
         <Compile Include="ModMenu\Page.cs" />
         <Compile Include="Pedals\PedalFourAxis.cs" />

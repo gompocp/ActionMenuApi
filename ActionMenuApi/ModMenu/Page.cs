@@ -2,7 +2,7 @@ using System;
 
 namespace ActionMenuApi.ModMenu
 {
-    public class Page
+    internal class Page
     {
         private int count = 0;
         private int maxPerPage = 8;

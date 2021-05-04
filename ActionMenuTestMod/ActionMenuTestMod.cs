@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using ActionMenuApi;
+using ActionMenuApi.Types;
 using Harmony;
 using MelonLoader;
 using UnhollowerRuntimeLib;

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using ActionMenuApi.Pedals;
 using ActionMenuApi.Managers;
 using ActionMenuApi.ModMenu;
+using ActionMenuApi.Pedals;
+using ActionMenuApi.Types;
 using MelonLoader;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
@@ -352,7 +353,7 @@ namespace ActionMenuApi
                     return;
             }
         }
-        [ObsoleteAttribute("This method is obsolete. Use the override AddButtonPedalToMenu(pageType, text, triggerEvent, icon, insertion)", true)]
+        [Obsolete("This method is obsolete. Use the override AddButtonPedalToMenu(pageType, text, triggerEvent, icon, insertion)", true)]
         public static void AddButtonPedalToMenu(ActionMenuPageType pageType, Action triggerEvent, string text = "Button Text", Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -366,7 +367,7 @@ namespace ActionMenuApi
             );
         }
 
-        [ObsoleteAttribute("This method is obsolete. Use the override AddButtonPedalToSubMenu(text, triggerEvent, icon)", true)]
+        [Obsolete("This method is obsolete. Use the override AddButtonPedalToSubMenu(text, triggerEvent, icon)", true)]
         public static PedalOption AddButtonPedalToSubMenu(Action triggerEvent, string text = "Button Text", Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -378,7 +379,7 @@ namespace ActionMenuApi
             return pedalOption;
         }
         
-        [ObsoleteAttribute("This method is obsolete. Use the override AddRadialPedalToMenu(pageType, text, onUpdate, startingValue, icon, insertion)", true)]
+        [Obsolete("This method is obsolete. Use the override AddRadialPedalToMenu(pageType, text, onUpdate, startingValue, icon, insertion)", true)]
         public static void AddRadialPedalToMenu(ActionMenuPageType pageType, Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -393,7 +394,7 @@ namespace ActionMenuApi
             );
         }
         
-        [ObsoleteAttribute("This method is obsolete. Use the override AddRadialPedalToSubMenu(text, onUpdate, startingValue, icon)", true)]
+        [Obsolete("This method is obsolete. Use the override AddRadialPedalToSubMenu(text, onUpdate, startingValue, icon)", true)]
         public static PedalOption AddRadialPedalToSubMenu(Action<float> onUpdate, string text = "Button Text", float startingValue = 0, Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -416,7 +417,7 @@ namespace ActionMenuApi
             return pedalOption;
         }
         
-        [ObsoleteAttribute("This method is obsolete. Use the override AddFourAxisPedalToMenu(pageType, text, onUpdate, icon, insertion, topButtonText, rightButtonText, downButtonText, leftButtonText)", true)]
+        [Obsolete("This method is obsolete. Use the override AddFourAxisPedalToMenu(pageType, text, onUpdate, icon, insertion, topButtonText, rightButtonText, downButtonText, leftButtonText)", true)]
         public static void AddFourAxisPedalToMenu(ActionMenuPageType pageType, string text, Vector2 startingValue, Action<Vector2> onUpdate,Texture2D icon = null, Insertion insertion = Insertion.Post, string topButtonText = "Up", 
             string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
         {
@@ -435,7 +436,7 @@ namespace ActionMenuApi
             );
         }
         
-        [ObsoleteAttribute("This method is obsolete. Use the override AddFourAxisPedalToSubMenu(text, onUpdate, icon, topButtonText, rightButtonText, downButtonText, leftButtonText)", true)]
+        [Obsolete("This method is obsolete. Use the override AddFourAxisPedalToSubMenu(text, onUpdate, icon, topButtonText, rightButtonText, downButtonText, leftButtonText)", true)]
         public static PedalOption AddFourAxisPedalToSubMenu(string text, Vector2 startingValue, Action<Vector2> onUpdate,Texture2D icon = null, string topButtonText = "Up", 
             string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
         {
@@ -456,7 +457,7 @@ namespace ActionMenuApi
             return pedalOption;
         }
 
-        [ObsoleteAttribute("This method is obsolete. Use the override AddSubMenuToMenu(pageType, text, openFunc, icon, closeFunc, insertion)", true)]
+        [Obsolete("This method is obsolete. Use the override AddSubMenuToMenu(pageType, text, openFunc, icon, closeFunc, insertion)", true)]
         public static void AddSubMenuToMenu(ActionMenuPageType pageType, Action openFunc, string text = null,
             Texture2D icon = null, Action closeFunc = null, Insertion insertion = Insertion.Post)
         {
@@ -472,7 +473,7 @@ namespace ActionMenuApi
             );
         }
         
-        [ObsoleteAttribute("This method is obsolete. Use the override AddTogglePedalToMenu(pageType, text, startingState, onToggle, icon, insertion)", true)]
+        [Obsolete("This method is obsolete. Use the override AddTogglePedalToMenu(pageType, text, startingState, onToggle, icon, insertion)", true)]
         public static void AddTogglePedalToMenu(ActionMenuPageType pageType,bool startingState, System.Action<bool> onToggle, string text, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
@@ -487,7 +488,7 @@ namespace ActionMenuApi
             );
         }
         
-        [ObsoleteAttribute("This method is obsolete. Use the override AddTogglePedalToSubMenu(text, startingState, onToggle, icon)", true)]
+        [Obsolete("This method is obsolete. Use the override AddTogglePedalToSubMenu(text, startingState, onToggle, icon)", true)]
         public static PedalOption AddTogglePedalToSubMenu(Action<bool> onToggle, bool startingState, string text, Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();

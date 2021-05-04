@@ -1,10 +1,11 @@
 ﻿using System;
 using ActionMenuApi.Managers;
+using ActionMenuApi.Types;
 using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    public class PedalFourAxis : PedalStruct
+    internal sealed class PedalFourAxis : PedalStruct
     {
         public PedalOption pedal { get; set; }
         

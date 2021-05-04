@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Reflection;
+using ActionMenuApi.Types;
 using MelonLoader;
 using UnityEngine;
 
 namespace ActionMenuApi.Managers
 {
-    public static class FourAxisPuppetManager
+    internal static class FourAxisPuppetManager
     {
         private static AxisPuppetMenu fourAxisPuppetMenuRight;
         private static AxisPuppetMenu fourAxisPuppetMenuLeft;

@@ -1,9 +1,10 @@
 ﻿using System;
+using ActionMenuApi.Types;
 using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    public class PedalSubMenu : PedalStruct
+    internal sealed class PedalSubMenu : PedalStruct
     {
 
         public Action openFunc { get; set; }

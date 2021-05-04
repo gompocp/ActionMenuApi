@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using MelonLoader;
 using ActionMenuApi.Managers;
 using ActionMenuApi.ModMenu;
+using MelonLoader;
 using Harmony;
 using UnityEngine;
 

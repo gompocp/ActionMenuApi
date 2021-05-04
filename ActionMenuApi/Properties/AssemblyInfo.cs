@@ -1,8 +1,8 @@
 ﻿using System;
 using MelonLoader;
-using ActionMenuApi;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using ActionMenuApi;
 
 
 [assembly: AssemblyTitle(ModInfo.Name)]

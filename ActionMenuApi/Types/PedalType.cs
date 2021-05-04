@@ -1,13 +1,11 @@
-﻿namespace ActionMenuApi.Pedals
+﻿namespace ActionMenuApi.Types
 {
-    public enum PedalType
+    internal enum PedalType
     {
         Button,
         Toggle,
         SubMenu, 
         FourAxisPuppet, 
         RadialPuppet,
-        ModFolder,
-        ModsFolder,
     }
 }
