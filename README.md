@@ -63,7 +63,7 @@ To use simply add ActionMenuApi to your mods folder and reference it in your pro
    ```sh
    git clone https://github.com/gompocp/ActionMenuApi.git
    ```
-2. Fix references (all available in VRChat\MelonLoader\Managed
+2. Fix references (all available in VRChat\MelonLoader\Managed)
 3. Make sure to edit the post build event in the TestMod's `.csproj` and set the copy path to your own mods folder before clicking build solution
 
 
