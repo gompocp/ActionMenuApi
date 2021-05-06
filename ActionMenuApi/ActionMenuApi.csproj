@@ -26,13 +26,14 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>none</DebugType>
+        <DebugType>full</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin</OutputPath>
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
@@ -79,7 +80,6 @@
         <Compile Include="Managers\FourAxisPuppetManager.cs" />
         <Compile Include="Managers\RadialPuppetManager.cs" />
         <Compile Include="ModMenu\ModsFolder.cs" />
-        <Compile Include="ModMenu\Page.cs" />
         <Compile Include="Pedals\PedalFourAxis.cs" />
         <Compile Include="Pedals\PedalToggle.cs" />
         <Compile Include="AMAPI.cs" />

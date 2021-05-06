@@ -12,7 +12,7 @@ namespace ActionMenuApi
         public const string Name = "ActionMenuApi";
         public const string Author = "gompo";
         public const string Version = "0.1.1";
-        public const string DownloadLink = null;
+        public const string DownloadLink = "https://github.com/gompocp/ActionMenuApi/releases";
     }
     
     public class ActionMenuApi : MelonMod

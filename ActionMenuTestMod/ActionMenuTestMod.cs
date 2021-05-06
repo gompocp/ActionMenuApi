@@ -75,6 +75,10 @@ namespace ActionMenuTestMod
                 },
                 subMenuIcon
             );
+            for (int i = 0; i < 20; i++) //Set to a high number if you want to test the page functionality 
+            {
+                AMAPI.AddModFolder($"Example Mod {i+2}", () => {}, subMenuIcon); 
+            }
         }
 
         private static void CreateCube()

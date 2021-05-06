@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MelonLoader;
@@ -265,9 +266,19 @@ namespace ActionMenuApi
         public static void UpdateArrow(this RadialPuppetMenu radialPuppet, double angleOriginal, double eulerAngle)
         {
             //MelonLogger.Msg($"Original: {angleOriginal}, Euler Angle:{eulerAngle}");
-            radialPuppet.GetArrow().transform.localPosition = new Vector3((float)(120 * Math.Cos(angleOriginal / Constants.radToDeg)), (float)(120 * Math.Sin(angleOriginal / Constants.radToDeg)), radialPuppet.GetArrow().transform.localPosition.z);
+            radialPuppet.GetArrow().transform.localPosition = new Vector3((float)(120 * Math.Cos(angleOriginal / Constants.RAD_TO_DEG)), (float)(120 * Math.Sin(angleOriginal / Constants.RAD_TO_DEG)), radialPuppet.GetArrow().transform.localPosition.z);
             radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (float)(180 - eulerAngle));
         }
+        
+        public static List<List<Action>> Split(this List<Action> mods, int chunkSize)  
+        {        
+            var list = new List<List<Action>>();
+            for (int i = 0; i < mods.Count; i += chunkSize) 
+            { 
+                list.Add(mods.GetRange(i, Math.Min(chunkSize, mods.Count - i))); 
+            }
+            return list; 
+        } 
         
         //These things might change, just a bit tricky to identify the correct ones using reflection
         public static void SetFillAngle(this PedalGraphic pedalGraphic, float angle) => pedalGraphic.field_Public_Single_3 = angle;
