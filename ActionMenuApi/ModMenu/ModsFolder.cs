@@ -85,7 +85,7 @@ namespace ActionMenuApi.ModMenu
             pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageSeven = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/7.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            new ModsFolder("Mods", modsSectionIcon); //TEMP Texture //TODO: Swap to a different texture
+            new ModsFolder("Mods", modsSectionIcon); 
         }
         
         private static Texture2D GetPageIcon(int pageIndex)
