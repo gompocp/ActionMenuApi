@@ -69,8 +69,8 @@ To use simply add ActionMenuApi to your mods folder and reference it in your pro
    ```sh
    git clone https://github.com/gompocp/ActionMenuApi.git
    ```
-2. Fix references (all available in VRChat\MelonLoader\Managed)
-3. Make sure to edit the post build event in the TestMod's `.csproj` and set the copy path to your own mods folder before clicking build solution
+2. Copy the .dlls from your MelonLoader\Managed folder to the Libs folder
+3. Build Solution
 
 
 ## Usage
@@ -120,7 +120,7 @@ Project Link: [https://github.com/gompocp/ActionMenuApi](https://github.com/gomp
 ## Acknowledgements
 
 * XRef method from [BenjaminZehowlt](https://github.com/BenjaminZehowlt/DynamicBonesSafety/blob/master/DynamicBonesSafetyMod.cs)
-* [Knah](https://github.com/knah/VRCMods/) assetbundle loading example
+* [Knah](https://github.com/knah/VRCMods/) assetbundle loading example and his solution structure
 
 
 [license-shield]: https://img.shields.io/github/license/gompocp/ActionMenuApi.svg?style=for-the-badge
