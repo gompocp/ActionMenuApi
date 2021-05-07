@@ -1,8 +1,8 @@
 
-*.dll
+Libs/*.dll
+Output
 .idea
-
-*.CopyComplete
+ActionMenuApi/obj/*
+ActionMenuTestMod/obj/*
 *.user
-*.cache
-*.pdb
+

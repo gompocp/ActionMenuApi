@@ -90,7 +90,7 @@ namespace ActionMenuApi
             }
         }
         
-        public static double ConvertFromDegToEuler(double angle)
+        public static float ConvertFromDegToEuler(float angle)
         {
             //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
             if (angle >= 0 && angle <= 90) return 90 - angle;
@@ -99,7 +99,7 @@ namespace ActionMenuApi
             if (angle <= 0 && angle >= -90) return 180 - (angle + 180) + 90;
             return 0;
         }
-        public static double ConvertFromEuler(double angle)
+        public static float ConvertFromEuler(float angle)
         {
             //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
             if (angle >= 90 && angle <= 270) return (angle - 90) * -1;

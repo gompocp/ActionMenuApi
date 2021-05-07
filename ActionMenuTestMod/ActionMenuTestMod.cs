@@ -8,15 +8,11 @@ using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
+[assembly: MelonInfo(typeof(ActionMenuTestMod.ActionMenuTestMod), "ActionMenuTestMod", "1.0.0", "gompo")]
+[assembly: MelonGame("VRChat", "VRChat")]
+
 namespace ActionMenuTestMod
 {
-    public static class ModInfo
-    {
-        public const string Name = "ActionMenuTestMod";
-        public const string Author = "gompo";
-        public const string Version = "1.0.0";
-        public const string DownloadLink = null;
-    }
     // Icons from https://uxwing.com/
     public class ActionMenuTestMod : MelonMod
     {
@@ -79,6 +75,7 @@ namespace ActionMenuTestMod
             {
                 AMAPI.AddModFolder($"Example Mod {i+2}", () => {}, subMenuIcon); 
             }
+            //AMAPI.AddButtonPedalToMenu("")
         }
 
         private static void CreateCube()

@@ -5,16 +5,11 @@ using MelonLoader;
 using Harmony;
 using UnityEngine;
 
+[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.1.2", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
+[assembly: MelonGame("VRChat", "VRChat")]
+
 namespace ActionMenuApi
 {
-    internal static class ModInfo
-    {
-        public const string Name = "ActionMenuApi";
-        public const string Author = "gompo";
-        public const string Version = "0.1.2";
-        public const string DownloadLink = "https://github.com/gompocp/ActionMenuApi/releases";
-    }
-    
     public class ActionMenuApi : MelonMod
     {
         public override void OnApplicationStart()

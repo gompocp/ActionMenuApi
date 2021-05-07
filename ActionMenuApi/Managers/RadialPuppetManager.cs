@@ -84,8 +84,8 @@ namespace ActionMenuApi.Managers
             current.GetCenterText().text = (Math.Round(startingValue*100f)) + "%";
             current.GetFill().UpdateGeometry(); ;
             current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;  //new Vector3(-256f, 0, 0); 
-            double angleOriginal =  Utilities.ConvertFromEuler(startingValue*360);
-            double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
+            float angleOriginal =  Utilities.ConvertFromEuler(startingValue*360);
+            float eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
             current.UpdateArrow(angleOriginal, eulerAngle);
         }
 
@@ -117,9 +117,9 @@ namespace ActionMenuApi.Managers
 
             if (Vector2.Distance(mousePos, Vector2.zero) > 12)
             {
-                double angleOriginal = Math.Round(((float)Math.Atan2(mousePos.y, mousePos.x)) * Constants.RAD_TO_DEG);
-                double eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
-                current.SetAngle((float)eulerAngle);
+                float angleOriginal = Mathf.Round(Mathf.Atan2(mousePos.y, mousePos.x) * Constants.RAD_TO_DEG);
+                float eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
+                current.SetAngle(eulerAngle);
                 current.UpdateArrow(angleOriginal, eulerAngle);
             }
         }

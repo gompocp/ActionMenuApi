@@ -1,78 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{8F74B60C-3E7F-409B-8245-61E16A4C34E7}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ActionMenuTestMod</RootNamespace>
-        <AssemblyName>ActionMenuTestMod</AssemblyName>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <LangVersion>latestmajor</LangVersion>
+        <TargetFramework>net472</TargetFramework>
+        <VrcReferences>true</VrcReferences>
+        <Version>1.0.0.0</Version>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>none</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
+
     <ItemGroup>
-        <Compile Include="ActionMenuTestMod.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
+        <ProjectReference Include="..\ActionMenuApi\ActionMenuApi.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Include="customicons" />
-    </ItemGroup>
-    <ItemGroup>
-      <Reference Include="Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
-      </Reference>
-      <Reference Include="Il2Cppmscorlib, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
-      </Reference>
-      <Reference Include="MelonLoader, Version=0.3.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
-      </Reference>
-      <Reference Include="UnhollowerBaseLib, Version=0.4.13.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.AssetBundleModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.CoreModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.PhysicsModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\..\..\..\..\Programs\Software\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\ActionMenuApi\ActionMenuApi.csproj">
-        <Project>{8f74b60c-3e7f-409b-8245-61e16a4c34e7}</Project>
-        <Name>ActionMenuApi</Name>
-      </ProjectReference>
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <PropertyGroup>
-        <PostBuildEvent>COPY "$(MSBuildProjectDirectory)\bin\ActionMenuTestMod.dll" "E:\Windows\Programs\Software\SteamLibrary\steamapps\common\VRChat\Mods"</PostBuildEvent>
-    </PropertyGroup>
 </Project>
