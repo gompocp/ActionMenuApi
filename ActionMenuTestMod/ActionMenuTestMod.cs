@@ -51,9 +51,10 @@ namespace ActionMenuTestMod
             buttonIcon = iconsAssetBundle.LoadAsset_Internal("Assets/Resources/Icons/cloud-data-download.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             buttonIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
 
-            //AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon);
+            AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon);
 
             AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Config, "Toggle", testBool, b => testBool = b);
+            
             AMAPI.AddModFolder(
                 "Cube Stuff",
                 delegate
@@ -75,7 +76,7 @@ namespace ActionMenuTestMod
             {
                 AMAPI.AddModFolder($"Example Mod {i+2}", () => {}, subMenuIcon); 
             }
-            //AMAPI.AddButtonPedalToMenu("")
+
         }
 
         private static void CreateCube()

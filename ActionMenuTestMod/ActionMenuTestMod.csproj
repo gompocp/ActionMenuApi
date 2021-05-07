@@ -9,4 +9,9 @@
     <ItemGroup>
         <ProjectReference Include="..\ActionMenuApi\ActionMenuApi.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="customicons" />
+      <EmbeddedResource Include="customicons" />
+    </ItemGroup>
 </Project>
