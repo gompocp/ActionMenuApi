@@ -44,14 +44,18 @@
 <a href="https://github.com/gompocp/ActionMenuApi">
     <img src="Assets/preview.gif" alt="Preview" width="700" height="400">
 </a> 
+
 This mod doesn't do anything on it's own.
+
 It provides an easy way for modders to add integration with the action menu.
-It supports the use of the:
-- Radial Puppet
-- Four Axis Puppet
-- Button
-- Toggle Button
-- Sub Menus
+
+It supports the use of the
+
+* Radial Puppet
+* Four Axis Puppet
+* Button
+* Toggle Button
+* Sub Menus
 
 Additionally allows mods to add their menus to a dedicated section on the action menu to prevent clutter.
 
