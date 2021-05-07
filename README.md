@@ -11,7 +11,6 @@
   <h3 align="center">ActionMenuApi</h3>
 
   <p align="center">
-    Currently in the process the rewriting old script used in my other mod "ActionMenuUtils"
     <br />
     <a href="https://github.com/gompocp/ActionMenuApi/issues">Request Feature</a>
   </p>
@@ -45,13 +44,16 @@
 <a href="https://github.com/gompocp/ActionMenuApi">
     <img src="Assets/preview.gif" alt="Preview" width="700" height="400">
 </a> 
-
-Supports the usage
-- Radial puppet
-- Four Axis puppet 
+This mod doesn't do anything on it's own.
+It provides an easy way for modders to add integration with the action menu.
+It supports the use of the:
+- Radial Puppet
+- Four Axis Puppet
 - Button
-- Toggle 
-- SubMenu  
+- Toggle Button
+- Sub Menus
+
+Additionally allows mods to add their menus to a dedicated section on the action menu to prevent clutter.
 
 ## Getting Started
 
