@@ -6,7 +6,6 @@
         <LangVersion>9</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-      <None Remove="actionmenuapi.icons" />
       <EmbeddedResource Include="actionmenuapi.icons" />
     </ItemGroup>
 </Project>
