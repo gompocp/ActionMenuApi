@@ -74,7 +74,14 @@ namespace ActionMenuTestMod
             {
                 AMAPI.AddModFolder($"Example Mod {i+2}", () => {}, subMenuIcon); 
             }
+        }
 
+        public override void OnUpdate()
+        {
+            if (Input.GetKeyUp(KeyCode.P))
+            {
+                AMAPI.RefreshActionMenu();
+            }
         }
 
         private static void CreateCube()

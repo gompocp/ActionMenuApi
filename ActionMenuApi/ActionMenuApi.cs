@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using ActionMenuApi.Managers;
+﻿using ActionMenuApi.Managers;
 using ActionMenuApi.ModMenu;
 using MelonLoader;
-using Harmony;
-using UnityEngine;
-
+#pragma warning disable 1591
 [assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.1.2", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
 [assembly: MelonGame("VRChat", "VRChat")]
 

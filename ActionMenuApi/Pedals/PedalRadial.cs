@@ -2,7 +2,6 @@
 using ActionMenuApi.Managers;
 using ActionMenuApi.Types;
 using UnityEngine;
-using UnhollowerRuntimeLib;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
 
 namespace ActionMenuApi.Pedals

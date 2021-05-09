@@ -4,6 +4,7 @@
         <VrcReferences>true</VrcReferences>
         <Version>0.1.2.0</Version>
         <LangVersion>9</LangVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
     <ItemGroup>
       <EmbeddedResource Include="actionmenuapi.icons" />

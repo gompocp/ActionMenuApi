@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using ActionMenuApi.Pedals;
 using ActionMenuApi.Types;
+using Harmony;
 using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
@@ -15,7 +16,7 @@ namespace ActionMenuApi
 {
     internal static class Utilities
     {
-        public static bool checkXref(MethodBase m, params  string[] keywords)
+        public static bool checkXref(MethodBase m, params string[] keywords)
         {
             try
             {
@@ -23,18 +24,18 @@ namespace ActionMenuApi
                 {
 
                     if (!XrefScanner.XrefScan(m).Any(
-                        instance => instance.Type == XrefType.Global && instance.ReadAsObject() != null && instance.ReadAsObject().ToString()
+                        instance => instance.Type == XrefType.Global && instance.ReadAsObject() != null && instance
+                            .ReadAsObject().ToString()
                             .Equals(keyword, StringComparison.OrdinalIgnoreCase)))
                     {
                         return false;
                     }
                 }
                 return true;
-            }
-            catch { }
+            }catch { }
             return false;
         }
-        
+
         public static bool checkXref(MethodBase m, List<string> keywords)
         {
             try
@@ -43,7 +44,8 @@ namespace ActionMenuApi
                 {
 
                     if (!XrefScanner.XrefScan(m).Any(
-                        instance => instance.Type == XrefType.Global && instance.ReadAsObject() != null && instance.ReadAsObject().ToString()
+                        instance => instance.Type == XrefType.Global && instance.ReadAsObject() != null && instance
+                            .ReadAsObject().ToString()
                             .Equals(keyword, StringComparison.OrdinalIgnoreCase)))
                     {
                         return false;
@@ -62,7 +64,8 @@ namespace ActionMenuApi
                 PedalOption pedalOption = instance.AddOption();
                 pedalOption.SetText(pedalStruct.text);
                 pedalOption.SetIcon(pedalStruct.icon);
-                pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
+                pedalOption.SetPedalTriggerEvent(
+                    DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
                 //Additional setup for pedals
                 switch (pedalStruct.Type)
                 {
@@ -89,7 +92,7 @@ namespace ActionMenuApi
                 }
             }
         }
-        
+
         public static float ConvertFromDegToEuler(float angle)
         {
             //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
@@ -99,6 +102,7 @@ namespace ActionMenuApi
             if (angle <= 0 && angle >= -90) return 180 - (angle + 180) + 90;
             return 0;
         }
+
         public static float ConvertFromEuler(float angle)
         {
             //TODO: Rewrite/Remove Unnecessary Addition/Subtraction
@@ -107,50 +111,64 @@ namespace ActionMenuApi
             if (angle < 90 && angle >= 0) return (90 - angle);
             return 0;
         }
+
         public static Vector2 GetCursorPosLeft()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
                 return new Vector2(Input.GetAxis(InputAxes.LeftHorizontal), Input.GetAxis(InputAxes.LeftVertical)) * 16;
             return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().GetCursorPos();
         }
+
         public static Vector2 GetCursorPosRight()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
-                return new Vector2(Input.GetAxis(InputAxes.RightHorizontal), Input.GetAxis(InputAxes.RightVertical)) * 16;
+                return new Vector2(Input.GetAxis(InputAxes.RightHorizontal), Input.GetAxis(InputAxes.RightVertical)) *
+                       16;
             return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().GetCursorPos();
         }
-        
+
         public static GameObject CloneGameObject(string pathToGameObject, string pathToParent)
         {
-            return GameObject.Instantiate(GameObject.Find(pathToGameObject).transform, GameObject.Find(pathToParent).transform).gameObject;
+            return GameObject
+                .Instantiate(GameObject.Find(pathToGameObject).transform, GameObject.Find(pathToParent).transform)
+                .gameObject;
         }
 
-        public static ActionMenuDriver.ExpressionIcons GetExpressionsIcons() => ActionMenuDriver.prop_ActionMenuDriver_0.field_Public_ExpressionIcons_0;
+        public static ActionMenuDriver.ExpressionIcons GetExpressionsIcons() =>
+            ActionMenuDriver.prop_ActionMenuDriver_0.field_Public_ExpressionIcons_0;
 
         // Didnt know what to name this function
         public static ActionMenuHand GetActionMenuHand()
         {
-            if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
+            if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() &&
+                ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuHand.Right;
             }
-            if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
+
+            if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() &&
+                !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuHand.Left;
             }
+
             return ActionMenuHand.Invalid;
         }
-        
+
         public static ActionMenuOpener GetActionMenuOpener()
         {
-            if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
+            if (!ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() &&
+                ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
             }
-            if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() && !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
+
+            if (ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().isOpen() &&
+                !ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().isOpen())
             {
                 return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
             }
+
             return null;
             /*
             else if (ActionMenuDriver._instance.openerL.isOpen() && ActionMenuDriver._instance.openerR.isOpen())
@@ -159,5 +177,83 @@ namespace ActionMenuApi
             }
             */
         }
+
+        public static void ScanMethod(MethodInfo m)
+        {
+            MelonLogger.Msg($"Scanning: {m.FullDescription()}");
+            foreach (var instance in XrefScanner.XrefScan(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Global && instance.ReadAsObject() != null)
+                    {
+                        try
+                        {
+                            MelonLogger.Msg($"   Found String: {instance.ReadAsObject().ToString()}");
+                        }catch { }
+                    }
+                    else if (instance.Type == XrefType.Method && instance.TryResolve() != null)
+                    {
+                        try
+                        {
+                            MelonLogger.Msg($"   Found Method: {instance.TryResolve().FullDescription()}");
+                        }catch { }
+                    }
+                }
+                catch { }
+            }
+            foreach (var instance in XrefScanner.UsedBy(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Method && instance.TryResolve() != null)
+                    {
+                        try
+                        {
+                            MelonLogger.Msg($"   Found Used By Method: {instance.TryResolve().FullDescription()}");
+                        }catch { }
+                    }
+                }
+                catch { }
+            }
+        }
+        
+        private static RefreshAMDelegate GetRefreshAMDelegate
+        {
+            get
+            {
+                //Build 1088 menu.Method_Private_Void_PDM_9()
+                if (refreshAMDelegate != null) return refreshAMDelegate;
+                MethodInfo refreshAMMethod = typeof(ActionMenu).GetMethods().Single(
+                    m =>
+                        m.Name.StartsWith("Method_Private_Void_PDM_")
+                        && !m.HasStringLiterals()
+                        && m.SameClassMethodCallCount(1)
+                        && m.HasMethodCallWithName("Method_Private_Void_ObjectNPublic")
+                        && !m.HasMethodWithDeclaringType(typeof(ActionMenuDriver))
+                );
+
+                refreshAMDelegate = (RefreshAMDelegate)Delegate.CreateDelegate(
+                    typeof(RefreshAMDelegate),
+                    null,
+                    refreshAMMethod);
+                return refreshAMDelegate;
+            }
+        }
+
+        public static void RefreshAM()
+        {
+            if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
+            {
+                Logger.LogWarning("Refresh called before driver init");
+                return;
+            }
+            var leftOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
+            if(leftOpener.isOpen()) GetRefreshAMDelegate.Invoke(leftOpener.GetActionMenu());
+            var rightOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
+            if(rightOpener.isOpen()) GetRefreshAMDelegate.Invoke(rightOpener.GetActionMenu()); 
+        }
+        private static RefreshAMDelegate refreshAMDelegate;
+        private delegate void RefreshAMDelegate(ActionMenu actionMenu);
     }
 }

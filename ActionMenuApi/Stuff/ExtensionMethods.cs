@@ -5,6 +5,7 @@ using System.Reflection;
 using MelonLoader;
 using TMPro;
 using UnhollowerBaseLib;
+using UnhollowerRuntimeLib.XrefScans;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 using UnityEngine;
@@ -278,7 +279,92 @@ namespace ActionMenuApi
                 list.Add(mods.GetRange(i, Math.Min(chunkSize, mods.Count - i))); 
             }
             return list; 
-        } 
+        }
+
+        public static bool HasStringLiterals(this MethodInfo m)
+        {
+            foreach (var instance in XrefScanner.XrefScan(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Global && instance.ReadAsObject() != null) return true;
+                }
+                catch { }
+            }
+            return false;
+        }
+        public static bool CheckStringsCount(this MethodInfo m, int count)
+        {
+            int total = 0;
+            foreach (var instance in XrefScanner.XrefScan(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Global && instance.ReadAsObject() != null) total++;
+                }
+                catch
+                {
+                }
+            }
+            return total == count;
+        }
+
+        public static bool HasMethodCallWithName(this MethodInfo m, string txt)
+        {
+            foreach (var instance in XrefScanner.XrefScan(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Method && instance.TryResolve() != null)
+                    {
+                        try
+                        {
+                            if (instance.TryResolve().Name.Contains(txt)) return true;
+                        }catch(Exception e) {MelonLogger.Warning(e);}
+                    }
+                }
+                catch { }
+            }
+            return false;
+        }
+        public static bool SameClassMethodCallCount(this MethodInfo m, int calls)
+        {
+            int count = 0;
+            foreach (var instance in XrefScanner.XrefScan(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Method && instance.TryResolve() != null)
+                    {
+                        try
+                        {
+                            if (m.DeclaringType == instance.TryResolve().DeclaringType) count++;
+                        }catch(Exception e) {MelonLogger.Warning(e);}
+                    }
+                }
+                catch { }
+            }
+            return count == calls;
+        }
+
+        public static bool HasMethodWithDeclaringType(this MethodInfo m, Type declaringType)
+        {
+            foreach (var instance in XrefScanner.XrefScan(m))
+            {
+                try
+                {
+                    if (instance.Type == XrefType.Method && instance.TryResolve() != null)
+                    {
+                        try
+                        {
+                            if (declaringType == instance.TryResolve().DeclaringType) return true;
+                        }catch(Exception e) {MelonLogger.Warning(e);}
+                    }
+                }
+                catch { }
+            }
+            return false;
+        }
         
         //These things might change, just a bit tricky to identify the correct ones using reflection
         public static void SetFillAngle(this PedalGraphic pedalGraphic, float angle) => pedalGraphic.field_Public_Single_3 = angle;

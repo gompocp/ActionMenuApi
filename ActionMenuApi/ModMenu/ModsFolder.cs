@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using ActionMenuApi.Types;
-using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
@@ -86,6 +85,7 @@ namespace ActionMenuApi.ModMenu
             pageSeven = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/7.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             new ModsFolder("Mods", modsSectionIcon); 
+            Logger.Log("Created Mods instance successfully");
         }
         
         private static Texture2D GetPageIcon(int pageIndex)

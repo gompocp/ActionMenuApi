@@ -1,21 +1,37 @@
 ﻿using System;
-using System.Diagnostics;
 using ActionMenuApi.Managers;
 using ActionMenuApi.ModMenu;
 using ActionMenuApi.Pedals;
 using ActionMenuApi.Types;
 using MelonLoader;
-using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
-using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 // ReSharper disable HeuristicUnreachableCode
 
 namespace ActionMenuApi
 {
+    /// <summary>
+    /// API for adding pedals to the action menu
+    /// </summary>
     public static class AMAPI
     {
+        /// <summary>
+        /// Trigger a refresh for the action menu
+        /// </summary>
+        public static void RefreshActionMenu()
+        {
+            try
+            {
+                Utilities.RefreshAM();
+            }
+            catch(Exception e)
+            {
+                MelonLogger.Error($"Refresh failed (oops) {e}");
+            }
+        }
+        
+        
         /// <summary>
         /// Add a button pedal to a specific ActionMenu page
         /// </summary>
@@ -147,7 +163,7 @@ namespace ActionMenuApi
         /// <param name="icon">(optional) The Button Icon</param>
         /// <param name="topButtonText">(optional) Top Button Button text On Four Axis Puppet</param>
         /// <param name="rightButtonText">(optional) Right Button Button text On Four Axis Puppet</param>
-        /// <param name="bottomButtonText">(optional) Bottom Button Button text On Four Axis Puppet</param>
+        /// <param name="downButtonText">(optional) Bottom Button Button text On Four Axis Puppet</param>
         /// <param name="leftButtonText">(optional) Left Button Button text On Four Axis Puppet</param>
         /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
         public static PedalOption AddFourAxisPedalToSubMenu(string text, Action<Vector2> onUpdate,Texture2D icon = null, string topButtonText = "Up", 
@@ -308,8 +324,7 @@ namespace ActionMenuApi
                     else if (insertion == Insertion.Post) Patches.emojisPagePost.Add(customPedal);
                     return;
                 case ActionMenuPageType.Expression:
-                    MelonLogger.Warning("Adding to the Expression page hasn't been implemented yet. Please use a different page");
-                    return;
+
                     if (insertion == Insertion.Pre) Patches.expressionPagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.expressionPagePost.Add(customPedal);
                     return;
@@ -318,8 +333,6 @@ namespace ActionMenuApi
                     else if (insertion == Insertion.Post) Patches.mainPagePost.Add(customPedal);
                     return;
                 case ActionMenuPageType.MenuOpacity:
-                    MelonLogger.Warning("Adding to the MenuOpacity page hasn't been implemented yet. Please use a different page");
-                    return;
                     if (insertion == Insertion.Pre) Patches.menuOpacityPagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.menuOpacityPagePost.Add(customPedal);
                     return;
@@ -338,8 +351,6 @@ namespace ActionMenuApi
                     else if (insertion == Insertion.Post) Patches.nameplatesOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPageType.NameplatesSize:
-                    MelonLogger.Warning("Adding to the NameplatesSize page hasn't been implemented yet. Please use a different page");
-                    return;
                     if (insertion == Insertion.Pre) Patches.nameplatesSizePagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.nameplatesSizePagePost.Add(customPedal);
                     return;
