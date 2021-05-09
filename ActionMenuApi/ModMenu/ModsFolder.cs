@@ -84,6 +84,8 @@ namespace ActionMenuApi.ModMenu
             pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageSeven = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/7.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            locked = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/locked.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
+            locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             new ModsFolder("Mods", modsSectionIcon); 
             Logger.Log("Created Mods instance successfully");
         }
@@ -118,5 +120,6 @@ namespace ActionMenuApi.ModMenu
         private static Texture2D pageFive;
         private static Texture2D pageSix;
         private static Texture2D pageSeven;
+        public static Texture2D locked;
     }
 }

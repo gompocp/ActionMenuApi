@@ -6,6 +6,7 @@ using ActionMenuApi.Types;
 using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.UI;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 // ReSharper disable HeuristicUnreachableCode
 
@@ -17,7 +18,7 @@ namespace ActionMenuApi
     public static class AMAPI
     {
         /// <summary>
-        /// Trigger a refresh for the action menu
+        /// Trigger a refresh for the action menus. Will only run if they are open
         /// </summary>
         public static void RefreshActionMenu()
         {
@@ -27,6 +28,8 @@ namespace ActionMenuApi
             }
             catch(Exception e)
             {
+                //TODO: add a fail-safe to force a complete refresh
+                //This is semi-abusable if this fails so its probably a good idea to have a fail-safe
                 MelonLogger.Error($"Refresh failed (oops) {e}");
             }
         }
@@ -69,6 +72,34 @@ namespace ActionMenuApi
             pedalOption.SetIcon(icon); 
             pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
             return pedalOption;
+        }
+        
+        /// <summary>
+        /// Add a lockable button pedal to a custom submenu
+        /// </summary>
+        /// <param name="text">Button text</param>
+        /// <param name="triggerEvent">Button click action</param>
+        /// <param name="locked">The starting state for the lockable pedal, true = locked, false = unlocked</param>
+        /// <param name="icon">(optional) The Button Icon</param>
+        /// <returns> PedalOption Instance (Note: 1. can be null if both action menus are open 2. The gameobject that it is attached to is destroyed when you change page on the action menu)</returns>
+        public static PedalOption AddLockableButtonPedalToSubMenu(string text, Action triggerEvent, bool locked, Texture2D icon = null)
+        {
+            ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
+            PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
+            pedalOption.SetText(text); 
+            pedalOption.SetIcon(icon);
+            if (!locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
+            else
+            {
+                var imageOverlay = pedalOption.GetActionButton().gameObject.GetChild("Inner").GetChild("Folder Icon").Clone();
+                imageOverlay.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
+                imageOverlay.SetActive(true);
+                imageOverlay.GetComponent<RawImage>().texture = ModsFolder.locked;
+                imageOverlay.transform.localPosition = new Vector3(50, -25, 0);
+                imageOverlay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            }
+            return pedalOption; 
         }
         
         /// <summary>

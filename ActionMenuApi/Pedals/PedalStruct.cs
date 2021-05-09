@@ -5,10 +5,9 @@ namespace ActionMenuApi.Pedals
 {
     internal class PedalStruct
     {
-        public string text { get; set; }
-        public Texture2D icon { get; set; }
-        public System.Action triggerEvent { get; set; }
-        
-        public PedalType Type { get; set; }
+        public string text { get; protected set; }
+        public Texture2D icon { get; protected set; }
+        public System.Action triggerEvent { get; protected set; }
+        public PedalType Type { get; protected set; }
     }
 }
