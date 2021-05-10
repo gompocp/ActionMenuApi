@@ -9,6 +9,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace ActionMenuApi
 {
@@ -237,6 +238,16 @@ namespace ActionMenuApi
             );
             return (ActionButton)axisPuppetButtonLeftProperty.GetValue(axisPuppetMenu);
         }
+        
+        private static PropertyInfo pedalOptionPrefabProperty;
+        public static GameObject GetPedalOptionPrefab(this ActionMenu actionMenu) //Build 1093 menu.field_Public_GameObject_1
+        {
+            if (pedalOptionPrefabProperty != null) return (GameObject)pedalOptionPrefabProperty.GetValue(actionMenu);
+            pedalOptionPrefabProperty = typeof(ActionMenu).GetProperties(BindingFlags.Public | BindingFlags.Instance).Single( 
+                p => p.PropertyType == typeof(GameObject) && ((GameObject)p.GetValue(actionMenu)).name.Equals("PedalOption")
+            );
+            return (GameObject)pedalOptionPrefabProperty.GetValue(actionMenu);
+        }
 
         public static void SetAlpha(this PedalGraphic pedalGraphic, float amount)
         {
@@ -364,6 +375,25 @@ namespace ActionMenuApi
                 catch { }
             }
             return false;
+        }
+        
+        public static GameObject Clone(this GameObject gameObject)
+        {
+            return Object
+                .Instantiate(gameObject.transform, gameObject.transform.parent)
+                .gameObject;
+        }
+
+        public static GameObject GetChild(this GameObject gameObject, string childName)
+        {
+            //MelonLogger.Msg($"Gameobject: {gameObject.name},   Child Searching for: {childName}");
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                var child = gameObject.transform.GetChild(i).gameObject;
+                //MelonLogger.Msg("   "+child.name);
+                if (child.name.Equals(childName)) return child;
+            }
+            return null;
         }
         
         //These things might change, just a bit tricky to identify the correct ones using reflection

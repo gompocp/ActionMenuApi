@@ -1,5 +1,4 @@
 ﻿using ActionMenuApi.Managers;
-using ActionMenuApi.ModMenu;
 using MelonLoader;
 #pragma warning disable 1591
 [assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.1.2", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
@@ -12,13 +11,14 @@ namespace ActionMenuApi
         public override void OnApplicationStart()
         {
             Patches.PatchAll(Harmony);
-            ModsFolder.CreateInstance();
+            ResourcesManager.LoadTextures();
         }
 
         public override void VRChat_OnUiManagerInit()
         {
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
+            ResourcesManager.InitLockGameObject();
         }
 
         public override void OnUpdate()

@@ -14,11 +14,12 @@ namespace ActionMenuTestMod
     // Icons from https://uxwing.com/
     public class ActionMenuTestMod : MelonMod
     {
-#pragma warning disable 414
+
         private float testFloatValue = 50;
         private float testFloatValue2 = 50;
         private bool testBool = false;
         private bool testBool2 = false;
+        private bool riskyFunctionsAllowed = false;
         private Vector2 testVector = new Vector2();
         private Vector2 testVector2 = new Vector2();
         private static float x = 0;
@@ -29,7 +30,7 @@ namespace ActionMenuTestMod
         private static Texture2D radialIcon;
         private static Texture2D subMenuIcon;
         private static Texture2D buttonIcon;
-#pragma warning restore 414
+        
         public override void OnApplicationStart()
         {
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuTestMod.customicons"))
@@ -54,23 +55,37 @@ namespace ActionMenuTestMod
             AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Config, "Toggle", testBool, b => testBool = b);
             
             AMAPI.AddModFolder(
-                "Cube Stuff",
+                "Test Stuff",
                 delegate
                 {
-                    MelonLogger.Msg("Sub Menu Opened");
-                    AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
-                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
-                    AMAPI.AddRadialPedalToSubMenu("X",RotateCubeX, x,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
-                    AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
-                    AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
+                    
+                    AMAPI.AddTogglePedalToSubMenu("Risky Functions", !riskyFunctionsAllowed, (b) =>
+                    {
+                        riskyFunctionsAllowed = !b;
+                        AMAPI.RefreshActionMenu();
+                    });
+                    //No properties here are saved because I'm lazy af
+                    AMAPI.AddLockableTogglePedalToSubMenu("Enable Hax", false, b => { }, riskyFunctionsAllowed);
+                    AMAPI.AddLockableRadialPedalToSubMenu("Volume", f => { }, riskyFunctionsAllowed);
+                    AMAPI.AddLockableSubMenuToSubMenu("Whatever", () => { }, riskyFunctionsAllowed);
+                    AMAPI.AddLockableButtonPedalToSubMenu("Risky Function", () =>
+                    {
+                        MelonLogger.Msg("Locked Pedal Func ran");
+                    },riskyFunctionsAllowed, buttonIcon);
+                    AMAPI.AddLockableFourAxisPedalToSubMenu("Move", vector2 => { }, riskyFunctionsAllowed);
+                    //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
+                    //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
+                    //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
+                    //AMAPI.AddRadialPedalToSubMenu("X",RotateCubeX, x,radialIcon);
+                    //AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
+                    //AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
+                    //AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
+                    //AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
+                    //AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
                 },
                 subMenuIcon
             );
-            for (int i = 0; i < 20; i++) //Set to a high number if you want to test the page functionality 
+            for (int i = 0; i < 2; i++) //Set to a high number if you want to test the page functionality 
             {
                 AMAPI.AddModFolder($"Example Mod {i+2}", () => {}, subMenuIcon); 
             }
