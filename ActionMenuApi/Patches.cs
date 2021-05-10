@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using ActionMenuApi.ModMenu;
+using ActionMenuApi.Managers;
 using ActionMenuApi.Pedals;
 using Harmony;
 using MelonLoader;
@@ -113,7 +113,7 @@ namespace ActionMenuApi
 
         public static void OpenMainPagePost(ActionMenu __instance)
         {
-            if (ModsFolder.instance.mods.Count > 0) ModsFolder.instance.AddMainPageButton();
+            if (ModsFolderManager.mods.Count > 0) ModsFolderManager.AddMainPageButton();
             Utilities.AddPedalsInList(mainPagePost, __instance);
         }
 

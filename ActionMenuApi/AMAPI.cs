@@ -1,6 +1,5 @@
 ﻿using System;
 using ActionMenuApi.Managers;
-using ActionMenuApi.ModMenu;
 using ActionMenuApi.Pedals;
 using ActionMenuApi.Types;
 using MelonLoader;
@@ -90,15 +89,7 @@ namespace ActionMenuApi
             pedalOption.SetText(text); 
             pedalOption.SetIcon(icon);
             if (!locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
-            else
-            {
-                var imageOverlay = pedalOption.GetActionButton().gameObject.GetChild("Inner").GetChild("Folder Icon").Clone();
-                imageOverlay.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
-                imageOverlay.SetActive(true);
-                imageOverlay.GetComponent<RawImage>().texture = ModsFolder.locked;
-                imageOverlay.transform.localPosition = new Vector3(50, -25, 0);
-                imageOverlay.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            }
+            else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
             return pedalOption; 
         }
         
@@ -331,8 +322,7 @@ namespace ActionMenuApi
         /// <param name="icon">(optional) The Button Icon</param>
         public static void AddModFolder(string text, Action openFunc, Texture2D icon = null)
         {
-            if(ModsFolder.instance == null) ModsFolder.CreateInstance();
-            ModsFolder.instance.AddMod(() =>
+            ModsFolderManager.AddMod(() =>
             {
                 AMAPI.AddSubMenuToSubMenu(text, openFunc, icon, null);
             });

@@ -1,64 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using ActionMenuApi.Types;
+using ActionMenuApi.Managers;
+using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace ActionMenuApi.ModMenu
+namespace ActionMenuApi.Managers
 {
-    internal class ModsFolder
+    internal static class ResourcesManager
     {
-        public List<Action> mods = new ();
-        public List<List<Action>> splitMods;
-        public static ModsFolder instance;
-        private string text;
-        private Texture2D icon;
-        private Action openFunc;
-        public ModsFolder(string text, Texture2D icon = null)
+        public static void LoadTextures()
         {
-            this.text = text;
-            this.icon = icon;
-            instance = this;
-            openFunc = () => {
-                if (mods.Count <= Constants.MAX_PEDALS_PER_PAGE)
-                {
-                    foreach (var action in mods) action.Invoke();
-                }
-                else
-                {
-                    if(splitMods == null) splitMods = mods.Split((int)Constants.MAX_PEDALS_PER_PAGE);
-                    for (int i = 0; i < splitMods.Count && i < Constants.MAX_PEDALS_PER_PAGE; i++)
-                    {
-                        int index = i;
-                        AMAPI.AddSubMenuToSubMenu($"Page {i+1}", () =>
-                        {
-                            foreach (var action in splitMods[index]) action.Invoke();
-                        }, GetPageIcon(i+1));
-                    }
-                }
-            };
-        }
-
-        public void AddMod(Action openingAction)
-        {
-            mods.Add(openingAction);
-        }
-
-        /*public void RemoveMod(Action openingAction)
-        {
-            mods.Remove(openingAction);
-        }*/
-        
-        public void AddMainPageButton()
-        {
-            AMAPI.AddSubMenuToSubMenu(text, openFunc, icon);
-        }
-
-        public static void CreateInstance()
-        {
-            if (instance != null) return;
             AssetBundle iconsAssetBundle;
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi.actionmenuapi.icons"))
             using (var tempStream = new MemoryStream((int)stream.Length))
@@ -68,7 +21,7 @@ namespace ActionMenuApi.ModMenu
                 iconsAssetBundle = AssetBundle.LoadFromMemory_Internal(tempStream.ToArray(), 0);
                 iconsAssetBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             }
-            Texture2D modsSectionIcon = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/vrcmg.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
+            modsSectionIcon = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/vrcmg.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageOne = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/1.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
@@ -86,11 +39,18 @@ namespace ActionMenuApi.ModMenu
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             locked = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/locked.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            new ModsFolder("Mods", modsSectionIcon); 
-            Logger.Log("Created Mods instance successfully");
+            
         }
-        
-        private static Texture2D GetPageIcon(int pageIndex)
+
+        public static void InitLockGameObject()
+        {
+            lockPrefab = Object.Instantiate(ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().GetPedalOptionPrefab().GetComponent<PedalOption>().GetActionButton().gameObject.GetChild("Inner").GetChild("Folder Icon"));
+            Object.DontDestroyOnLoad(lockPrefab);
+            lockPrefab.active = false;
+            lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
+            lockPrefab.GetComponent<RawImage>().texture = locked;
+        }
+        public static Texture2D GetPageIcon(int pageIndex)
         {
             switch (pageIndex)
             {
@@ -112,7 +72,17 @@ namespace ActionMenuApi.ModMenu
                     return null;
             }
         }
-        
+
+        public static void AddLockChildIcon(GameObject parent)
+        {
+            var lockedGameObject = Object.Instantiate(lockPrefab, parent.transform, false);
+            lockedGameObject.SetActive(true);
+            lockedGameObject.transform.localPosition = new Vector3(50, -25, 0);
+            lockedGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+        public static Texture2D GetModsSectionIcon() => modsSectionIcon;
+
+        private static GameObject lockPrefab;
         private static Texture2D pageOne;
         private static Texture2D pageTwo;
         private static Texture2D pageThree;
@@ -120,6 +90,7 @@ namespace ActionMenuApi.ModMenu
         private static Texture2D pageFive;
         private static Texture2D pageSix;
         private static Texture2D pageSeven;
-        public static Texture2D locked;
+        private static Texture2D locked;
+        private static Texture2D modsSectionIcon;
     }
 }

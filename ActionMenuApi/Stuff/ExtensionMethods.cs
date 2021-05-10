@@ -238,6 +238,16 @@ namespace ActionMenuApi
             );
             return (ActionButton)axisPuppetButtonLeftProperty.GetValue(axisPuppetMenu);
         }
+        
+        private static PropertyInfo pedalOptionPrefabProperty;
+        public static GameObject GetPedalOptionPrefab(this ActionMenu actionMenu) //Build 1093 menu.field_Public_GameObject_1
+        {
+            if (pedalOptionPrefabProperty != null) return (GameObject)pedalOptionPrefabProperty.GetValue(actionMenu);
+            pedalOptionPrefabProperty = typeof(ActionMenu).GetProperties(BindingFlags.Public | BindingFlags.Instance).Single( 
+                p => p.PropertyType == typeof(GameObject) && ((GameObject)p.GetValue(actionMenu)).name.Equals("PedalOption")
+            );
+            return (GameObject)pedalOptionPrefabProperty.GetValue(actionMenu);
+        }
 
         public static void SetAlpha(this PedalGraphic pedalGraphic, float amount)
         {

@@ -58,18 +58,15 @@ namespace ActionMenuTestMod
                 "Test Stuff",
                 delegate
                 {
-                    MelonLogger.Msg("Sub Menu Opened");
                     AMAPI.AddLockableButtonPedalToSubMenu("Risky Functions", () =>
                     {
                         MelonLogger.Msg("Locked Pedal Func ran");
                     },riskyFunctionsAllowed, buttonIcon);
                     AMAPI.AddTogglePedalToSubMenu("Risky Functions", !riskyFunctionsAllowed, (b) =>
                     {
-                        MelonLogger.Msg(b);
                         riskyFunctionsAllowed = !b;
                         AMAPI.RefreshActionMenu();
                     });
-                 
                     //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
                     //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
                     //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
@@ -82,7 +79,7 @@ namespace ActionMenuTestMod
                 },
                 subMenuIcon
             );
-            for (int i = 0; i < 20; i++) //Set to a high number if you want to test the page functionality 
+            for (int i = 0; i < 2; i++) //Set to a high number if you want to test the page functionality 
             {
                 AMAPI.AddModFolder($"Example Mod {i+2}", () => {}, subMenuIcon); 
             }

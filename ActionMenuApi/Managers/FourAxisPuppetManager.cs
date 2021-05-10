@@ -32,7 +32,7 @@ namespace ActionMenuApi.Managers
                 {
                     if (hand == ActionMenuHand.Right)
                     {
-                        if (Input.GetAxis(InputAxes.RightTrigger) >= 0.4)
+                        if (Input.GetAxis(InputAxes.RightTrigger) >= 0.4f)
                         {
                             CloseFourAxisMenu(); 
                             return;
@@ -40,7 +40,7 @@ namespace ActionMenuApi.Managers
                     }
                     else if (hand == ActionMenuHand.Left)
                     {
-                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4)
+                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4f)
                         {
                             CloseFourAxisMenu();
                             return;
