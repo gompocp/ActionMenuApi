@@ -58,24 +58,30 @@ namespace ActionMenuTestMod
                 "Test Stuff",
                 delegate
                 {
-                    AMAPI.AddLockableButtonPedalToSubMenu("Risky Functions", () =>
-                    {
-                        MelonLogger.Msg("Locked Pedal Func ran");
-                    },riskyFunctionsAllowed, buttonIcon);
+                    
                     AMAPI.AddTogglePedalToSubMenu("Risky Functions", !riskyFunctionsAllowed, (b) =>
                     {
                         riskyFunctionsAllowed = !b;
                         AMAPI.RefreshActionMenu();
                     });
+                    //No properties here are saved because I'm lazy af
+                    AMAPI.AddLockableTogglePedalToSubMenu("Enable Hax", false, b => { }, riskyFunctionsAllowed);
+                    AMAPI.AddLockableRadialPedalToSubMenu("Volume", f => { }, riskyFunctionsAllowed);
+                    AMAPI.AddLockableSubMenuToSubMenu("Whatever", () => { }, riskyFunctionsAllowed);
+                    AMAPI.AddLockableButtonPedalToSubMenu("Risky Function", () =>
+                    {
+                        MelonLogger.Msg("Locked Pedal Func ran");
+                    },riskyFunctionsAllowed, buttonIcon);
+                    AMAPI.AddLockableFourAxisPedalToSubMenu("Move", vector2 => { }, riskyFunctionsAllowed);
                     //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
                     //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
                     //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
                     //AMAPI.AddRadialPedalToSubMenu("X",RotateCubeX, x,radialIcon);
                     //AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
-                    AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
-                    AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
-                    AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
-                    AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
+                    //AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
+                    //AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
+                    //AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
+                    //AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
                 },
                 subMenuIcon
             );
