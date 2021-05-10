@@ -90,6 +90,7 @@ namespace ActionMenuApi.Managers
 
         public static void CloseRadialMenu()
         {
+            if (current == null) return;
             CallUpdateAction();
             current.gameObject.SetActive(false);
             current = null;

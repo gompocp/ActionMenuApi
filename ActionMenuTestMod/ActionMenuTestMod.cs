@@ -58,7 +58,6 @@ namespace ActionMenuTestMod
                 "Test Stuff",
                 delegate
                 {
-                    
                     AMAPI.AddTogglePedalToSubMenu("Risky Functions", !riskyFunctionsAllowed, (b) =>
                     {
                         riskyFunctionsAllowed = !b;
@@ -73,15 +72,22 @@ namespace ActionMenuTestMod
                         MelonLogger.Msg("Locked Pedal Func ran");
                     },riskyFunctionsAllowed, buttonIcon);
                     AMAPI.AddLockableFourAxisPedalToSubMenu("Move", vector2 => { }, riskyFunctionsAllowed);
-                    //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
-                    //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
-                    //AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
-                    //AMAPI.AddRadialPedalToSubMenu("X",RotateCubeX, x,radialIcon);
-                    //AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
-                    //AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
-                    //AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
-                    //AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
-                    //AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
+                },
+                subMenuIcon
+            );
+            AMAPI.AddModFolder(
+                "Cube Stuff",
+                delegate
+                {
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
+                    AMAPI.AddFourAxisPedalToSubMenu("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
+                    AMAPI.AddRadialPedalToSubMenu("X",RotateCubeX, x,radialIcon); //Rotation a bit borked
+                    AMAPI.AddTogglePedalToSubMenu("Test Toggle", testBool2, (b) => testBool2 = b);
+                    AMAPI.AddRadialPedalToSubMenu("Y",RotateCubeY, y,radialIcon);
+                    AMAPI.AddRadialPedalToSubMenu("Z",RotateCubeZ, z,radialIcon);
+                    AMAPI.AddButtonPedalToSubMenu("Spawn Cube", CreateCube, buttonIcon);
+                    AMAPI.AddButtonPedalToSubMenu("Tp Cube To Player",() => controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
                 },
                 subMenuIcon
             );

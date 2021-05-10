@@ -27,9 +27,9 @@ namespace ActionMenuApi
             }
             catch(Exception e)
             {
-                //TODO: add a fail-safe to force a complete refresh
-                //This is semi-abusable if this fails so its probably a good idea to have a fail-safe
                 MelonLogger.Error($"Refresh failed (oops) {e}");
+                //This is semi-abusable if this fails so its probably a good idea to have a fail-safe to protect sensitive functions that are meant to be locked
+                Utilities.ResetMenu(); //aka clearing the page stack
             }
         }
         
@@ -43,6 +43,28 @@ namespace ActionMenuApi
         /// <param name="icon">(optional) The Button Icon</param>
         /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
         public static void AddButtonPedalToMenu(ActionMenuPageType pageType, string text, Action triggerEvent, Texture2D icon = null, Insertion insertion = Insertion.Post)
+        {
+            AddPedalToList(
+                pageType, 
+                new PedalButton(
+                    text,
+                    icon, 
+                    triggerEvent
+                ),
+                insertion
+            );
+        }
+
+        /// <summary>
+        /// Add a button pedal to a specific ActionMenu page
+        /// </summary>
+        /// <param name="pageType">The page to add the button to</param>
+        /// <param name="text">Button text</param>
+        /// <param name="triggerEvent">Button click action</param>
+        /// <param name="locked">The starting state for the lockable pedal, true = locked, false = unlocked</param>
+        /// <param name="icon">(optional) The Button Icon</param>
+        /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
+        public static void AddLockableButtonPedalToMenu(ActionMenuPageType pageType, string text, Action triggerEvent, bool locked = false, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
                 pageType, 
@@ -166,10 +188,10 @@ namespace ActionMenuApi
         /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
         /// <param name="topButtonText">(optional) Top Button Button text On Four Axis Puppet</param>
         /// <param name="rightButtonText">(optional) Right Button Button text On Four Axis Puppet</param>
-        /// <param name="bottomButtonText">(optional) Bottom Button Button text On Four Axis Puppet</param>
+        /// <param name="downButtonText">(optional) Bottom Button Button text On Four Axis Puppet</param>
         /// <param name="leftButtonText">(optional) Left Button Button text On Four Axis Puppet</param>
         public static void AddFourAxisPedalToMenu(ActionMenuPageType pageType, string text, Action<Vector2> onUpdate,Texture2D icon = null, Insertion insertion = Insertion.Post, string topButtonText = "Up", 
-            string rightButtonText = "Right", string bottomButtonText = "Down", string leftButtonText = "Left")
+            string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
         {
             AddPedalToList(
                 pageType, 
@@ -179,7 +201,7 @@ namespace ActionMenuApi
                     onUpdate,
                     topButtonText,
                     rightButtonText,
-                    bottomButtonText,
+                    downButtonText,
                     leftButtonText
                 ),
                 insertion

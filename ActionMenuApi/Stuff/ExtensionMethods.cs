@@ -282,6 +282,58 @@ namespace ActionMenuApi
             radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (float)(180 - eulerAngle));
         }
         
+                private static ClosePuppetMenusDelegate GetClosePuppetMenusDelegate
+        {
+            get
+            {
+                //Build 1088 menu.Method_Public_Void_Boolean_2()
+                if (closePuppetMenusDelegate != null) return closePuppetMenusDelegate;
+                MethodInfo closePuppetMenusMethod = typeof(ActionMenu).GetMethods().Single(
+                    m => m.Name.StartsWith("Method_Public_Void_Boolean_")
+                         && m.GetParameters().Length == 1
+                         && m.GetParameters()[0].IsOptional
+                         && !m.Name.Contains("PDM")
+                );
+                closePuppetMenusDelegate = (ClosePuppetMenusDelegate)Delegate.CreateDelegate(
+                    typeof(ClosePuppetMenusDelegate),
+                    null,
+                    closePuppetMenusMethod);
+                return closePuppetMenusDelegate;
+            }
+        }
+        public static void ClosePuppetMenus(this ActionMenu actionMenu, bool canResetValue)
+        {
+            GetClosePuppetMenusDelegate(actionMenu, canResetValue);
+        }
+        private static ClosePuppetMenusDelegate closePuppetMenusDelegate;
+        private delegate void ClosePuppetMenusDelegate(ActionMenu actionMenu, bool canResetValue);
+        
+        private static DestroyPageDelegate GetDestroyPageDelegate
+        {
+            get
+            {
+                //Build 1088 menu.Method_Private_Void_ObjectNPublicAcTeAcStGaUnique_0()
+                if (destroyPageDelegate != null) return destroyPageDelegate;
+                MethodInfo destroyPageMethod = typeof(ActionMenu).GetMethods().Single(
+                    m =>
+                        m.Name.StartsWith("Method_Private_Void_ObjectNPublicAcTeAcStGaUnique_")
+                        && m.GetParameters().Length == 1
+                        && !m.Name.Contains("PDM")
+                );
+                destroyPageDelegate = (DestroyPageDelegate)Delegate.CreateDelegate(
+                    typeof(DestroyPageDelegate),
+                    null,
+                    destroyPageMethod);
+                return destroyPageDelegate;
+            }
+        }
+        public static void DestroyPage(this ActionMenu actionMenu, ActionMenuPage page)
+        {
+            GetDestroyPageDelegate(actionMenu, page);
+        }
+        private static DestroyPageDelegate destroyPageDelegate;
+        private delegate void DestroyPageDelegate(ActionMenu actionMenu, ActionMenuPage page);
+        
         public static List<List<Action>> Split(this List<Action> mods, int chunkSize)  
         {        
             var list = new List<List<Action>>();

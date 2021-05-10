@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ActionMenuApi.Managers;
 using ActionMenuApi.Pedals;
 using ActionMenuApi.Types;
 using Harmony;
@@ -9,6 +10,7 @@ using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
+using VRC.UI;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
 
@@ -240,7 +242,7 @@ namespace ActionMenuApi
                 return refreshAMDelegate;
             }
         }
-
+        
         public static void RefreshAM()
         {
             if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
@@ -255,5 +257,23 @@ namespace ActionMenuApi
         }
         private static RefreshAMDelegate refreshAMDelegate;
         private delegate void RefreshAMDelegate(ActionMenu actionMenu);
+        
+        private static void ResetActionMenu(ActionMenu actionMenu)
+        {
+            RadialPuppetManager.CloseRadialMenu();
+            FourAxisPuppetManager.CloseFourAxisMenu();
+            actionMenu.ClosePuppetMenus(true);
+            foreach (var page in actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0)
+                actionMenu.DestroyPage(page);
+            actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0?.Clear();
+            actionMenu.field_Public_List_1_ObjectNPublicPaSiAcObUnique_0?.Clear();
+        }
+        public static void ResetMenu()
+        {
+            var leftOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
+            if (leftOpener.isOpen()) ResetActionMenu(leftOpener.GetActionMenu()); 
+            var rightOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
+            if(rightOpener.isOpen()) ResetActionMenu(rightOpener.GetActionMenu());
+        }
     }
 }

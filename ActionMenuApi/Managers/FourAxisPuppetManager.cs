@@ -112,6 +112,7 @@ namespace ActionMenuApi.Managers
 
         public static void CloseFourAxisMenu()
         {
+            if (current == null) return;
             CallUpdateAction();
             current.gameObject.SetActive(false);
             current = null;
