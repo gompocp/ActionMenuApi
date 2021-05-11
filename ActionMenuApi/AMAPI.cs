@@ -27,9 +27,9 @@ namespace ActionMenuApi
             }
             catch(Exception e)
             {
-                MelonLogger.Error($"Refresh failed (oops) {e}");
+                MelonLogger.Warning($"Refresh failed (oops). This may or may not be an oof if another exception immediately follows after this exception: {e}");
                 //This is semi-abusable if this fails so its probably a good idea to have a fail-safe to protect sensitive functions that are meant to be locked
-                Utilities.ResetMenu(); //aka clearing the page stack
+                Utilities.ResetMenu();
             }
         }
         
@@ -395,7 +395,7 @@ namespace ActionMenuApi
         }
 
         /// <summary>
-        /// Add a mod a dedicated section of the action menu with other mods
+        /// Add a mod to a dedicated section of the action menu with other mods
         /// </summary>
         /// <param name="text">Button text</param>
         /// <param name="openFunc">Function called when your mod page is opened. Add your methods calls to other AMAPI methods such AddRadialPedalToSubMenu to add buttons to the submenu it creates when clicked</param>

@@ -282,7 +282,7 @@ namespace ActionMenuApi
             radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (float)(180 - eulerAngle));
         }
         
-                private static ClosePuppetMenusDelegate GetClosePuppetMenusDelegate
+        private static ClosePuppetMenusDelegate GetClosePuppetMenusDelegate
         {
             get
             {
