@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    internal sealed class PedalFourAxis : PedalStruct
+    public sealed class PedalFourAxis : PedalStruct
     {
         public PedalOption pedal { get; set; }
         
         public PedalFourAxis(string text, Texture2D icon, Action<Vector2> onUpdate, string topButtonText, 
-            string rightButtonText, string downButtonText, string leftButtonText)
+            string rightButtonText, string downButtonText, string leftButtonText, bool locked = false)
         {
             this.text = text;
             this.icon = icon;
@@ -22,6 +22,7 @@ namespace ActionMenuApi.Pedals
                 FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
             };
             this.Type = PedalType.FourAxisPuppet;
+            this.locked = locked;
         }
         
     }

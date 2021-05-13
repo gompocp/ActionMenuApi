@@ -32,7 +32,7 @@ namespace ActionMenuApi.Managers
                 {
                     if (hand == ActionMenuHand.Right)
                     {
-                        if (Input.GetAxis(InputAxes.RightTrigger) >= 0.4f)
+                        if (Input.GetAxis(Constants.RIGHT_TRIGGER) >= 0.4f)
                         { 
                             CloseRadialMenu();
                             return;
@@ -40,7 +40,7 @@ namespace ActionMenuApi.Managers
                     }
                     else if (hand == ActionMenuHand.Left)
                     {
-                        if (Input.GetAxis(InputAxes.LeftTrigger) >= 0.4f) 
+                        if (Input.GetAxis(Constants.LEFT_TRIGGER) >= 0.4f) 
                         {
                             CloseRadialMenu();
                             return;

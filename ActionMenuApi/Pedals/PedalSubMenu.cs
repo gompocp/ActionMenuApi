@@ -4,14 +4,13 @@ using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    internal sealed class PedalSubMenu : PedalStruct
+    public sealed class PedalSubMenu : PedalStruct
     {
 
         public Action openFunc { get; set; }
         public Action closeFunc { get; set; }
         
-        public PedalSubMenu(Action openFunc, string text = null,
-            Texture2D icon = null, Action closeFunc = null)
+        public PedalSubMenu(Action openFunc, string text = null, Texture2D icon = null, Action closeFunc = null, bool locked = false)
         {
             this.text = text;
             this.icon = icon;
@@ -23,6 +22,7 @@ namespace ActionMenuApi.Pedals
                 Utilities.GetActionMenuOpener().GetActionMenu().PushPage(openFunc, closeFunc, icon, text);
             };
             this.Type = PedalType.SubMenu;
+            this.locked = locked;
         }
     }
 }

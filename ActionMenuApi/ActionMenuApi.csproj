@@ -8,5 +8,9 @@
     </PropertyGroup>
     <ItemGroup>
       <EmbeddedResource Include="actionmenuapi.icons" />
+      <None Remove="Stuff\_dummy_.dll" />
+      <EmbeddedResource Include="Stuff\_dummy_.dll" />
+      <None Remove="Stuff\_dummy2_.dll" />
+      <EmbeddedResource Include="Stuff\_dummy2_.dll" />
     </ItemGroup>
 </Project>

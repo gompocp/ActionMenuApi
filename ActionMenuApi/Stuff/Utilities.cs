@@ -117,15 +117,14 @@ namespace ActionMenuApi
         public static Vector2 GetCursorPosLeft()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
-                return new Vector2(Input.GetAxis(InputAxes.LeftHorizontal), Input.GetAxis(InputAxes.LeftVertical)) * 16;
+                return new Vector2(Input.GetAxis(Constants.LEFT_HORIZONTAL), Input.GetAxis(Constants.LEFT_VERTICAL)) * 16;
             return ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener().GetActionMenu().GetCursorPos();
         }
 
         public static Vector2 GetCursorPosRight()
         {
             if (UnityEngine.XR.XRDevice.isPresent)
-                return new Vector2(Input.GetAxis(InputAxes.RightHorizontal), Input.GetAxis(InputAxes.RightVertical)) *
-                       16;
+                return new Vector2(Input.GetAxis(Constants.RIGHT_HORIZONTAL), Input.GetAxis(Constants.RIGHT_VERTICAL)) * 16;
             return ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu().GetCursorPos();
         }
 
@@ -258,22 +257,12 @@ namespace ActionMenuApi
         private static RefreshAMDelegate refreshAMDelegate;
         private delegate void RefreshAMDelegate(ActionMenu actionMenu);
         
-        private static void ResetActionMenu(ActionMenu actionMenu)
-        {
-            RadialPuppetManager.CloseRadialMenu();
-            FourAxisPuppetManager.CloseFourAxisMenu();
-            actionMenu.ClosePuppetMenus(true);
-            foreach (var page in actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0)
-                actionMenu.DestroyPage(page);
-            actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0?.Clear();
-            actionMenu.field_Public_List_1_ObjectNPublicPaSiAcObUnique_0?.Clear();
-        }
         public static void ResetMenu()
         {
             var leftOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
-            if (leftOpener.isOpen()) ResetActionMenu(leftOpener.GetActionMenu()); 
+            if (leftOpener.isOpen()) leftOpener.GetActionMenu().ResetMenu(); 
             var rightOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
-            if(rightOpener.isOpen()) ResetActionMenu(rightOpener.GetActionMenu());
+            if(rightOpener.isOpen()) rightOpener.GetActionMenu().ResetMenu();
         }
     }
 }

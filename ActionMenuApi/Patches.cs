@@ -7,7 +7,6 @@ using ActionMenuApi.Managers;
 using ActionMenuApi.Pedals;
 using Harmony;
 using MelonLoader;
-using UnityEngine;
 
 namespace ActionMenuApi
 {
@@ -48,22 +47,29 @@ namespace ActionMenuApi
         private static readonly List<string> openExpressionMenuKeyWords = new(new[] {"Reset Avatar"});
         private static readonly List<string> openOptionsPageKeyWords = new(new[] {"Config"});
         private static readonly List<string> openSDK2ExpressionPageKeyWords = new(new[] {"EMOTE{0}"});
+
         private static readonly List<string> openNameplatesOpacityPageKeyWords =
             new(new[] {"100%", "80%", "60%", "40%", "20%", "0%"});
+
         private static readonly List<string> openNameplatesPageKeyWords = new(new[] {"Visibility", "Size", "Opacity"});
+
         private static readonly List<string> openNameplatesVisibilityPageKeyWords =
             new(new[] {"Nameplates Shown", "Icons Only", "Nameplates Hidden"});
+
         private static readonly List<string> openNameplatesSizePageKeyWords =
             new(new[] {"Large", "Medium", "Normal", "Small", "Tiny"});
+
         private static readonly List<string> openMenuSizePageKeyWords =
-                new(new[] {"XXXXXXXXX"}); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
-        
+            new(new[]
+            {
+                "XXXXXXXXX"
+            }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
+
         private static HarmonyInstance Harmony;
 
         public static void PatchAll(HarmonyInstance harmonyInstance)
         {
             Harmony = harmonyInstance;
-            
             PatchMethod(openMenuOpacityPageKeyWords, "OpenMenuOpacityPagePre", "OpenMenuOpacityPagePost");
             PatchMethod(openExpressionMenuKeyWords, "OpenExpressionMenuPre", "OpenExpressionMenuPost");
             PatchMethod(openConfigPageKeyWords, "OpenConfigPagePre", "OpenConfigPagePost");
@@ -71,7 +77,8 @@ namespace ActionMenuApi
             PatchMethod(openEmojisPageKeyWords, "OpenEmojisPagePre", "OpenEmojisPagePost");
             PatchMethod(openNameplatesOpacityPageKeyWords, "OpenNameplatesOpacityPre", "OpenNameplatesOpacityPost");
             PatchMethod(openNameplatesPageKeyWords, "OpenNameplatesPagePre", "OpenNameplatesPagePost");
-            PatchMethod(openNameplatesVisibilityPageKeyWords, "OpenNameplatesVisibilityPre", "OpenNameplatesVisibilityPost");
+            PatchMethod(openNameplatesVisibilityPageKeyWords, "OpenNameplatesVisibilityPre",
+                "OpenNameplatesVisibilityPost");
             PatchMethod(openSDK2ExpressionPageKeyWords, "OpenSDK2ExpressionPre", "OpenSDK2ExpressionPost");
             PatchMethod(openOptionsPageKeyWords, "OpenOptionsPre", "OpenOptionsPost");
 
@@ -79,8 +86,8 @@ namespace ActionMenuApi
             harmonyInstance.Patch(
                 typeof(ActionMenu).GetMethods().Single(
                     m => Utilities.checkXref(m, openNameplatesSizePageKeyWords)
-                    && m.CheckStringsCount(5)
-                ), 
+                         && m.CheckStringsCount(5)
+                ),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePost"))
             );
