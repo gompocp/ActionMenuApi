@@ -93,6 +93,7 @@ namespace ActionMenuApi.Api
         
         internal static void AddPedalToList(ActionMenuPage pageType, PedalStruct customPedal, Insertion insertion)
         {
+            Logger.Log($"Adding: {pageType.ToString()}, Text: {customPedal.text}, Locked: {customPedal.locked}");
             switch (pageType)
             {
                 case ActionMenuPage.SDK2Expression:

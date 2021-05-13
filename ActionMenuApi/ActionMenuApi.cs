@@ -27,7 +27,7 @@ namespace ActionMenuApi
             FourAxisPuppetManager.OnUpdate();
         }
 
-        ActionMenuApi()
+        public ActionMenuApi()
         {
             LoaderCheck.CheckForRainbows();
         }

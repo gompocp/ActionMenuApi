@@ -14,7 +14,7 @@ namespace ActionMenuApi
         {
             try
             {
-                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi._dummy_.dll");
+                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi.Stuff._dummy_.dll");
                 using var memStream = new MemoryStream((int) stream.Length);
                 stream.CopyTo(memStream);
 
@@ -30,7 +30,7 @@ namespace ActionMenuApi
             
             try
             {
-                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi._dummy2_.dll");
+                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi.Stuff._dummy2_.dll");
                 using var memStream = new MemoryStream((int) stream.Length);
                 stream.CopyTo(memStream);
 
