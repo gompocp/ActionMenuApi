@@ -39,7 +39,7 @@ namespace ActionMenuApi.Managers
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             locked = iconsAssetBundle.LoadAsset_Internal("Assets/ActionMenuApi/locked.png", Il2CppType.Of<Texture2D>()).Cast<Texture2D>();
             locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            
+            MelonLogger.Msg("Loaded textures");
         }
 
         public static void InitLockGameObject()
@@ -49,6 +49,7 @@ namespace ActionMenuApi.Managers
             lockPrefab.active = false;
             lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
             lockPrefab.GetComponent<RawImage>().texture = locked;
+            MelonLogger.Msg("Created lock gameobject");
         }
         public static Texture2D GetPageIcon(int pageIndex)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ActionMenuApi.Managers;
 using MelonLoader;
 using TMPro;
 using UnhollowerBaseLib;
@@ -333,6 +334,17 @@ namespace ActionMenuApi
         }
         private static DestroyPageDelegate destroyPageDelegate;
         private delegate void DestroyPageDelegate(ActionMenu actionMenu, ActionMenuPage page);
+        
+        public static void ResetMenu(this ActionMenu actionMenu)
+        {
+            RadialPuppetManager.CloseRadialMenu();
+            FourAxisPuppetManager.CloseFourAxisMenu();
+            actionMenu.ClosePuppetMenus(true);
+            foreach (var page in actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0)
+                actionMenu.DestroyPage(page);
+            actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0?.Clear();
+            actionMenu.field_Public_List_1_ObjectNPublicPaSiAcObUnique_0?.Clear();
+        }
         
         public static List<List<Action>> Split(this List<Action> mods, int chunkSize)  
         {        

@@ -6,12 +6,12 @@ using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUniq
 
 namespace ActionMenuApi.Pedals
 {
-    internal sealed class PedalRadial : PedalStruct
+    public sealed class PedalRadial : PedalStruct
     {
         public float currentValue;
         public PedalOption pedal { get; set; }
-        
-        public PedalRadial(string text, float startingValue, Texture2D icon, Action<float> onUpdate)
+
+        public PedalRadial(string text, float startingValue, Texture2D icon, Action<float> onUpdate, bool locked = false)
         {
             this.text = text;
             this.currentValue = startingValue;
@@ -25,6 +25,7 @@ namespace ActionMenuApi.Pedals
                 RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedal);
             };
             this.Type = PedalType.RadialPuppet;
+            this.locked = locked;
         }
     }
 }

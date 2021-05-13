@@ -42,39 +42,11 @@ namespace ActionMenuApi
         /// <param name="triggerEvent">Button click action</param>
         /// <param name="icon">(optional) The Button Icon</param>
         /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
+        [Obsolete("Use AddSubMenuToMenu(pageType, text, openFunc, icon, locked, closeFunc, insertion) instead, you can leave the locked parameter = false", false)]
         public static void AddButtonPedalToMenu(ActionMenuPageType pageType, string text, Action triggerEvent, Texture2D icon = null, Insertion insertion = Insertion.Post)
         {
-            AddPedalToList(
-                pageType, 
-                new PedalButton(
-                    text,
-                    icon, 
-                    triggerEvent
-                ),
-                insertion
-            );
-        }
-
-        /// <summary>
-        /// Add a button pedal to a specific ActionMenu page
-        /// </summary>
-        /// <param name="pageType">The page to add the button to</param>
-        /// <param name="text">Button text</param>
-        /// <param name="triggerEvent">Button click action</param>
-        /// <param name="locked">The starting state for the lockable pedal, true = locked, false = unlocked</param>
-        /// <param name="icon">(optional) The Button Icon</param>
-        /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
-        public static void AddLockableButtonPedalToMenu(ActionMenuPageType pageType, string text, Action triggerEvent, bool locked = false, Texture2D icon = null, Insertion insertion = Insertion.Post)
-        {
-            AddPedalToList(
-                pageType, 
-                new PedalButton(
-                    text,
-                    icon, 
-                    triggerEvent
-                ),
-                insertion
-            );
+            var pedal = new PedalButton(text, icon, triggerEvent);
+            AddPedalToList(pageType, pedal, insertion);
         }
         
         /// <summary>
@@ -86,7 +58,7 @@ namespace ActionMenuApi
         /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
         public static PedalOption AddButtonPedalToSubMenu(string text, Action triggerEvent, Texture2D icon = null)
         {
-            return AMAPI.AddLockableButtonPedalToSubMenu(text, triggerEvent, false, icon);
+            return AMAPI.AddButtonPedalToCustomMenu(text, triggerEvent, false, icon);
         }
         
         /// <summary>
@@ -97,7 +69,7 @@ namespace ActionMenuApi
         /// <param name="locked">The starting state for the lockable pedal, true = locked, false = unlocked</param>
         /// <param name="icon">(optional) The Button Icon</param>
         /// <returns> PedalOption Instance (Note: 1. can be null if both action menus are open 2. The gameobject that it is attached to is destroyed when you change page on the action menu)</returns>
-        public static PedalOption AddLockableButtonPedalToSubMenu(string text, Action triggerEvent, bool locked, Texture2D icon = null)
+        public static PedalOption AddButtonPedalToCustomMenu(string text, Action triggerEvent, bool locked, Texture2D icon = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -269,8 +241,7 @@ namespace ActionMenuApi
         /// <param name="icon">(optional) The Button Icon</param>
         /// <param name="closeFunc">(optional) Function called when page closes</param>
         /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
-        public static void AddSubMenuToMenu(ActionMenuPageType pageType, string text, Action openFunc,
-            Texture2D icon = null, Action closeFunc = null, Insertion insertion = Insertion.Post)
+        public static void AddSubMenuToMenu(ActionMenuPageType pageType, string text, Action openFunc, Texture2D icon = null, Action closeFunc = null, Insertion insertion = Insertion.Post)
         {
             AddPedalToList(
                 pageType, 
@@ -284,6 +255,7 @@ namespace ActionMenuApi
             );
         }
         
+   
         /// <summary>
         /// Add a submenu button pedal to a custom submenu
         /// </summary>
@@ -465,5 +437,22 @@ namespace ActionMenuApi
                     return;
             }
         }
+        
+        /// <summary>
+        /// Add a submenu to an ActionMenu page
+        /// </summary>
+        /// <param name="pageType">The page to add the button to</param>
+        /// <param name="text">Button text</param>
+        /// <param name="openFunc">Function called when page opened. Add your methods calls to other AMAPI methods such AddRadialPedalToSubMenu to add buttons to the submenu it creates when clicked</param>
+        /// <param name="icon">(optional) The Button Icon</param>
+        /// <param name="closeFunc">(optional) Function called when page closes</param>
+        /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
+        public static PedalSubMenu AddSubMenuToMenu(ActionMenuPageType pageType, string text, Action openFunc, Texture2D icon = null, bool locked = false, Action closeFunc = null, Insertion insertion = Insertion.Post)
+        {
+            var pedal = new PedalSubMenu(openFunc, text, icon, closeFunc, locked);
+            AddPedalToList(pageType, pedal, insertion);
+            return pedal;
+        }
+        
     }
 }

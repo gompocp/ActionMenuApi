@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace ActionMenuApi.Pedals
 {
-    internal sealed class PedalToggle : PedalStruct
+    public sealed class PedalToggle : PedalStruct
     {
         public bool toggled { get; set; }
         
         public PedalOption pedal { get; set; }
-        public PedalToggle(string text, System.Action<bool> onToggle, bool toggled, Texture2D icon = null)
+        public PedalToggle(string text, System.Action<bool> onToggle, bool toggled, Texture2D icon = null, bool locked = false)
         {
             this.text = text;
             this.toggled = toggled;
@@ -24,6 +24,7 @@ namespace ActionMenuApi.Pedals
                 onToggle.Invoke(toggled);
             };
             this.Type = PedalType.Toggle;
+            this.locked = locked;
         }
     }
 }
