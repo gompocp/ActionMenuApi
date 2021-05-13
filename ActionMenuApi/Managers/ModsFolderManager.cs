@@ -1,5 +1,7 @@
 using System;
+using ActionMenuApi;
 using System.Collections.Generic;
+using ActionMenuApi.Api;
 
 namespace ActionMenuApi.Managers
 {
@@ -19,10 +21,10 @@ namespace ActionMenuApi.Managers
                 for (int i = 0; i < splitMods.Count && i < Constants.MAX_PEDALS_PER_PAGE; i++)
                 {
                     int index = i;
-                    AMAPI.AddSubMenuToSubMenu($"Page {i+1}", () =>
+                    CustomSubMenu.AddSubMenu($"Page {i+1}", () =>
                     {
                         foreach (var action in splitMods[index]) action.Invoke();
-                    }, ResourcesManager.GetPageIcon(i+1));
+                    }, false, ResourcesManager.GetPageIcon(i+1));
                 }
             }
         };
@@ -39,7 +41,7 @@ namespace ActionMenuApi.Managers
         
         public static void AddMainPageButton()
         {
-            AMAPI.AddSubMenuToSubMenu(Constants.MODS_FOLDER_NAME, openFunc, ResourcesManager.GetModsSectionIcon());
+            CustomSubMenu.AddSubMenu(Constants.MODS_FOLDER_NAME, openFunc, false, ResourcesManager.GetModsSectionIcon());
         }
     }
 }

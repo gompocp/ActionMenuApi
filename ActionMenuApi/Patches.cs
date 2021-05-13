@@ -70,7 +70,6 @@ namespace ActionMenuApi
         public static void PatchAll(HarmonyInstance harmonyInstance)
         {
             Harmony = harmonyInstance;
-
             PatchMethod(openMenuOpacityPageKeyWords, "OpenMenuOpacityPagePre", "OpenMenuOpacityPagePost");
             PatchMethod(openExpressionMenuKeyWords, "OpenExpressionMenuPre", "OpenExpressionMenuPost");
             PatchMethod(openConfigPageKeyWords, "OpenConfigPagePre", "OpenConfigPagePost");

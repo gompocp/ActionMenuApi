@@ -1,8 +1,11 @@
-﻿namespace ActionMenuApi.Types
+﻿using System;
+
+namespace ActionMenuApi.Types
 {
     /// <summary>
     /// Defines the already existing vrchat pages that you can add pedals to
     /// </summary>
+    [Obsolete("Use ActionMenuApi.Api.ActionMenuPage", true)]
     public enum ActionMenuPageType
     {
         
