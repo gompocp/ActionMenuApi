@@ -24,7 +24,7 @@ namespace ActionMenuApi.Managers
                     CustomSubMenu.AddSubMenu($"Page {i+1}", () =>
                     {
                         foreach (var action in splitMods[index]) action.Invoke();
-                    }, false, ResourcesManager.GetPageIcon(i+1));
+                    }, ResourcesManager.GetPageIcon(i+1), false);
                 }
             }
         };
@@ -41,7 +41,7 @@ namespace ActionMenuApi.Managers
         
         public static void AddMainPageButton()
         {
-            CustomSubMenu.AddSubMenu(Constants.MODS_FOLDER_NAME, openFunc, false, ResourcesManager.GetModsSectionIcon());
+            CustomSubMenu.AddSubMenu(Constants.MODS_FOLDER_NAME, openFunc, ResourcesManager.GetModsSectionIcon(),false);
         }
     }
 }

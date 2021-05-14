@@ -65,14 +65,14 @@ namespace ActionMenuTestMod
                         AMUtils.RefreshActionMenu();
                     });
                     //No properties here are saved because I'm lazy af
-                    CustomSubMenu.AddToggle("Enable Hax", false, b => { }, riskyFunctionsAllowed);
-                    CustomSubMenu.AddRadialPuppet("Volume", f => { }, riskyFunctionsAllowed);
-                    CustomSubMenu.AddSubMenu("Whatever", () => { }, riskyFunctionsAllowed);
+                    CustomSubMenu.AddToggle("Enable Hax", false, b => { }, null,riskyFunctionsAllowed);
+                    CustomSubMenu.AddRadialPuppet("Volume", f => { }, 0, null, riskyFunctionsAllowed);
+                    CustomSubMenu.AddSubMenu("Whatever", () => { }, null, riskyFunctionsAllowed);
                     CustomSubMenu.AddButton("Risky Function", () =>
                     {
                         MelonLogger.Msg("Locked Pedal Func ran");
-                    }, riskyFunctionsAllowed, buttonIcon);
-                    CustomSubMenu.AddFourAxisPuppet("Move", vector2 => { }, riskyFunctionsAllowed);
+                    }, buttonIcon, riskyFunctionsAllowed);
+                    CustomSubMenu.AddFourAxisPuppet("Move", vector2 => { }, null, riskyFunctionsAllowed);
                 },
                 subMenuIcon
             );
@@ -131,6 +131,7 @@ namespace ActionMenuTestMod
         
         private static void RotateCubeX(float rotation)
         {
+            //This is the incorrect way of rotating the gameobject and it breaks from 90-270 as quaternions and euler angle conversions are a bit fucky
             Vector3 old = controllingGameObject.transform.eulerAngles;
             controllingGameObject.transform.eulerAngles = new Vector3((rotation)*360, old.y, old.z);
             x = rotation;

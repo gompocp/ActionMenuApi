@@ -21,7 +21,7 @@ namespace ActionMenuApi.Api
         /// <param name="locked">The starting state for the lockable pedal, true = locked, false = unlocked</param>
         /// <param name="icon">(optional) The Button Icon</param>
         /// <returns> PedalOption Instance (Note: 1. can be null if both action menus are open 2. The gameobject that it is attached to is destroyed when you change page on the action menu)</returns>
-        public static PedalOption AddButton(string text, Action triggerEvent, bool locked, Texture2D icon = null)
+        public static PedalOption AddButton(string text, Action triggerEvent, Texture2D icon = null, bool locked = false)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -43,7 +43,7 @@ namespace ActionMenuApi.Api
         /// <param name="startingValue">(optional) Starting value for radial puppet 0-1</param>
         /// <param name="icon">(optional) The Button Icon</param>
         /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
-        public static PedalOption AddRadialPuppet(string text, Action<float> onUpdate, bool locked, float startingValue = 0, Texture2D icon = null)
+        public static PedalOption AddRadialPuppet(string text, Action<float> onUpdate, float startingValue = 0, Texture2D icon = null, bool locked = false)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -79,7 +79,7 @@ namespace ActionMenuApi.Api
         /// <param name="downButtonText">(optional) Bottom Button Button text On Four Axis Puppet</param>
         /// <param name="leftButtonText">(optional) Left Button Button text On Four Axis Puppet</param>
         /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
-        public static PedalOption AddFourAxisPuppet(string text, Action<Vector2> onUpdate, bool locked, Texture2D icon = null, string topButtonText = "Up", 
+        public static PedalOption AddFourAxisPuppet(string text, Action<Vector2> onUpdate, Texture2D icon = null, bool locked = false, string topButtonText = "Up", 
             string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -111,7 +111,7 @@ namespace ActionMenuApi.Api
         /// <param name="icon">(optional) The Button Icon</param>
         /// <param name="closeFunc">(optional) Function called when page closes</param>
         /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
-        public static PedalOption AddSubMenu(string text, Action openFunc, bool locked, Texture2D icon = null, Action closeFunc = null)
+        public static PedalOption AddSubMenu(string text, Action openFunc, Texture2D icon = null, bool locked = false, Action closeFunc = null)
         {
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -138,7 +138,7 @@ namespace ActionMenuApi.Api
         /// <param name="locked">The starting state for the lockable pedal, true = locked, false = unlocked</param>
         /// <param name="icon">(optional) The Button Icon</param>
         /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
-        public static PedalOption AddToggle(string text, bool startingState, Action<bool> onToggle, bool locked, Texture2D icon = null)
+        public static PedalOption AddToggle(string text, bool startingState, Action<bool> onToggle, Texture2D icon = null, bool locked = false)
         {
             
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();

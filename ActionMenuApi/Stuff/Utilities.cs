@@ -63,6 +63,7 @@ namespace ActionMenuApi
         {
             foreach (var pedalStruct in list)
             {
+                if(!pedalStruct.shouldAdd) continue;
                 PedalOption pedalOption = instance.AddOption();
                 pedalOption.SetText(pedalStruct.text);
                 pedalOption.SetIcon(pedalStruct.icon);

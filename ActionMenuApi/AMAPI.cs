@@ -26,7 +26,7 @@ namespace ActionMenuApi
         [Obsolete("This method is only here for compatibility reasons! Please use CustomSubMenu.AddButton()", false)]
         public static PedalOption AddButtonPedalToSubMenu(string text, Action triggerEvent, Texture2D icon = null)
         {
-            return CustomSubMenu.AddButton(text, triggerEvent, false, icon);
+            return CustomSubMenu.AddButton(text, triggerEvent, icon, false);
         }
         
         [Obsolete("This method is only here for compatibility reasons! Please use VRCActionMenuPage.AddRadialPuppet()", false)]
@@ -38,7 +38,7 @@ namespace ActionMenuApi
         [Obsolete("This method is only here for compatibility reasons! Please use CustomSubMenu.AddRadialPuppet()", false)]
         public static PedalOption AddRadialPedalToSubMenu(string text, Action<float> onUpdate, float startingValue = 0, Texture2D icon = null)
         {
-            return CustomSubMenu.AddRadialPuppet(text, onUpdate, false, startingValue, icon);
+            return CustomSubMenu.AddRadialPuppet(text, onUpdate, startingValue, icon, false);
         }
         
         [Obsolete("This method is only here for compatibility reasons! Please use VRCActionMenuPage.AddFourAxisPuppet()", false)]
@@ -52,7 +52,7 @@ namespace ActionMenuApi
         public static PedalOption AddFourAxisPedalToSubMenu(string text, Action<Vector2> onUpdate,Texture2D icon = null, string topButtonText = "Up", 
             string rightButtonText = "Right", string downButtonText = "Down", string leftButtonText = "Left")
         {
-            return CustomSubMenu.AddFourAxisPuppet(text, onUpdate, false, icon, topButtonText, rightButtonText, downButtonText, leftButtonText);
+            return CustomSubMenu.AddFourAxisPuppet(text, onUpdate, icon, false, topButtonText, rightButtonText, downButtonText, leftButtonText);
         }
         
         [Obsolete("This method is only here for compatibility reasons! Please use VRCActionMenuPage.AddSubMenu()", false)]
@@ -64,7 +64,7 @@ namespace ActionMenuApi
         [Obsolete("This method is only here for compatibility reasons! Please use CustomSubMenu.AddSubMenu()", false)]
         public static PedalOption AddSubMenuToSubMenu(string text, Action openFunc, Texture2D icon = null, Action closeFunc = null)
         {
-            return CustomSubMenu.AddSubMenu(text, openFunc, false, icon, closeFunc);
+            return CustomSubMenu.AddSubMenu(text, openFunc, icon, false,  closeFunc);
         }
         
         [Obsolete("This method is only here for compatibility reasons! Please use VRCActionMenuPage.AddToggle()", false)]
@@ -76,7 +76,7 @@ namespace ActionMenuApi
         [Obsolete("This method is only here for compatibility reasons! Please use CustomSubMenu.AddToggle()", false)]
         public static PedalOption AddTogglePedalToSubMenu(string text, bool startingState, Action<bool> onToggle, Texture2D icon = null)
         {
-            return CustomSubMenu.AddToggle(text, startingState, onToggle, false, icon);
+            return CustomSubMenu.AddToggle(text, startingState, onToggle, icon, false);
         }
         
         [Obsolete("This method is only here for compatibility reasons! Please use AMUtils.AddToModsFolder()", false)]
