@@ -14,7 +14,7 @@
     <br />
     <a href="https://github.com/gompocp/ActionMenuApi/issues">Request Feature</a>
   </p>
-</p>
+
 
 
 
@@ -76,24 +76,27 @@ To use simply add ActionMenuApi to your mods folder and reference it in your pro
 ## Usage
 
 ```cs
-using ActionMenuApi;
+using ActionMenuApi.Api;
+using ActionMenuApi.Pedals;
 /*
 
 Code
 
 */
 
+//Call in OnApplicationStart()
 //To add a button to the main page of the action menu
-AMAPI.AddButtonPedalToMenu(ActionMenuPageType.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon);
+//                          Page to add to          Action for onClick                    Text       Texture     locked     
+VRCActionMenuPage.AddButton(ActionMenuPage.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon, true);
 
 //To add a toggle to the main page of the action menu
-AMAPI.AddTogglePedalToMenu(ActionMenuPageType.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
+VRCActionMenuPage.AddToggle(ActionMenuPage.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
 
 //To add a radial pedal to the main page of the action menu
-AMAPI.AddRadialPedalToMenu(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue, radialIcon);
+VRCActionMenuPage.AddRadialPuppet(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue, radialIcon);
 
 //To add a submenu to the main page of the action menu and add a toggle and button to it
-AMAPI.AddSubMenuToMenu(ActionMenuPageType.Main, 
+VRCActionMenuPage.AddSubMenu(ActionMenuPageType.Main, 
     delegate {
         MelonLogger.Msg("Sub Menu Opened");
         AMAPI.AddButtonPedalToSubMenu(() => MelonLogger.Msg("Pressed Button In Sub Menu"), "Sub Menu Button", buttonIcon);

@@ -3,7 +3,6 @@ using System.Reflection;
 using ActionMenuApi;
 using ActionMenuApi.Api;
 using ActionMenuApi.Pedals;
-using ActionMenuApi.Types;
 using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -79,7 +78,6 @@ namespace ActionMenuTestMod
                 subMenuIcon
             );
             
-            //Purely for backwards compatibility testing
             AMUtils.AddToModsFolder(
                 "New Cube Stuff",
                 delegate
