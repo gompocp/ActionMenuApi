@@ -67,8 +67,8 @@ namespace ActionMenuApi
                 PedalOption pedalOption = instance.AddOption();
                 pedalOption.SetText(pedalStruct.text);
                 pedalOption.SetIcon(pedalStruct.icon);
-                pedalOption.SetPedalTriggerEvent(
-                    DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
+                if(!pedalStruct.locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
+                else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
                 //Additional setup for pedals
                 switch (pedalStruct.Type)
                 {
