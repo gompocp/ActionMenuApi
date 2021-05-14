@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using ActionMenuApi;
+using ActionMenuApi.Api;
 using ActionMenuApi.Types;
 using MelonLoader;
 using UnhollowerRuntimeLib;
@@ -61,17 +62,17 @@ namespace ActionMenuTestMod
                     AMAPI.AddTogglePedalToSubMenu("Risky Functions", !riskyFunctionsAllowed, (b) =>
                     {
                         riskyFunctionsAllowed = !b;
-                        AMAPI.RefreshActionMenu();
+                        AMUtils.RefreshActionMenu();
                     });
                     //No properties here are saved because I'm lazy af
-                    AMAPI.AddLockableTogglePedalToSubMenu("Enable Hax", false, b => { }, riskyFunctionsAllowed);
-                    AMAPI.AddLockableRadialPedalToSubMenu("Volume", f => { }, riskyFunctionsAllowed);
-                    AMAPI.AddLockableSubMenuToSubMenu("Whatever", () => { }, riskyFunctionsAllowed);
-                    AMAPI.AddLockableButtonPedalToSubMenu("Risky Function", () =>
+                    CustomSubMenu.AddToggle("Enable Hax", false, b => { }, riskyFunctionsAllowed);
+                    CustomSubMenu.AddRadialPuppet("Volume", f => { }, riskyFunctionsAllowed);
+                    CustomSubMenu.AddSubMenu("Whatever", () => { }, riskyFunctionsAllowed);
+                    CustomSubMenu.AddButton("Risky Function", () =>
                     {
                         MelonLogger.Msg("Locked Pedal Func ran");
-                    },riskyFunctionsAllowed, buttonIcon);
-                    AMAPI.AddLockableFourAxisPedalToSubMenu("Move", vector2 => { }, riskyFunctionsAllowed);
+                    }, riskyFunctionsAllowed, buttonIcon);
+                    CustomSubMenu.AddFourAxisPuppet("Move", vector2 => { }, riskyFunctionsAllowed);
                 },
                 subMenuIcon
             );
@@ -101,7 +102,7 @@ namespace ActionMenuTestMod
         {
             if (Input.GetKeyUp(KeyCode.P))
             {
-                AMAPI.RefreshActionMenu();
+                AMUtils.RefreshActionMenu();
             }
         }
 
