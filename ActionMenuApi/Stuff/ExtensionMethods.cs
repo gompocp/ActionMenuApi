@@ -69,10 +69,13 @@ namespace ActionMenuApi
         private static PushPageDelegate pushPageDelegate;
         private delegate ActionMenuPage PushPageDelegate(ActionMenu actionMenu, Il2CppSystem.Action openFunc, Il2CppSystem.Action closeFunc = null, Texture2D icon = null, string text = null);
         
+
         
+        public static void SetBackgroundIcon(this PedalOption pedal, Texture2D icon) => pedal.GetActionButton().prop_Texture2D_0 = icon; 
         
-        public static Texture2D SetIcon(this PedalOption pedal, Texture2D icon) => pedal.prop_Texture2D_0 = icon;
-        public static Texture2D GetIcon(this PedalOption pedal) => pedal.prop_Texture2D_0; //Only texture2d prop on PedalOption. shouldnt change unless drastic changes are made to the action menu
+        //Only texture2d prop on PedalOption. shouldnt change unless drastic changes are made to the action menu
+        public static void SetForegroundIcon(this PedalOption pedal, Texture2D icon) => pedal.prop_Texture2D_0 = icon;
+        
         public static bool isOpen(this ActionMenuOpener actionMenuOpener) => actionMenuOpener.field_Private_Boolean_0; //only bool on action menu opener, shouldnt change
         
         private static PropertyInfo actionButtonPercentProperty;

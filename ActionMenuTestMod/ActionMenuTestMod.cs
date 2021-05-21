@@ -66,14 +66,14 @@ namespace ActionMenuTestMod
                         AMUtils.RefreshActionMenu(); //Refresh menu to update the locked state of the pedal
                     });
                     //No properties here are saved because I'm lazy af
-                    CustomSubMenu.AddToggle("Enable Hax", false, b => { }, null,riskyFunctionsAllowed);
-                    CustomSubMenu.AddRadialPuppet("Volume", f => { }, 0, null, riskyFunctionsAllowed);
-                    CustomSubMenu.AddSubMenu("Whatever", () => { }, null, riskyFunctionsAllowed);
+                    CustomSubMenu.AddToggle("Enable Hax", false, b => { }, buttonIcon,riskyFunctionsAllowed);
+                    CustomSubMenu.AddRadialPuppet("Volume", f => { }, 0, buttonIcon, riskyFunctionsAllowed);
+                    CustomSubMenu.AddSubMenu("Whatever", () => { }, buttonIcon, riskyFunctionsAllowed);
                     CustomSubMenu.AddButton("Risky Function", () =>
                     {
                         MelonLogger.Msg("Locked Pedal Func ran");
                     }, buttonIcon, riskyFunctionsAllowed);
-                    CustomSubMenu.AddFourAxisPuppet("Move", vector2 => { }, null, riskyFunctionsAllowed);
+                    CustomSubMenu.AddFourAxisPuppet("Move", vector2 => { }, toggleIcon, riskyFunctionsAllowed);
                 },
                 subMenuIcon
             );
@@ -82,7 +82,7 @@ namespace ActionMenuTestMod
                 "New Cube Stuff",
                 delegate
                 {
-                    CustomSubMenu.AddFourAxisPuppet("Reposition cube X/Y", (v) => RePositionCubeXY(v), toggleIcon);
+                    CustomSubMenu.AddFourAxisPuppet("Reposition cube X/Y", (v) => RePositionCubeXY(v), buttonIcon);
                     CustomSubMenu.AddFourAxisPuppet("Reposition cube Z/Y", RePositionCubeZY, toggleIcon);
                     CustomSubMenu.AddFourAxisPuppet("Reposition cube X/Z", RePositionCubeXZ, toggleIcon);
                     CustomSubMenu.AddRadialPuppet("X",RotateCubeX, x,radialIcon); //Rotation a bit borked

@@ -29,8 +29,8 @@ namespace ActionMenuApi.Api
             ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
-            pedalOption.SetText(text); 
-            pedalOption.SetIcon(icon);
+            pedalOption.SetText(text);
+            pedalOption.SetForegroundIcon(icon);
             if (!locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
             else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
             return pedalOption; 
@@ -52,7 +52,7 @@ namespace ActionMenuApi.Api
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.SetText(text); 
-            pedalOption.SetIcon(icon);
+            pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
             if(!locked) pedalOption.SetPedalTriggerEvent(
@@ -89,7 +89,7 @@ namespace ActionMenuApi.Api
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.SetText(text); 
-            pedalOption.SetIcon(icon);
+            pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeAxis);
             if(!locked) pedalOption.SetPedalTriggerEvent(
                 DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
@@ -120,7 +120,7 @@ namespace ActionMenuApi.Api
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.SetText(text); 
-            pedalOption.SetIcon(icon);
+            pedalOption.SetForegroundIcon(icon);
             //pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
             if(!locked) pedalOption.SetPedalTriggerEvent(
                 DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
@@ -147,7 +147,7 @@ namespace ActionMenuApi.Api
             if (actionMenuOpener == null) return null;
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.SetText(text); 
-            pedalOption.SetIcon(icon);
+            pedalOption.SetBackgroundIcon(icon);
             if (startingState) pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
             else pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
             if(!locked) pedalOption.SetPedalTriggerEvent(

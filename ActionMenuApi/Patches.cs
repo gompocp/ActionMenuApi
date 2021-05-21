@@ -83,14 +83,14 @@ namespace ActionMenuApi
             PatchMethod(openOptionsPageKeyWords, "OpenOptionsPre", "OpenOptionsPost");
 
             //Special Child
-            harmonyInstance.Patch(
+            /*harmonyInstance.Patch(
                 typeof(ActionMenu).GetMethods().Single(
                     m => Utilities.checkXref(m, openNameplatesSizePageKeyWords)
                          && m.CheckStringsCount(5)
                 ),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePost"))
-            );
+            );*/
             MelonLogger.Msg("Patches Applied");
         }
 

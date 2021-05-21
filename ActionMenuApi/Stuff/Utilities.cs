@@ -66,7 +66,6 @@ namespace ActionMenuApi
                 if(!pedalStruct.shouldAdd) continue;
                 PedalOption pedalOption = instance.AddOption();
                 pedalOption.SetText(pedalStruct.text);
-                pedalOption.SetIcon(pedalStruct.icon);
                 if(!pedalStruct.locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
                 else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
                 //Additional setup for pedals
@@ -80,6 +79,7 @@ namespace ActionMenuApi
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeRadial);
                         pedalOption.SetButtonPercentText($"{Math.Round(pedalRadial.currentValue)}%");
                         pedalRadial.pedal = pedalOption;
+                        pedalOption.SetBackgroundIcon(pedalStruct.icon);
                         break;
                     case PedalType.Toggle:
                         PedalToggle pedalToggle = (PedalToggle) pedalStruct;
@@ -88,9 +88,14 @@ namespace ActionMenuApi
                         else
                             pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeToggleOff);
                         pedalToggle.pedal = pedalOption;
+                        pedalOption.SetBackgroundIcon(pedalStruct.icon);
                         break;
                     case PedalType.FourAxisPuppet:
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeAxis);
+                        pedalOption.SetBackgroundIcon(pedalStruct.icon);
+                        break;
+                    default:
+                        pedalOption.SetForegroundIcon(pedalStruct.icon);
                         break;
                 }
             }
