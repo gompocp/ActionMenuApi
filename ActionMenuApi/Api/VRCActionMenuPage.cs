@@ -140,6 +140,8 @@ namespace ActionMenuApi.Api
                     else if (insertion == Insertion.Post) Patches.nameplatesOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.NameplatesSize:
+                    MelonLogger.Warning("Adding to the Nameplates size page isn't supported currently. Please use a different page");
+                    return;
                     if (insertion == Insertion.Pre) Patches.nameplatesSizePagePre.Add(customPedal);
                     else if (insertion == Insertion.Post) Patches.nameplatesSizePagePost.Add(customPedal);
                     return;
