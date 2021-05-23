@@ -66,8 +66,8 @@ namespace ActionMenuApi
                 if(!pedalStruct.shouldAdd) continue;
                 PedalOption pedalOption = instance.AddOption();
                 pedalOption.SetText(pedalStruct.text);
-                if(!pedalStruct.locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(pedalStruct.triggerEvent));
-                else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+                if(!pedalStruct.locked) pedalOption.SetPedalAction(pedalStruct.triggerEvent);
+                else pedalOption.Lock();
                 //Additional setup for pedals
                 switch (pedalStruct.Type)
                 {
@@ -256,9 +256,9 @@ namespace ActionMenuApi
                 return;
             }
             var leftOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
-            if(leftOpener.isOpen()) GetRefreshAMDelegate.Invoke(leftOpener.GetActionMenu());
+            GetRefreshAMDelegate.Invoke(leftOpener.GetActionMenu());
             var rightOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
-            if(rightOpener.isOpen()) GetRefreshAMDelegate.Invoke(rightOpener.GetActionMenu()); 
+            GetRefreshAMDelegate.Invoke(rightOpener.GetActionMenu()); 
         }
         private static RefreshAMDelegate refreshAMDelegate;
         private delegate void RefreshAMDelegate(ActionMenu actionMenu);

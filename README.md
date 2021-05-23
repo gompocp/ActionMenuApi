@@ -107,6 +107,11 @@ VRCActionMenuPage.AddSubMenu(ActionMenuPageType.Main,
 );
 ```
 
+When you lock/update a pedal in anyway, you must call either `AMUtils.ResetMenu()` or `AMUtils.RefreshMenu()` so that these changes will be visible. If you are after locking a submenu its advised that you call `AMUtils.ResetMenu()` so that in case the user is already in the submenu it'll pushed them out of it. If you are just locking a button pedal or something, you can just call `AMUtils.RefreshMenu()` to rebuild the current action menu submenu. 
+
+> NOTE FOR PEOPLE USING THE LOCKING FUNCTIONALITY FOR RISKY FUNCTIONS: It is advised that in the case that my reflection to reset/refresh the action menu fails you have a boolean check in the pedal trigger event so that the action can't run anyway if it fails
+
+
 _For a mod example check out the test mod [here](https://github.com/gompocp/ActionMenuApi/tree/main/ActionMenuTestMod)_
 
 

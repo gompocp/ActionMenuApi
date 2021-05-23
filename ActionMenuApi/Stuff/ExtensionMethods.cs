@@ -6,6 +6,7 @@ using ActionMenuApi.Managers;
 using MelonLoader;
 using TMPro;
 using UnhollowerBaseLib;
+using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique;  //Will this change?, ¯\_(ツ)_/¯x2
@@ -95,7 +96,7 @@ namespace ActionMenuApi
         
         public static ActionButton GetActionButton(this PedalOption pedalOption) => pedalOption.field_Public_ActionButton_0; //only one
         public static void SetPedalTriggerEvent(this PedalOption pedalOption, PedalOptionTriggerEvent triggerEvent) => pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = triggerEvent; //only one
-
+        public static void SetPedalAction(this PedalOption pedalOption, Action action) => pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(action); 
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver)
         {
             if (actionMenuDriver.field_Public_ActionMenuOpener_0.field_Public_EnumNPublicSealedvaLeRi3vUnique_0 == ActionMenuOpener.EnumNPublicSealedvaLeRi3vUnique.Left)
@@ -259,6 +260,13 @@ namespace ActionMenuApi
             temp.a = amount;
             pedalGraphic.color = temp;
         }
+
+        public static void Lock(this PedalOption pedalOption)
+        {
+            pedalOption.prop_Boolean_0 = true;
+            ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+        }
+    
         
         public static void SetAngle(this RadialPuppetMenu radialPuppet, float angle)
         {

@@ -31,8 +31,8 @@ namespace ActionMenuApi.Api
             PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.SetText(text);
             pedalOption.SetForegroundIcon(icon);
-            if (!locked) pedalOption.SetPedalTriggerEvent(DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(triggerEvent));
-            else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+            if (!locked) pedalOption.SetPedalAction(triggerEvent);
+            else pedalOption.Lock();
             return pedalOption; 
         }
         
@@ -55,8 +55,8 @@ namespace ActionMenuApi.Api
             pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
-            if(!locked) pedalOption.SetPedalTriggerEvent(
-                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            if(!locked) pedalOption.SetPedalAction(
+                delegate
                 {
                     var combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
                     {
@@ -64,9 +64,9 @@ namespace ActionMenuApi.Api
                         pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
                     }), onUpdate);
                     RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
-                }))
+                }
             );
-            else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+            else pedalOption.Lock();
             return pedalOption;
         }
 
@@ -91,17 +91,17 @@ namespace ActionMenuApi.Api
             pedalOption.SetText(text); 
             pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeAxis);
-            if(!locked) pedalOption.SetPedalTriggerEvent(
-                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            if(!locked) pedalOption.SetPedalAction(
+                delegate
                 {
                     FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
                     FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
                     FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
                     FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
                     FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
-                }))
+                }
             );
-            else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+            else pedalOption.Lock();
             return pedalOption;
         }
         
@@ -122,13 +122,13 @@ namespace ActionMenuApi.Api
             pedalOption.SetText(text); 
             pedalOption.SetForegroundIcon(icon);
             //pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
-            if(!locked) pedalOption.SetPedalTriggerEvent(
-                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            if(!locked) pedalOption.SetPedalAction(
+                delegate
                 {
                     actionMenuOpener.GetActionMenu().PushPage(openFunc, closeFunc, icon, text);
-                }))
+                }
             );
-            else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+            else pedalOption.Lock();
             return pedalOption;
         }
         
@@ -150,8 +150,8 @@ namespace ActionMenuApi.Api
             pedalOption.SetBackgroundIcon(icon);
             if (startingState) pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
             else pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
-            if(!locked) pedalOption.SetPedalTriggerEvent(
-                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(new Action(delegate
+            if(!locked) pedalOption.SetPedalAction(
+                delegate
                 {
                     startingState = !startingState;
                     if (startingState)
@@ -159,9 +159,9 @@ namespace ActionMenuApi.Api
                     else 
                         pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
                     onToggle.Invoke(startingState);
-                }))
+                }
             );
-            else ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
+            else pedalOption.Lock();
             return pedalOption;
         }
     }

@@ -8,7 +8,7 @@ namespace ActionMenuApi.Api
     public static class AMUtils
     {
         /// <summary>
-        /// Trigger a refresh for the action menus. Will only run if they are open
+        /// Trigger a refresh for the action menus
         /// </summary>
         public static void RefreshActionMenu()
         {
@@ -22,6 +22,14 @@ namespace ActionMenuApi.Api
                 //This is semi-abusable if this fails so its probably a good idea to have a fail-safe to protect sensitive functions that are meant to be locked
                 Utilities.ResetMenu();
             }
+        }
+        
+        /// <summary>
+        /// Trigger a complete reset for the action menus
+        /// </summary>
+        public static void ResetMenu()
+        {
+            Utilities.ResetMenu();
         }
         
         /// <summary>

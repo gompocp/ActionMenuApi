@@ -3,7 +3,7 @@ using System.Collections;
 using ActionMenuApi.Managers;
 using MelonLoader;
 #pragma warning disable 1591
-[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.2.1", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
+[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.2.2", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
 [assembly: MelonGame("VRChat", "VRChat")]
 ////PedalOption.prop_Boolean_0 TODO: Note to self to use this sometime in the future
 namespace ActionMenuApi
