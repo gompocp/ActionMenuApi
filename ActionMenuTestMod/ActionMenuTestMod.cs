@@ -93,7 +93,7 @@ namespace ActionMenuTestMod
                     CustomSubMenu.AddButton("Tp Cube To Player",() => _controllingGameObject.transform.localPosition = VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.localPosition, buttonIcon);
                 },
                 subMenuIcon,
-                true
+                false
             );
 
             //Purely for backwards compatibility testing don't use yourself
@@ -124,6 +124,11 @@ namespace ActionMenuTestMod
             if (Input.GetKeyUp(KeyCode.P))
             {
                 AMUtils.RefreshActionMenu();
+            }
+
+            if (Input.GetKeyUp(KeyCode.I))
+            {
+                AMUtils.ResetMenu();
             }
         }
 

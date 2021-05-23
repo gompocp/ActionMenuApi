@@ -265,6 +265,11 @@ namespace ActionMenuApi
         
         public static void ResetMenu()
         {
+            if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
+            {
+                Logger.LogWarning("Reset called before driver init");
+                return;
+            }
             var leftOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
             if (leftOpener.isOpen()) leftOpener.GetActionMenu().ResetMenu(); 
             var rightOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();

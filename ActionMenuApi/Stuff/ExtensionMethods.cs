@@ -331,6 +331,7 @@ namespace ActionMenuApi
                         m.Name.StartsWith("Method_Private_Void_ObjectNPublicAcTeAcStGaUnique_")
                         && m.GetParameters().Length == 1
                         && !m.Name.Contains("PDM")
+                        && !m.HasStringLiterals()
                 );
                 destroyPageDelegate = (DestroyPageDelegate)Delegate.CreateDelegate(
                     typeof(DestroyPageDelegate),
@@ -351,8 +352,8 @@ namespace ActionMenuApi
             RadialPuppetManager.CloseRadialMenu();
             FourAxisPuppetManager.CloseFourAxisMenu();
             actionMenu.ClosePuppetMenus(true);
-            foreach (var page in actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0)
-                actionMenu.DestroyPage(page);
+            for (int i = 0; i < actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0._items.Count; i++)
+                actionMenu.DestroyPage(actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0._items[i]);
             actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0?.Clear();
             actionMenu.field_Public_List_1_ObjectNPublicPaSiAcObUnique_0?.Clear();
         }
