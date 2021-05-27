@@ -80,7 +80,7 @@ namespace ActionMenuApi.Managers
             current.GetFill().SetFillAngle(startingValue*360); //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
             current.GetTitle().text = title;
-            current.GetCenterText().text = (Math.Round(startingValue*100f)) + "%";
+            current.GetCenterText().text = $"{Mathf.Round(startingValue*100f)}%";
             current.GetFill().UpdateGeometry(); ;
             current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;  //new Vector3(-256f, 0, 0); 
             float angleOriginal =  Utilities.ConvertFromEuler(startingValue*360);

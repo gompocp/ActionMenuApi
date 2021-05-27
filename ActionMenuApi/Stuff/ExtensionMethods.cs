@@ -287,11 +287,11 @@ namespace ActionMenuApi
             radialPuppet.GetFill().UpdateGeometry();
         }
 
-        public static void UpdateArrow(this RadialPuppetMenu radialPuppet, double angleOriginal, double eulerAngle)
+        public static void UpdateArrow(this RadialPuppetMenu radialPuppet, float angleOriginal, float eulerAngle)
         {
             //MelonLogger.Msg($"Original: {angleOriginal}, Euler Angle:{eulerAngle}");
-            radialPuppet.GetArrow().transform.localPosition = new Vector3((float)(120 * Math.Cos(angleOriginal / Constants.RAD_TO_DEG)), (float)(120 * Math.Sin(angleOriginal / Constants.RAD_TO_DEG)), radialPuppet.GetArrow().transform.localPosition.z);
-            radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (float)(180 - eulerAngle));
+            radialPuppet.GetArrow().transform.localPosition = new Vector3(120 * Mathf.Cos(angleOriginal / Constants.RAD_TO_DEG), 120 * Mathf.Sin(angleOriginal / Constants.RAD_TO_DEG), radialPuppet.GetArrow().transform.localPosition.z);
+            radialPuppet.GetArrow().transform.localEulerAngles = new Vector3(radialPuppet.GetArrow().transform.localEulerAngles.x, radialPuppet.GetArrow().transform.localEulerAngles.y, (180 - eulerAngle));
         }
         
         private static ClosePuppetMenusDelegate GetClosePuppetMenusDelegate
