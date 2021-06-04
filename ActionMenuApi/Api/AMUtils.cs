@@ -31,13 +31,14 @@ namespace ActionMenuApi.Api
         {
             Utilities.ResetMenu();
         }
-        
+
         /// <summary>
         /// Add a mod to a dedicated section of the action menu with other mods
         /// </summary>
         /// <param name="text">Button text</param>
         /// <param name="openFunc">Function called when your mod page is opened. Add your methods calls to other AMAPI methods such AddRadialPedalToSubMenu to add buttons to the submenu it creates when clicked</param>
         /// <param name="icon">(optional) The Button Icon</param>
+        /// <param name="locked">(optional) Starting state of pedal</param>
         public static void AddToModsFolder(string text, Action openFunc, Texture2D icon = null, bool locked = false)
         {
             ModsFolderManager.AddMod(() =>

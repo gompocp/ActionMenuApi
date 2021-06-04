@@ -231,7 +231,7 @@ namespace ActionMenuApi
             {
                 //Build 1088 menu.Method_Private_Void_PDM_9()
                 if (refreshAMDelegate != null) return refreshAMDelegate;
-                MethodInfo refreshAMMethod = typeof(ActionMenu).GetMethods().Single(
+                MethodInfo refreshAMMethod = typeof(ActionMenu).GetMethods().First(
                     m =>
                         m.Name.StartsWith("Method_Private_Void_PDM_")
                         && !m.HasStringLiterals()
