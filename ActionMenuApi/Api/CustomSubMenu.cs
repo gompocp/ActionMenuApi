@@ -69,6 +69,39 @@ namespace ActionMenuApi.Api
             else pedalOption.Lock();
             return pedalOption;
         }
+        
+        /// <summary>
+        /// Add a lockable and restricted radial puppet button pedal to a custom submenu. Restricted meaning that you can't rotate past 100 to get to 0 and vice versa
+        /// </summary>
+        /// <param name="text">Button text</param>
+        /// <param name="onUpdate">Calls action with a float between 0 - 1 depending on the current value of the radial puppet</param>
+        /// <param name="startingValue">(optional) Starting value for radial puppet 0-1</param>
+        /// <param name="icon">(optional) The Button Icon</param>
+        /// <param name="locked">(optional)The starting state for the lockable pedal, true = locked, false = unlocked</param>
+        /// <returns> PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the action menu</returns>
+        public static PedalOption AddRestrictedRadialPuppet(string text, Action<float> onUpdate, float startingValue = 0, Texture2D icon = null, bool locked = false)
+        {
+            ActionMenuOpener actionMenuOpener = Utilities.GetActionMenuOpener();
+            if (actionMenuOpener == null) return null;
+            PedalOption pedalOption = actionMenuOpener.GetActionMenu().AddOption();
+            pedalOption.SetText(text); 
+            pedalOption.SetBackgroundIcon(icon);
+            pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
+            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
+            if(!locked) pedalOption.SetPedalAction(
+                delegate
+                {
+                    var combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate(float f)
+                    {
+                        startingValue = f;
+                        pedalOption.SetButtonPercentText($"{Math.Round(startingValue*100)}%");
+                    }), onUpdate);
+                    RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption, true);
+                }
+            );
+            else pedalOption.Lock();
+            return pedalOption;
+        }
 
         /// <summary>
         /// Add a lockable four axis puppet button pedal to a custom submenu

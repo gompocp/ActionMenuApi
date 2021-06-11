@@ -2,6 +2,7 @@
 using ActionMenuApi.Types;
 using MelonLoader;
 using UnityEngine;
+using VRC.UI;
 
 namespace ActionMenuApi.Managers
 {
@@ -21,6 +22,8 @@ namespace ActionMenuApi.Managers
         
         public static float radialPuppetValue { get; set; }
         private static bool open = false;
+        private static bool restricted = false;
+        private static float currentValue;
         public static Action<float> onUpdate { get; set; }
         
         public static void OnUpdate()
@@ -57,7 +60,7 @@ namespace ActionMenuApi.Managers
             }
         }
 
-        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title, PedalOption pedalOption)
+        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title, PedalOption pedalOption, bool restricted = false)
         {
             if(open) return;
             switch (Utilities.GetActionMenuHand())
@@ -75,10 +78,12 @@ namespace ActionMenuApi.Managers
                     open = true;
                     break;
             }
+            RadialPuppetManager.restricted = restricted;
             Input.ResetInputAxes();
             current.gameObject.SetActive(true);
             current.GetFill().SetFillAngle(startingValue*360); //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
+            RadialPuppetManager.currentValue = startingValue;
             current.GetTitle().text = title;
             current.GetCenterText().text = $"{Mathf.Round(startingValue*100f)}%";
             current.GetFill().UpdateGeometry(); ;
@@ -119,8 +124,46 @@ namespace ActionMenuApi.Managers
             {
                 float angleOriginal = Mathf.Round(Mathf.Atan2(mousePos.y, mousePos.x) * Constants.RAD_TO_DEG);
                 float eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
-                current.SetAngle(eulerAngle);
-                current.UpdateArrow(angleOriginal, eulerAngle);
+                float normalisedAngle = eulerAngle / 360f;
+                if (Math.Abs(normalisedAngle - currentValue) < 0.0001f) return;
+                if (!restricted)
+                {
+                    current.SetAngle(eulerAngle);
+                    current.UpdateArrow(angleOriginal, eulerAngle);
+                }
+                else
+                {
+                    if (currentValue > normalisedAngle)
+                    {
+                        if (currentValue - normalisedAngle < 0.5f)
+                        {
+                            current.SetAngle(eulerAngle);
+                            current.UpdateArrow(angleOriginal, eulerAngle);
+                            currentValue = normalisedAngle;
+                        }
+                        else
+                        {
+                            current.SetAngle(360);
+                            current.UpdateArrow(90, 360); 
+                            currentValue = 1f;
+                        }
+                    }
+                    else
+                    {
+                        if (normalisedAngle - currentValue < 0.5f)
+                        {
+                            current.SetAngle(eulerAngle);
+                            current.UpdateArrow(angleOriginal, eulerAngle);
+                            currentValue = normalisedAngle;
+                        }
+                        else
+                        {
+                            current.SetAngle(0);
+                            current.UpdateArrow(90, 0);
+                            currentValue = 0;
+                        }
+                    }
+                }
             }
         }
   

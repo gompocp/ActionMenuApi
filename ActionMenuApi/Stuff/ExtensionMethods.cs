@@ -72,7 +72,7 @@ namespace ActionMenuApi
         
 
         
-        public static void SetBackgroundIcon(this PedalOption pedal, Texture2D icon) => pedal.GetActionButton().prop_Texture2D_2 = icon; 
+        public static void SetBackgroundIcon(this PedalOption pedal, Texture2D icon) => pedal.GetActionButton().prop_Texture2D_0 = icon; 
         
         //Only texture2d prop on PedalOption. shouldnt change unless drastic changes are made to the action menu
         public static void SetForegroundIcon(this PedalOption pedal, Texture2D icon) => pedal.prop_Texture2D_0 = icon;
@@ -476,6 +476,6 @@ namespace ActionMenuApi
         public static void SetFillAngle(this PedalGraphic pedalGraphic, float angle) => pedalGraphic.field_Public_Single_3 = angle;
         public static float GetFillAngle(this PedalGraphic pedalGraphic) => pedalGraphic.field_Public_Single_3;
         public static Vector2 GetCursorPos(this ActionMenu actionMenu) => actionMenu.field_Private_Vector2_0;
-        public static void SetPedalTypeIcon(this PedalOption pedalOption, Texture2D icon) => pedalOption.GetActionButton().prop_Texture2D_0 = icon; //No choice needs to be hardcoded in sadly
+        public static void SetPedalTypeIcon(this PedalOption pedalOption, Texture2D icon) => pedalOption.GetActionButton().prop_Texture2D_2 = icon; //No choice needs to be hardcoded in sadly
     }
 }

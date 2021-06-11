@@ -68,6 +68,7 @@ namespace ActionMenuTestMod
                     //No properties here are saved because I'm lazy af
                     CustomSubMenu.AddToggle("Enable Hax", false, b => { }, buttonIcon,riskyFunctionsAllowed);
                     CustomSubMenu.AddRadialPuppet("Volume", f => { }, 0, buttonIcon, riskyFunctionsAllowed);
+                    CustomSubMenu.AddRestrictedRadialPuppet("Volume Restricted", f => { }, 0, buttonIcon, riskyFunctionsAllowed);
                     CustomSubMenu.AddSubMenu("Whatever", () => { }, buttonIcon, riskyFunctionsAllowed);
                     CustomSubMenu.AddButton("Risky Function", () =>
                     {

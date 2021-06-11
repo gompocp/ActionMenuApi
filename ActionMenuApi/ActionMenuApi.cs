@@ -3,8 +3,9 @@ using System.Collections;
 using ActionMenuApi.Managers;
 using MelonLoader;
 #pragma warning disable 1591
-[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.2.3", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
+[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.3.0", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
 [assembly: MelonGame("VRChat", "VRChat")]
+[assembly: VerifyLoaderVersion(0, 4, 0, true)]
 
 namespace ActionMenuApi
 {
@@ -23,11 +24,12 @@ namespace ActionMenuApi
                 MelonLogger.Error($"Patching failed with exception: {e.Message}");
             }
         }
-
-        IEnumerator WaitForActionMenuInit()
+        
+        IEnumerator WaitForActionMenuInit() 
         {
-            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
+            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
                 yield return null;
+            if (!LoaderCheck.passed && new Random().Next(6) == 0) yield break; // Must be your lucky day
             ResourcesManager.InitLockGameObject();
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();

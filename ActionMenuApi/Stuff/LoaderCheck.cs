@@ -10,6 +10,7 @@ namespace ActionMenuApi
     internal static class LoaderCheck
     {
         //Credit to knah: https://github.com/knah/VRCMods/blob/master/UIExpansionKit/LoaderIntegrityCheck.cs
+        public static bool passed = true;
         public static void CheckForRainbows()
         {
             try
@@ -22,7 +23,7 @@ namespace ActionMenuApi
 
                 RainbowsFound();
 
-                Console.ReadLine();
+                while (Console.In.Peek() != '\n') Console.In.Read();
             }
             catch (BadImageFormatException ex)
             {
@@ -42,7 +43,7 @@ namespace ActionMenuApi
                 
                 RainbowsFound();
 
-                Console.ReadLine();
+                while (Console.In.Peek() != '\n') Console.In.Read();
             }
 
             try
@@ -54,7 +55,7 @@ namespace ActionMenuApi
                 
                 RainbowsFound();
 
-                Console.ReadLine();
+                while (Console.In.Peek() != '\n') Console.In.Read();
             }
             catch (BadImageFormatException ex)
             {
@@ -71,6 +72,7 @@ namespace ActionMenuApi
         private static void RainbowsFound()
         {
             MelonLogger.Error("===================================================================");
+            MelonLogger.Error("Message from: ActionMenuApi");
             MelonLogger.Error("You're using MelonLoader with important security features missing.");
             MelonLogger.Error("This exposes you to additional risks from certain malicious actors,");
             MelonLogger.Error("including account theft, account bans, and other unwanted consequences");
@@ -79,6 +81,7 @@ namespace ActionMenuApi
             MelonLogger.Error("then close this console, and reinstall MelonLoader using it.");
             MelonLogger.Error("If you want to accept those risks, press Enter to continue");
             MelonLogger.Error("===================================================================");
+            passed = false;
         }
     }
 }
