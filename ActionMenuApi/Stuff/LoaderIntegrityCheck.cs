@@ -6,7 +6,7 @@ using MelonLoader;
 
 namespace ActionMenuApi
 {
-    [HarmonyShield]
+    [PatchShield]
     internal static class LoaderIntegrityCheck
     {
         //Credit to knah: https://github.com/knah/VRCMods/blob/master/UIExpansionKit/LoaderIntegrityCheck.cs

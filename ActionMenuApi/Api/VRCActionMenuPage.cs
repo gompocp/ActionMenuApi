@@ -40,6 +40,23 @@ namespace ActionMenuApi.Api
             AddPedalToList(pageType, pedal, insertion);
             return pedal;
         }
+        
+        /// <summary>
+        /// Add a restricted radial puppet button pedal to a specific ActionMenu page. Restricted meaning that you can't rotate past 100 to get to 0 and vice versa
+        /// </summary>
+        /// <param name="pageType">The page to add the button to</param>
+        /// <param name="text">Button text</param>
+        /// <param name="onUpdate">Calls action with a float between 0 - 1 depending on the current value of the radial puppet</param>
+        /// <param name="startingValue">(optional) Starting value for radial puppet 0-1</param>
+        /// <param name="icon">(optional) The Button Icon</param>
+        /// <param name="locked">(optional)The starting state for the lockable pedal, true = locked, false = unlocked</param>
+        /// <param name="insertion">(optional) Determines whether or not the button is added before or after VRChat's buttons for the target page</param>
+        public static PedalRadial AddRestrictedRadialPuppet(ActionMenuPage pageType, string text, Action<float> onUpdate, float startingValue = 0, Texture2D icon = null, bool locked = false, Insertion insertion = Insertion.Post)
+        {
+            var pedal = new PedalRadial(text, startingValue, icon, onUpdate, locked, true);
+            AddPedalToList(pageType, pedal, insertion);
+            return pedal;
+        }
 
         /// <summary>
         /// Add a four axis puppet button pedal to a specific ActionMenu page
