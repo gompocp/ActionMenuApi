@@ -2,7 +2,6 @@
 using ActionMenuApi.Types;
 using MelonLoader;
 using UnityEngine;
-using VRC.UI;
 
 namespace ActionMenuApi.Managers
 {

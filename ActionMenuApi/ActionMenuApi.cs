@@ -29,7 +29,7 @@ namespace ActionMenuApi
         {
             while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
                 yield return null;
-            if (!LoaderCheck.passed && new Random().Next(6) == 0) yield break; // Must be your lucky day
+            if (!LoaderIntegrityCheck.passed && new Random().Next(6) == 0) yield break; // Must be your lucky day
             ResourcesManager.InitLockGameObject();
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
@@ -44,7 +44,7 @@ namespace ActionMenuApi
 
         public ActionMenuApi()
         {
-            LoaderCheck.CheckForRainbows();
+            LoaderIntegrityCheck.VibeCheck();
         }
     }
 }

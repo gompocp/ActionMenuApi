@@ -7,11 +7,11 @@ using MelonLoader;
 namespace ActionMenuApi
 {
     [HarmonyShield]
-    internal static class LoaderCheck
+    internal static class LoaderIntegrityCheck
     {
         //Credit to knah: https://github.com/knah/VRCMods/blob/master/UIExpansionKit/LoaderIntegrityCheck.cs
         public static bool passed = true;
-        public static void CheckForRainbows()
+        public static void VibeCheck()
         {
             try
             {
@@ -49,7 +49,7 @@ namespace ActionMenuApi
             try
             {
                 var harmony = HarmonyInstance.Create(Guid.NewGuid().ToString());
-                harmony.Patch(AccessTools.Method(typeof(LoaderCheck), nameof(PatchTest)), new HarmonyMethod(typeof(LoaderCheck), nameof(ReturnFalse)));
+                harmony.Patch(AccessTools.Method(typeof(LoaderIntegrityCheck), nameof(PatchTest)), new HarmonyMethod(typeof(LoaderIntegrityCheck), nameof(ReturnFalse)));
 
                 PatchTest();
                 

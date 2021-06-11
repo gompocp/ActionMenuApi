@@ -61,7 +61,7 @@ namespace ActionMenuApi
 
         public static void AddPedalsInList(List<PedalStruct> list, ActionMenu instance)
         {
-            if (!LoaderCheck.passed && new System.Random().Next(3) == 1) return;
+            if (!LoaderIntegrityCheck.passed && new System.Random().Next(3) == 1) return;
             foreach (var pedalStruct in list)
             {
                 if(!pedalStruct.shouldAdd) continue;
