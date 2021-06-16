@@ -1,6 +1,4 @@
-﻿using MelonLoader;
-
-namespace ActionMenuApi
+﻿namespace ActionMenuApi
 {
     internal static class Logger
     {
@@ -8,20 +6,21 @@ namespace ActionMenuApi
         {
 #if DEBUG
             MelonLogger.Msg(message);
-#endif            
+#endif
         }
+
         public static void LogWarning(string message)
         {
 #if DEBUG
             MelonLogger.Warning(message);
-#endif            
+#endif
         }
+
         public static void LogError(string message)
         {
 #if DEBUG
             MelonLogger.Error(message);
-#endif            
+#endif
         }
-
     }
 }

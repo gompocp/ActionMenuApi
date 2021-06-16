@@ -11,11 +11,13 @@ namespace ActionMenuApi
     {
         //Credit to knah: https://github.com/knah/VRCMods/blob/master/UIExpansionKit/LoaderIntegrityCheck.cs
         public static bool passed = true;
+
         public static void VibeCheck()
         {
             try
             {
-                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi.Stuff._dummy_.dll");
+                using var stream = Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("ActionMenuApi.Stuff._dummy_.dll");
                 using var memStream = new MemoryStream((int) stream.Length);
                 stream.CopyTo(memStream);
 
@@ -28,10 +30,11 @@ namespace ActionMenuApi
             catch (BadImageFormatException ex)
             {
             }
-            
+
             try
             {
-                using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ActionMenuApi.Stuff._dummy2_.dll");
+                using var stream = Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("ActionMenuApi.Stuff._dummy2_.dll");
                 using var memStream = new MemoryStream((int) stream.Length);
                 stream.CopyTo(memStream);
 
@@ -40,7 +43,7 @@ namespace ActionMenuApi
             catch (BadImageFormatException ex)
             {
                 MelonLogger.Error(ex.ToString());
-                
+
                 RainbowsFound();
 
                 while (Console.In.Peek() != '\n') Console.In.Read();
@@ -49,10 +52,11 @@ namespace ActionMenuApi
             try
             {
                 var harmony = HarmonyInstance.Create(Guid.NewGuid().ToString());
-                harmony.Patch(AccessTools.Method(typeof(LoaderIntegrityCheck), nameof(PatchTest)), new HarmonyMethod(typeof(LoaderIntegrityCheck), nameof(ReturnFalse)));
+                harmony.Patch(AccessTools.Method(typeof(LoaderIntegrityCheck), nameof(PatchTest)),
+                    new HarmonyMethod(typeof(LoaderIntegrityCheck), nameof(ReturnFalse)));
 
                 PatchTest();
-                
+
                 RainbowsFound();
 
                 while (Console.In.Peek() != '\n') Console.In.Read();
@@ -62,12 +66,15 @@ namespace ActionMenuApi
             }
         }
 
-        private static bool ReturnFalse() => false;
+        private static bool ReturnFalse()
+        {
+            return false;
+        }
 
         public static void PatchTest()
         {
             throw new BadImageFormatException();
-        } 
+        }
 
         private static void RainbowsFound()
         {

@@ -2,47 +2,51 @@
 using ActionMenuApi.Types;
 using MelonLoader;
 using UnityEngine;
+using UnityEngine.XR;
 
 namespace ActionMenuApi.Managers
 {
     internal static class RadialPuppetManager
     {
-
-        public static void Setup()
-        {
-            radialPuppetMenuLeft = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
-            radialPuppetMenuRight = Utilities.CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu", "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
-        }
-        
         private static RadialPuppetMenu radialPuppetMenuRight;
         private static RadialPuppetMenu radialPuppetMenuLeft;
         private static RadialPuppetMenu current;
         private static ActionMenuHand hand;
-        
-        public static float radialPuppetValue { get; set; }
-        private static bool open = false;
-        private static bool restricted = false;
+        private static bool open;
+        private static bool restricted;
         private static float currentValue;
+
+        public static float radialPuppetValue { get; set; }
         public static Action<float> onUpdate { get; set; }
-        
+
+        public static void Setup()
+        {
+            radialPuppetMenuLeft = Utilities
+                .CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/RadialPuppetMenu",
+                    "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
+            radialPuppetMenuRight = Utilities
+                .CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu",
+                    "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
+        }
+
         public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
             if (current != null && current.gameObject.gameObject.active)
             {
-                if (UnityEngine.XR.XRDevice.isPresent)
+                if (XRDevice.isPresent)
                 {
                     if (hand == ActionMenuHand.Right)
                     {
                         if (Input.GetAxis(Constants.RIGHT_TRIGGER) >= 0.4f)
-                        { 
+                        {
                             CloseRadialMenu();
                             return;
                         }
                     }
                     else if (hand == ActionMenuHand.Left)
                     {
-                        if (Input.GetAxis(Constants.LEFT_TRIGGER) >= 0.4f) 
+                        if (Input.GetAxis(Constants.LEFT_TRIGGER) >= 0.4f)
                         {
                             CloseRadialMenu();
                             return;
@@ -54,14 +58,16 @@ namespace ActionMenuApi.Managers
                     CloseRadialMenu();
                     return;
                 }
+
                 UpdateMathStuff();
                 CallUpdateAction();
             }
         }
 
-        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title, PedalOption pedalOption, bool restricted = false)
+        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title,
+            PedalOption pedalOption, bool restricted = false)
         {
-            if(open) return;
+            if (open) return;
             switch (Utilities.GetActionMenuHand())
             {
                 case ActionMenuHand.Invalid:
@@ -77,18 +83,21 @@ namespace ActionMenuApi.Managers
                     open = true;
                     break;
             }
+
             RadialPuppetManager.restricted = restricted;
             Input.ResetInputAxes();
             current.gameObject.SetActive(true);
-            current.GetFill().SetFillAngle(startingValue*360); //Please dont break
+            current.GetFill().SetFillAngle(startingValue * 360); //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
-            RadialPuppetManager.currentValue = startingValue;
+            currentValue = startingValue;
             current.GetTitle().text = title;
-            current.GetCenterText().text = $"{Mathf.Round(startingValue*100f)}%";
-            current.GetFill().UpdateGeometry(); ;
-            current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition;  //new Vector3(-256f, 0, 0); 
-            float angleOriginal =  Utilities.ConvertFromEuler(startingValue*360);
-            float eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
+            current.GetCenterText().text = $"{Mathf.Round(startingValue * 100f)}%";
+            current.GetFill().UpdateGeometry();
+            ;
+            current.transform.localPosition =
+                pedalOption.GetActionButton().transform.localPosition; //new Vector3(-256f, 0, 0); 
+            var angleOriginal = Utilities.ConvertFromEuler(startingValue * 360);
+            var eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
             current.UpdateArrow(angleOriginal, eulerAngle);
         }
 
@@ -108,7 +117,7 @@ namespace ActionMenuApi.Managers
             {
                 onUpdate?.Invoke(current.GetFill().GetFillAngle() / 360f);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet: {e}");
             }
@@ -116,14 +125,16 @@ namespace ActionMenuApi.Managers
 
         private static void UpdateMathStuff()
         {
-            Vector2 mousePos = (hand == ActionMenuHand.Left) ? Utilities.GetCursorPosLeft() : Utilities.GetCursorPosRight();
+            var mousePos = hand == ActionMenuHand.Left
+                ? Utilities.GetCursorPosLeft()
+                : Utilities.GetCursorPosRight();
             radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
 
             if (Vector2.Distance(mousePos, Vector2.zero) > 12)
             {
-                float angleOriginal = Mathf.Round(Mathf.Atan2(mousePos.y, mousePos.x) * Constants.RAD_TO_DEG);
-                float eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
-                float normalisedAngle = eulerAngle / 360f;
+                var angleOriginal = Mathf.Round(Mathf.Atan2(mousePos.y, mousePos.x) * Constants.RAD_TO_DEG);
+                var eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
+                var normalisedAngle = eulerAngle / 360f;
                 if (Math.Abs(normalisedAngle - currentValue) < 0.0001f) return;
                 if (!restricted)
                 {
@@ -143,7 +154,7 @@ namespace ActionMenuApi.Managers
                         else
                         {
                             current.SetAngle(360);
-                            current.UpdateArrow(90, 360); 
+                            current.UpdateArrow(90, 360);
                             currentValue = 1f;
                         }
                     }
@@ -165,6 +176,5 @@ namespace ActionMenuApi.Managers
                 }
             }
         }
-  
     }
 }

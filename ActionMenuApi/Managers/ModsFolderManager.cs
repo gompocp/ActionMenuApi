@@ -1,5 +1,4 @@
 using System;
-using ActionMenuApi;
 using System.Collections.Generic;
 using ActionMenuApi.Api;
 
@@ -7,24 +6,25 @@ namespace ActionMenuApi.Managers
 {
     internal static class ModsFolderManager
     {
-        public static List<Action> mods = new ();
+        public static List<Action> mods = new();
         public static List<List<Action>> splitMods;
-        
-        private static Action openFunc = () => {
+
+        private static readonly Action openFunc = () =>
+        {
             if (mods.Count <= Constants.MAX_PEDALS_PER_PAGE)
             {
                 foreach (var action in mods) action.Invoke();
             }
             else
             {
-                if(splitMods == null) splitMods = mods.Split((int)Constants.MAX_PEDALS_PER_PAGE);
-                for (int i = 0; i < splitMods.Count && i < Constants.MAX_PEDALS_PER_PAGE; i++)
+                if (splitMods == null) splitMods = mods.Split(Constants.MAX_PEDALS_PER_PAGE);
+                for (var i = 0; i < splitMods.Count && i < Constants.MAX_PEDALS_PER_PAGE; i++)
                 {
-                    int index = i;
-                    CustomSubMenu.AddSubMenu($"Page {i+1}", () =>
+                    var index = i;
+                    CustomSubMenu.AddSubMenu($"Page {i + 1}", () =>
                     {
                         foreach (var action in splitMods[index]) action.Invoke();
-                    }, ResourcesManager.GetPageIcon(i+1), false);
+                    }, ResourcesManager.GetPageIcon(i + 1));
                 }
             }
         };
@@ -38,10 +38,10 @@ namespace ActionMenuApi.Managers
         {
             mods.Remove(openingAction);
         }*/
-        
+
         public static void AddMainPageButton()
         {
-            CustomSubMenu.AddSubMenu(Constants.MODS_FOLDER_NAME, openFunc, ResourcesManager.GetModsSectionIcon(),false);
+            CustomSubMenu.AddSubMenu(Constants.MODS_FOLDER_NAME, openFunc, ResourcesManager.GetModsSectionIcon());
         }
     }
 }

@@ -4,8 +4,8 @@
     {
         Button,
         Toggle,
-        SubMenu, 
-        FourAxisPuppet, 
-        RadialPuppet,
+        SubMenu,
+        FourAxisPuppet,
+        RadialPuppet
     }
 }
