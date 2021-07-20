@@ -1,8 +1,9 @@
-
 Libs/*.dll
 Output
 .idea
 ActionMenuApi/obj/*
 ActionMenuTestMod/obj/*
+IntegrityCheckGenerator/obj/*
+IntegrityCheckWeaver/obj/*
 *.user
 

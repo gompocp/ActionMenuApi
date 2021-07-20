@@ -13,7 +13,7 @@ using UnityEngine;
 namespace ActionMenuTestMod
 {
     // Icons from https://uxwing.com/
-    public class ActionMenuTestMod : MelonMod
+    public partial class ActionMenuTestMod : MelonMod
     {
 
         private float testFloatValue = 50;
@@ -21,8 +21,8 @@ namespace ActionMenuTestMod
         private bool testBool = false;
         private bool testBool2 = false;
         private bool riskyFunctionsAllowed = false;
-        private Vector2 testVector = new Vector2();
-        private Vector2 testVector2 = new Vector2();
+        private Vector2 testVector = new ();
+        private Vector2 testVector2 = new ();
         private static float x = 0;
         private static float y = 0;
         private static float z = 0;
