@@ -4,9 +4,10 @@ using ActionMenuApi.Managers;
 using MelonLoader;
 
 #pragma warning disable 1591
-[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.3.0", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
+[assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.3.1", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
 [assembly: MelonGame("VRChat", "VRChat")]
-[assembly: VerifyLoaderVersion(0, 4, 0, true)]
+[assembly: VerifyLoaderBuild("10254481011005649504957561025057535457484899102569857565510010155494950")]
+[assembly: VerifyLoaderVersion(0, 4, 2, true)]
 
 namespace ActionMenuApi
 {
@@ -19,7 +20,7 @@ namespace ActionMenuApi
             MelonCoroutines.Start(WaitForActionMenuInit());
             try
             {
-                Patches.PatchAll(Harmony);
+                Patches.PatchAll(HarmonyInstance);
             }
             catch (Exception e)
             {
@@ -31,6 +32,7 @@ namespace ActionMenuApi
         {
             while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
                 yield return null;
+            if (string.IsNullOrEmpty(ID)) yield break;
             ResourcesManager.InitLockGameObject();
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
@@ -42,5 +44,7 @@ namespace ActionMenuApi
             RadialPuppetManager.OnUpdate();
             FourAxisPuppetManager.OnUpdate();
         }
+
+        private static string ID = "gompo";
     }
 }

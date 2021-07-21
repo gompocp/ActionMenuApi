@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using ActionMenuApi.Pedals;
 using ActionMenuApi.Types;
-using Harmony;
+using HarmonyLib;
 using MelonLoader;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;

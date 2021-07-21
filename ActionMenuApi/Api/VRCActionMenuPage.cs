@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ActionMenuApi.Api
 {
+    /// <summary>
+    /// VRC Page specific things
+    /// </summary>
     public static class VRCActionMenuPage
     {
         /// <summary>

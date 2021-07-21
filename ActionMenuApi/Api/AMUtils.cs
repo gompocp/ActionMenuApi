@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ActionMenuApi.Api
 {
+    /// <summary>
+    /// General Action Menu Things
+    /// </summary>
     public static class AMUtils
     {
         /// <summary>

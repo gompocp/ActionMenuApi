@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using ActionMenuApi.Managers;
 using ActionMenuApi.Pedals;
-using Harmony;
+using HarmonyLib;
 using MelonLoader;
 
 namespace ActionMenuApi
