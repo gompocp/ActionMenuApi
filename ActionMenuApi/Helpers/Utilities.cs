@@ -9,10 +9,7 @@ using MelonLoader;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using UnityEngine.XR;
-//Will this change?, ¯\_(ツ)_/¯
 using Object = UnityEngine.Object;
-
-//Will this change?, ¯\_(ツ)_/¯x2
 
 namespace ActionMenuApi.Helpers
 {
@@ -30,7 +27,7 @@ namespace ActionMenuApi.Helpers
                     m =>
                         m.Name.StartsWith("Method_Private_Void_PDM_")
                         && !m.HasStringLiterals()
-                        && m.SameClassMethodCallCount(1)
+                        && m.SameClassMethodCallCount(1) 
                         && m.HasMethodCallWithName("Method_Private_Void_ObjectNPublic")
                         && !m.HasMethodWithDeclaringType(typeof(ActionMenuDriver))
                 );
@@ -259,9 +256,9 @@ namespace ActionMenuApi.Helpers
             }
 
             var leftOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetLeftOpener();
-            GetRefreshAMDelegate.Invoke(leftOpener.GetActionMenu());
+            GetRefreshAMDelegate(leftOpener.GetActionMenu());
             var rightOpener = ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener();
-            GetRefreshAMDelegate.Invoke(rightOpener.GetActionMenu());
+            GetRefreshAMDelegate(rightOpener.GetActionMenu());
         }
 
         public static void ResetMenu()

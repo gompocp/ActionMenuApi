@@ -8,6 +8,7 @@ using ActionMenuApi.Managers;
 using ActionMenuApi.Pedals;
 using HarmonyLib;
 using MelonLoader;
+using UnhollowerBaseLib;
 
 namespace ActionMenuApi
 {
@@ -78,11 +79,11 @@ namespace ActionMenuApi
             PatchMethod(openEmojisPageKeyWords, "OpenEmojisPagePre", "OpenEmojisPagePost");
             PatchMethod(openNameplatesOpacityPageKeyWords, "OpenNameplatesOpacityPre", "OpenNameplatesOpacityPost");
             PatchMethod(openNameplatesPageKeyWords, "OpenNameplatesPagePre", "OpenNameplatesPagePost");
-            PatchMethod(openNameplatesVisibilityPageKeyWords, "OpenNameplatesVisibilityPre",
-                "OpenNameplatesVisibilityPost");
+            PatchMethod(openNameplatesVisibilityPageKeyWords, "OpenNameplatesVisibilityPre", "OpenNameplatesVisibilityPost");
             PatchMethod(openSDK2ExpressionPageKeyWords, "OpenSDK2ExpressionPre", "OpenSDK2ExpressionPost");
             PatchMethod(openOptionsPageKeyWords, "OpenOptionsPre", "OpenOptionsPost");
 
+            //Method_Private_Void_PDM_11
             //Special Child
             /*harmonyInstance.Patch(
                 typeof(ActionMenu).GetMethods().Single(

@@ -15,7 +15,6 @@ using Exception = System.Exception;
 using Math = System.Math;
 using Object = UnityEngine.Object;
 using Type = System.Type;
-
 namespace ActionMenuApi.Helpers
 {
     internal static class ExtensionMethods

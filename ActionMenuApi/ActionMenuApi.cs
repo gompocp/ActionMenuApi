@@ -4,10 +4,10 @@ using ActionMenuApi.Managers;
 using MelonLoader;
 
 #pragma warning disable 1591
+
 [assembly: MelonInfo(typeof(ActionMenuApi.ActionMenuApi), "ActionMenuApi", "0.3.1", "gompo", "https://github.com/gompocp/ActionMenuApi/releases")]
 [assembly: MelonGame("VRChat", "VRChat")]
-[assembly: VerifyLoaderBuild("10254481011005649504957561025057535457484899102569857565510010155494950")]
-[assembly: VerifyLoaderVersion(0, 4, 2, true)]
+[assembly: VerifyLoaderVersion(0, 4, 3, true)]
 
 namespace ActionMenuApi
 {
@@ -37,8 +37,7 @@ namespace ActionMenuApi
             RadialPuppetManager.Setup();
             FourAxisPuppetManager.Setup();
         }
-
-
+        
         public override void OnUpdate()
         {
             RadialPuppetManager.OnUpdate();

@@ -6,6 +6,9 @@
         <LangVersion>9</LangVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
     <ItemGroup>
       <EmbeddedResource Include="actionmenuapi.icons" />
     </ItemGroup>

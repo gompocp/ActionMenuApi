@@ -1,6 +1,6 @@
 ﻿namespace ActionMenuApi.Helpers
 {
-    internal class Constants
+    internal static class Constants
     {
         public const int MAX_PEDALS_PER_PAGE = 7;
         public const float PI = 3.14159274f;
