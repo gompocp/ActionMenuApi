@@ -717,8 +717,7 @@ namespace ActionMenuApi.Helpers
 
         private delegate PedalOption AddOptionDelegate(ActionMenu actionMenu);
 
-        private delegate ActionMenuPage PushPageDelegate(ActionMenu actionMenu, Action openFunc,
-            Action closeFunc = null, Texture2D icon = null, string text = null);
+        private delegate ActionMenuPage PushPageDelegate(ActionMenu actionMenu, Il2CppSystem.Action openFunc, Il2CppSystem.Action closeFunc = null, Texture2D icon = null, string text = null);
 
         private delegate void ClosePuppetMenusDelegate(ActionMenu actionMenu, bool canResetValue);
 
