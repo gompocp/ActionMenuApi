@@ -14,7 +14,7 @@ namespace ActionMenuApi.Managers
         {
             if (mods.Count <= Constants.MAX_PEDALS_PER_PAGE)
             {
-                foreach (var action in mods) action.Invoke();
+                foreach (var action in mods) action();
             }
             else
             {
@@ -24,7 +24,7 @@ namespace ActionMenuApi.Managers
                     var index = i;
                     CustomSubMenu.AddSubMenu($"Page {i + 1}", () =>
                     {
-                        foreach (var action in splitMods[index]) action.Invoke();
+                        foreach (var action in splitMods[index]) action();
                     }, ResourcesManager.GetPageIcon(i + 1));
                 }
             }
