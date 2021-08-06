@@ -21,17 +21,16 @@ namespace ActionMenuApi.Helpers
         {
             get
             {
-                //Build 1088 menu.Method_Private_Void_PDM_9()
+                //Build 1121 menu.Method_Private_Void_PDM_11)
                 if (refreshAMDelegate != null) return refreshAMDelegate;
-                var refreshAMMethod = typeof(ActionMenu).GetMethods().First(
+                var refreshAMMethod = typeof(ActionMenu).GetMethods().Last(
                     m =>
                         m.Name.StartsWith("Method_Private_Void_PDM_")
                         && !m.HasStringLiterals()
                         && m.SameClassMethodCallCount(1) 
-                        && m.HasMethodCallWithName("Method_Private_Void_ObjectNPublic")
+                        && m.HasMethodCallWithName("ThrowArgumentOutOfRangeException")
                         && !m.HasMethodWithDeclaringType(typeof(ActionMenuDriver))
                 );
-
                 refreshAMDelegate = (RefreshAMDelegate) Delegate.CreateDelegate(
                     typeof(RefreshAMDelegate),
                     null,
@@ -40,7 +39,7 @@ namespace ActionMenuApi.Helpers
             }
         }
 
-        public static bool checkXref(MethodBase m, params string[] keywords)
+        public static bool CheckXref(MethodBase m, params string[] keywords)
         {
             try
             {
@@ -60,7 +59,7 @@ namespace ActionMenuApi.Helpers
             return false;
         }
 
-        public static bool checkXref(MethodBase m, List<string> keywords)
+        public static bool CheckXref(MethodBase m, List<string> keywords)
         {
             try
             {

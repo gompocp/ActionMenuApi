@@ -220,7 +220,7 @@ namespace ActionMenuApi
         private static MethodInfo FindAMMethod(List<string> keywords)
         {
             return typeof(ActionMenu).GetMethods()
-                .First(m => m.Name.StartsWith("Method") && Utilities.checkXref(m, keywords));
+                .First(m => m.Name.StartsWith("Method") && Utilities.CheckXref(m, keywords));
         }
 
         private static void PatchMethod(List<string> keywords, string preName, string postName)
