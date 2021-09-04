@@ -87,22 +87,22 @@ Code
 //Call in OnApplicationStart()
 //To add a button to the main page of the action menu
 //                          Page to add to          Action for onClick                    Text       Texture     locked     
-VRCActionMenuPage.AddButton(ActionMenuPage.Main, () => MelonLogger.Msg("Pressed Button") , "Button", buttonIcon, true);
+VRCActionMenuPage.AddButton(ActionMenuPage.Main, "Button",() => MelonLogger.Msg("Pressed Button"), buttonIcon true);
 
 //To add a toggle to the main page of the action menu
-VRCActionMenuPage.AddToggle(ActionMenuPage.Main, testBool, b => testBool = b, "Toggle", toggleIcon);
+VRCActionMenuPage.AddToggle(ActionMenuPage.Main,"Toggle", testBool, b => testBool = b, toggleIcon);
 
 //To add a radial pedal to the main page of the action menu
-VRCActionMenuPage.AddRadialPuppet(ActionMenuPageType.Main, f => testFloatValue = f, "Radial", testFloatValue, radialIcon);
+VRCActionMenuPage.AddRadialPuppet(ActionMenuPageType.Main, "Radial",f => testFloatValue = f, testFloatValue, radialIcon);
 
 //To add a submenu to the main page of the action menu and add a toggle and button to it
 VRCActionMenuPage.AddSubMenu(ActionMenuPageType.Main, 
+    "Sub Menu",
     delegate {
         MelonLogger.Msg("Sub Menu Opened");
-        AMAPI.AddButtonPedalToSubMenu(() => MelonLogger.Msg("Pressed Button In Sub Menu"), "Sub Menu Button", buttonIcon);
-        AMAPI.AddTogglePedalToSubMenu(b => testBool2 = b, testBool2, "Sub Menu Toggle", toggleIcon);
+        CustomSubMenu.AddButton("Pressed Button In Sub Menu", () => MelonLogger.Msg("Pressed Button In Sub Menu"), buttonIcon);
+        CustomSubMenu.AddToggle("Sub Menu Toggle",testBool2, b => testBool2 = b, toggleIcon);
     },
-    "Sub Menu", 
     subMenuIcon
 );
 ```
